@@ -1,0 +1,158 @@
+# ---------------------------------------------------------------
+# Site Information Settings
+# ---------------------------------------------------------------
+
+# Head info
+head:
+    favicon: "/img/favicon.png"
+    high_res_favicon: "/img/favicon.png"
+    apple_touch_icon: "/img/favicon.png"
+    keywords: AndyFrancis
+
+# Jump Links Settings
+url:
+    rss:
+    daily_pic: "#"
+    logo:
+
+
+# ---------------------------------------------------------------
+# Style Settings
+# ---------------------------------------------------------------
+
+# Schemes
+scheme: Paradox
+#scheme: Isolation
+
+# UI & UX: slogan, color, effect
+uiux:
+    slogan: "Hi, welcome to my world!"
+    theme_color: "#0097A7"
+    theme_sub_color: "#00838F"
+    hyperlink_color: "#00838F"
+    button_color: "#757575"
+    android_chrome_color: "#0097A7"
+    nprogress_color: "#FF4081"
+    nprogress_buffer: "800"
+
+# JS Effect Switches
+js_effect:
+    fade: true
+    smoothscroll: true
+
+# Reading experience
+# markdown available value:
+#     Material | Github | Plain
+reading:
+    markdown: Github
+    entry_excerpt: 80
+    code_highlight: monokai
+
+# Thumbnail Settings
+thumbnail:
+    purecolor:
+    random_amount: 19
+
+# Background Settings
+# bing available parameter:
+#     new | color= | type=
+#         color available value: black, blue, brown, green, multi, orange, pink, purple, red, white, yellow
+#         type available value: A (animal), C (culture), N (nature), S (space), T (travel)
+background:
+    purecolor: "#F5F5F5"
+    #bgimg: "/img/bg.png"
+    bing:
+        enable: false
+        parameter:
+
+# Images Settings
+img:
+    logo: "/img/logo.png"
+    avatar: "/img/avatar.png"
+    daily_pic: "/img/daily_pic.png"
+    sidebar_header: "/img/sidebar_header.png"
+    footerico: "/img/footer/footer_ico-"
+    #upyun_logo: "/img/upyun_logo.png"
+    random_thumbnail: "/img/random/material-"
+
+# Custom Fonts
+fonts: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+
+# ---------------------------------------------------------------
+# Menu Settings
+# ---------------------------------------------------------------
+
+# SNS Menu
+sns:
+    email: f20140907@outlook.com
+    twitter: 
+    facebook: 
+    googleplus: 
+    weibo: "http://weibo.com/2868506620/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1"
+    instagram:
+    tumblr:
+    github: "https://github.com/DongFrancis"
+    linkedin:
+    zhihu: "https://www.zhihu.com/people/dongfrancis"
+
+# SNS Share Switch
+sns_share:
+  twitter: true
+  facebook: true
+  googleplus: true
+  weibo: true
+  linkedin: true
+  qq: true
+  telegram: true
+
+# Sidebar User Dropdown
+dropdown:
+    Email Me:
+        link: "#"
+        icon: email
+
+# Sidebar Categories Switch
+sidebar_categories: true
+
+# Pages Menu
+pages:
+    #about: "/about"
+    关于我: "/about"
+    标签云: "/tags"
+
+# Qrcode for redirect at other device
+qrcode: true
+
+# ---------------------------------------------------------------
+# Integrated Services
+# ---------------------------------------------------------------
+
+# Comment Systems
+# Available value:
+#     duoshuo | disqus
+comment:
+    use:
+    shortname:
+    duoshuo_thread_key: path
+    duoshuo_embed_js_url: "https://static.duoshuo.com/embed.js"
+
+# Search Systems
+# Available value:
+#     swiftype | google | local
+search:
+    use: google
+    swiftype_key:
+
+# Leancloud Views
+leancloud:
+    enable: true
+    app_id: 8YFBemKH0O8tpzQAbR4h48tO-gzGzoHsz
+    app_key: YqO5Q2e1TTOdHmhXOmFsMceT
+    av_core_mini: "https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"
+
+# Busuanzi 不蒜子 Views
+busuanzi:
+    enable: false
+    all_site_uv: false
+    post_pv: false
+    busuanzi_pure_mini_js: "https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
