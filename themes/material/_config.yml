@@ -13,7 +13,9 @@ head:
 url:
     rss:
     daily_pic: "#"
-    logo:
+    logo: "#"
+
+mailto: f20140807@outlook.com
 
 
 # ---------------------------------------------------------------
@@ -26,7 +28,7 @@ scheme: Paradox
 
 # UI & UX: slogan, color, effect
 uiux:
-    slogan: "Hi, welcome to my world!"
+    slogan: "Welcome to my world !"
     theme_color: "#0097A7"
     theme_sub_color: "#00838F"
     hyperlink_color: "#00838F"
@@ -38,7 +40,7 @@ uiux:
 # JS Effect Switches
 js_effect:
     fade: true
-    smoothscroll: true
+    smoothscroll: false
 
 # Reading experience
 # markdown available value:
@@ -108,7 +110,7 @@ sns_share:
 # Sidebar User Dropdown
 dropdown:
     Email Me:
-        link: "#"
+        link: "mailto:f20140807@outlook.com"
         icon: email
 
 # Sidebar Categories Switch
@@ -140,7 +142,7 @@ comment:
 # Available value:
 #     swiftype | google | local
 search:
-    use: google
+    use: local
     swiftype_key:
 
 # Leancloud Views

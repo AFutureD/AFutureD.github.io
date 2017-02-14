@@ -3,12 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Francis'Blog
+title: Francis' Blog
 subtitle: subtitle
 description: 
 author: Andy Francis
 language: zh-CN
 timezone: Asia/Shanghai
+email: f20140807@outlook.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -42,6 +43,10 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
+
+search:
+  path: search.xml
+  field: post
 
 # Category & Tag
 default_category: uncategorized
