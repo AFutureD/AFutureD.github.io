@@ -18,9 +18,9 @@ There are two branches in this repositories which is named "hexo" and "master".
 Then I could add an remote repo connected to this repo. When I chceckout remote version,you must get things like this:
 
 >coding	git@git.coding.net:AndyFrancis/andyfrancis.coding.me.git (fetch)
->coding	git@git.coding.net:AndyFrancis/andyfrancis.coding.me.git (push)
->origin	https://github.com/DongFrancis/DongFrancis.github.io.git (fetch)
->origin	https://github.com/DongFrancis/DongFrancis.github.io.git (push)
+coding	git@git.coding.net:AndyFrancis/andyfrancis.coding.me.git (push)
+origin	https://github.com/DongFrancis/DongFrancis.github.io.git (fetch)
+origin	https://github.com/DongFrancis/DongFrancis.github.io.git (push)
 
 3. push repo
 
