@@ -15,8 +15,6 @@ url:
     daily_pic: "#"
     logo: "#"
 
-mailto: f20140807@outlook.com
-
 
 # ---------------------------------------------------------------
 # Style Settings
@@ -34,7 +32,7 @@ uiux:
     hyperlink_color: "#00838F"
     button_color: "#757575"
     android_chrome_color: "#0097A7"
-    nprogress_color: "#FF4081"
+    nprogress_color: "#29d"
     nprogress_buffer: "800"
 
 # JS Effect Switches
@@ -80,6 +78,9 @@ img:
 # Custom Fonts
 fonts: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
 
+# Card Elevation Level
+card_elevation: 2
+
 # ---------------------------------------------------------------
 # Menu Settings
 # ---------------------------------------------------------------
@@ -96,34 +97,63 @@ sns:
     github: "https://github.com/DongFrancis"
     linkedin:
     zhihu: "https://www.zhihu.com/people/dongfrancis"
+    bilibili:
+    telegram:
 
 # SNS Share Switch
 sns_share:
-  twitter: true
-  facebook: true
-  googleplus: true
-  weibo: true
-  linkedin: true
-  qq: true
-  telegram: true
+    twitter: true
+    facebook: true
+    googleplus: true
+    weibo: true
+    linkedin: true
+    qq: false
+    telegram: true
 
-# Sidebar User Dropdown
-dropdown:
-    Email Me:
-        link: "mailto:f20140807@outlook.com"
-        icon: email
-
-# Sidebar Categories Switch
-sidebar_categories: true
-
-# Pages Menu
-pages:
-    #about: "/about"
-    关于我: "/about"
-    标签云: "/tags"
+# Sidebar Customize
+sidebar:
+    dropdown:
+        Email Me:
+            link: "mailto:f20140807@outlook.com"
+            icon: email
+    homepage:
+        use: true
+        icon: home
+        divider: false
+    archives:
+        use: true
+        icon: inbox
+        divider: false
+    categories:
+        use: true
+        icon: chrome_reader_mode
+        divider: false
+    pages:
+        #About:
+            #link: "/about"
+            #icon: person
+            #divider: false
+        关于我:
+            link: "/about"
+            divider: false
+        标签云:
+            link: "/tags"
+            divider: false
+    article_num:
+        use: true
+        divider: false
+    footer:
+        divider: true
+        theme: true
+        support: false
+        feedback: false
+        material: false
 
 # Qrcode for redirect at other device
 qrcode: true
+
+# Support Pin posts on the top of the list
+topPost: false
 
 # ---------------------------------------------------------------
 # Integrated Services
@@ -144,6 +174,11 @@ comment:
 search:
     use: local
     swiftype_key:
+
+# Analytics Systems
+analytics:
+    baidu_id:
+    google_id:
 
 # Leancloud Views
 leancloud:

@@ -20,10 +20,10 @@
 ## General 概括
 
 [![Author](https://img.shields.io/badge/author-Viosey-blue.svg?style=flat-square)](https://viosey.com)
-[![Version](https://img.shields.io/badge/version-1.2.5-green.svg?style=flat-square)]()
+[![QQ Group](https://img.shields.io/badge/QQ%20%E7%BE%A4-566308505-blue.svg?style=flat-square)](http://jq.qq.com/?_wv=1027&k=40Vdy24)
+[![Version](https://img.shields.io/badge/version-1.3.0-green.svg?style=flat-square)]()
 [![Hexo](https://img.shields.io/badge/hexo-3.0+-green.svg?style=flat-square)](https://hexo.io)
 [![Build Status](https://img.shields.io/travis/viosey/hexo-theme-material.svg?style=flat-square)](https://travis-ci.org/viosey/hexo-theme-material)
-[![QQ Group](https://img.shields.io/badge/QQ%20%E7%BE%A4-566308505-brightgreen.svg?style=flat-square)](http://jq.qq.com/?_wv=1027&k=40Vdy24)
 
 ## Demo 演示
 
@@ -49,7 +49,11 @@
 
 All kinds of contributions (enhancements, new features, documentation & code improvements, issues & bugs reporting) are welcome.
 
+Before you start your contributing, please read the [Contributing Rules Wiki](https://github.com/viosey/hexo-theme-material/wiki) first.
+
 欢迎各种形式的贡献，包括但不限于优化，添加功能，文档 & 代码的改进，问题和 bugs 的报告。期待您的 `Pull Request`。
+
+在参与贡献之前，请阅读[项目贡献 Wiki](https://github.com/viosey/hexo-theme-material/wiki)，了解如何为 Material 主题贡献。
 
 
 ## License 许可证
@@ -65,4 +69,4 @@ Open sourced under the GPL v3.0 license.
 
 ![](https://qiniu.viosey.com/img/Material-Phone-Render.png)
 
-![](https://qiniu.viosey.com/img/Materia-themel-overview-tiny.png)
+![](https://qiniu.viosey.com/img/Materia-overview-tiny.png)
