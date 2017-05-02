@@ -4,16 +4,16 @@
 
 # Site
 title: Francis' Blog
-subtitle: subtitle
+subtitle: 属于我的空间
 description: 
 author: Andy Francis
-language: zh-CN
+language: zh-Hans
 timezone: Asia/Shanghai
 email: f20140807@outlook.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://dongfrancis.github.io/
+url: http://blog.afuture.me/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -47,6 +47,8 @@ highlight:
 search:
   path: search.xml
   field: post
+  format: html
+  limit: 10000
 
 # Category & Tag
 default_category: uncategorized
@@ -68,7 +70,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: material
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -77,4 +79,5 @@ deploy:
   repo: 
     github: git@github.com:DongFrancis/DongFrancis.github.io.git
     coding: git@git.coding.net:AndyFrancis/andyfrancis.coding.me.git
-  branch: master
+  branch: master-next
+
