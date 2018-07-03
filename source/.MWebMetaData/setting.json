@@ -1,0 +1,10 @@
+{
+  "name" : "AFuture's Blog",
+  "fileExtension" : ".md",
+  "autoUploadInsertedImageKey" : "七牛-http:\/\/up-z2.qiniu.com",
+  "autoUploadInsertedImage" : false,
+  "folderType" : 11,
+  "mediaFloder" : "media",
+  "orderBy" : 0,
+  "newlinesToBR" : 0
+}

@@ -1,6 +1,7 @@
 ---
 title: Hdu-2686 Matrix
 date: 2016-12-28 16:31:57
+mathjax: true
 tags: 
     - Muti-treaded 
     - DP

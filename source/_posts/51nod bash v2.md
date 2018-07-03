@@ -1,6 +1,7 @@
 ---
 title: 51nod bash v2
 date: 2016-12-28 16:31:57
+mathjax: true
 tags: 
     - 博弈
     - 巴什博奕

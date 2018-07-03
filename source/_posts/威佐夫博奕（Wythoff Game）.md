@@ -1,6 +1,7 @@
 ---
 title: 51nod 威佐夫博奕（Wythoff Game）
 date: 2016-12-28 16:31:57
+mathjax: true
 tags: 
     - 博弈
     - 威佐夫博奕（Wythoff Game）

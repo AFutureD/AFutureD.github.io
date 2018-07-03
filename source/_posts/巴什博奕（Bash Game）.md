@@ -1,6 +1,7 @@
 ---
 title: 51nod 巴什博奕（Bash Game）
 date: 2016-12-28 16:31:57
+mathjax: true
 tags: 
     - 博弈
     - 巴什博奕（Bash Game）

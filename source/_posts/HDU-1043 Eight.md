@@ -1,6 +1,7 @@
 ---
 title: HDU-1043 Eight
 date: 2016-12-28 16:31:57
+mathjax: true
 tags: 
     - 搜索
     - A*算法

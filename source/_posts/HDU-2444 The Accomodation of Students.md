@@ -1,6 +1,7 @@
 ---
 title: HDU-2444 The Accomodation of Students
 date: 2016-12-28 16:31:57
+mathjax: true
 tags: 
     - 图论
     - 二分图

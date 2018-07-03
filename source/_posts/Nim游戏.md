@@ -1,6 +1,7 @@
 ---
 title: 51nod Nim游戏
 date: 2016-12-28 16:31:57
+mathjax: true
 tags: 
     - 博弈
     - Nim游戏

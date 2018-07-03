@@ -1,6 +1,7 @@
 ---
 title: 博客的开始——如何搭建Hexo
 date: 2016-12-27 09:43:57
+mathjax: true
 tags: Hexo
 categories: 技术类
 ---

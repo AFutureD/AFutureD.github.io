@@ -1,6 +1,7 @@
 ---
 title: SYNU-2015-training-题解
 date: 2017-02-12 13:23:16
+mathjax: true
 tags: 
     - 题解
 categories: Algorithm

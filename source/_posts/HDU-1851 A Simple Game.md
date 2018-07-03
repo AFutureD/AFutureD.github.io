@@ -1,6 +1,7 @@
 ---
 title: HDU-1851 A Simple Game
 date: 2016-12-28 16:31:57
+mathjax: true
 tags: 
     - 博弈
     - SG函数
