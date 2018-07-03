@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="简述在 Liner Regression 中 $\pmb{y}$ 是一个连续值，那么当我们解决一个二分类问题时 $\pmb{y}$ 则是一个离散值，只有两个取值（ $0$ 或 $1$ ），这时可以通过广义线性模型来解决。通过广义线性模型，我们找到一个单调可微函数将分类任务的标记 $\pmb{y}$ 与线性模型的预测值联系起来。最后我们找到 Logistic Function 来作为线性模型。 广义">
+<meta name="keywords" content="Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logistic Regression">
+<meta property="og:url" content="http://blog.afuture.me/2018/07/03/Logistic-Regression/index.html">
+<meta property="og:site_name" content="AFuture&#39;s Blog">
+<meta property="og:description" content="简述在 Liner Regression 中 $\pmb{y}$ 是一个连续值，那么当我们解决一个二分类问题时 $\pmb{y}$ 则是一个离散值，只有两个取值（ $0$ 或 $1$ ），这时可以通过广义线性模型来解决。通过广义线性模型，我们找到一个单调可微函数将分类任务的标记 $\pmb{y}$ 与线性模型的预测值联系起来。最后我们找到 Logistic Function 来作为线性模型。 广义">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fl5zm1lftxj30jc0feq3p.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1fl66kyi55pj30co0b6q35.jpg">
+<meta property="og:updated_time" content="2018-07-03T09:00:41.164Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Logistic Regression">
+<meta name="twitter:description" content="简述在 Liner Regression 中 $\pmb{y}$ 是一个连续值，那么当我们解决一个二分类问题时 $\pmb{y}$ 则是一个离散值，只有两个取值（ $0$ 或 $1$ ），这时可以通过广义线性模型来解决。通过广义线性模型，我们找到一个单调可微函数将分类任务的标记 $\pmb{y}$ 与线性模型的预测值联系起来。最后我们找到 Logistic Function 来作为线性模型。 广义">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fl5zm1lftxj30jc0feq3p.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.afuture.me/2018/07/03/Logistic-Regression/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Logistic Regression | AFuture's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AFuture's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2018/07/03/Logistic-Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Francis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AFuture's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Logistic Regression
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-03 14:49:09 / 修改时间：17:00:41" itemprop="dateCreated datePublished" datetime="2018-07-03T14:49:09+08:00">2018-07-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>在 Liner Regression 中 $\pmb{y}$ 是一个连续值，那么当我们解决一个二分类问题时 $\pmb{y}$ 则是一个离散值，只有两个取值（ $0$ 或 $1$ ），这时可以通过广义线性模型来解决。通过广义线性模型，我们找到一个单调可微函数将分类任务的标记 $\pmb{y}$ 与线性模型的预测值联系起来。最后我们找到 Logistic Function 来作为线性模型。</p>
+<h2 id="广义线性模型（Generalized-Linear-Models-）"><a href="#广义线性模型（Generalized-Linear-Models-）" class="headerlink" title="广义线性模型（Generalized Linear Models ）"></a>广义线性模型（Generalized Linear Models ）</h2><p>在笔记中，我先把广义线性模型梳理一遍，这有助于我更好得学习机器学习。</p>
+<p>当然如果仅仅是为了学习 Logistic Function 那么可以先看看后面的内容，之后再看这部分内容。</p>
+<p>在回归学习中，我们的函数都类似于$f(\pmb{y}|\pmb{x}); \pmb{\theta} \sim \mathcal{N}(\mu,\sigma^2)$ 或者在之后讲的二分类函数 $f(\pmb{y}|\pmb{x}); \pmb{\theta} \sim \rm{Bernoulli}(\phi)$ ，这里的 $\mu$ 和 $\phi$ 都分别是 $x$ 和 $\theta$ 的某种函数（ $\sigma$ 与分布无关 ）。其实，有一种更广泛的模型，这两种模型都是它的特例，这种更广泛的模型叫做广义线性模型。</p>
+<blockquote>
+<p>  在广义线性模型中(GLM), 对于每个独立参数的 $\pmb{y}$ ，假设通过一个指数族产生。这就是说，对于均值 $\mu$ , 和独立变量 $\pmb{x}$，有：<br>  $$<br>  E(\pmb{y})=\pmb{\mu}=g^{-1}(\pmb{\theta}^{\mathit{T}} \pmb{x})<br>  $$<br>  $E(\pmb{y})$ 是 $\pmb{y}$ 的期望；$\pmb{\theta}^{\mathit{T}} \pmb{x}$  是一个线性估计; $g$ 是链接函数。</p>
+</blockquote>
+<p>关于广义线性模型更多的知识请前往 <a href="https://en.wikipedia.org/wiki/Generalized_linear_model#Model_components" target="_blank" rel="noopener">Wikipedia</a> 。</p>
+<h3 id="指数族（The-Exponential-Family-）"><a href="#指数族（The-Exponential-Family-）" class="headerlink" title="指数族（The Exponential Family ）"></a>指数族（The Exponential Family ）</h3><p>在学习广义线性模型之前，我们要先定义一下指数族分布（exponential family distributions）。如果一个分布能用下面的方式来写出来，我们就说这类分布属于指数族：<br>$$<br>p(y;\eta)=b(y)\rm{exp}(\eta^TT(y)-a(\eta))<br>$$<br>上面的式子中，</p>
+<p>$\eta$ ：该分布的自然参数（natural parameter，也叫典范参数 canonical parameter）；</p>
+<p>$T(y)​$ ：充分统计量（sufficient statistic），我们目前用的这些分布中通常 $T(y) = y​$ ；</p>
+<p>$a(\eta)$ ：一个<strong>对数分割函数（log partition function）</strong>；</p>
+<p>$e^{−a(\eta)} $ ：这个量本质上扮演了归一化常数（normalization constant）的角色，也就是确保分布的 $p(y;\eta)$ 的总和等于1。</p>
+<p>对 给定的 $T$ , $a$ 和 $b$ 就定义了一个以 $\eta$ 为参数的分布族（family，或者叫集 set）；通过改变 $\eta$ ，我们就能得到这个分布族中的不同分布。 </p>
+<p>现在咱们看到的伯努利（Bernoulli）分布和高斯（Gaussian）分布就都属于指数分布族。伯努利分布的均值是 $\phi$ ，也写作 $\rm{Bernoulli}(\phi)$ ，确定的分布是 $y \in{0,1}$，因此有 $p(y=1;\phi)=\phi;p(y=0;\phi)=1-\phi$。这时候只要修改 $\phi$ ，就能得到一系列不同均值的伯努利分布了。现在我们展示的通过修改 $\phi$ ,而得到的这种伯努利分布，就属于指数分布族；也就是说，只要给定一组 $T$ , $a$ 和 $b$ ，就可以用上面的等式来确定一组特定的伯努利分布了。</p>
+<p>伯努利分布通过广义线性模型可以这样写：<br>$$<br>\begin{align}<br>p(y;\phi) &amp;= \phi^y(1-\phi)^{1-y}\\<br>&amp;=\rm{exp}(\it{y}\rm{}\log{\phi}+(1-y)\log{(1-\phi)})\\<br>&amp;=\rm{exp}\left(\left(\log{\left(\frac{\phi}{1-\phi}\right)}\right)\it{y}\rm{}+\log{(1-\phi)}\right)<br>\end{align}<br>$$</p>
+<p>因此，给出了自然参数（natural parameter）$\eta=\log{\left(\frac{\phi}{1-\phi}\right)}$ 。 有趣的是，如果我们翻转这个定义，通过 $\phi$ 表示 $\eta$ 就会得到 $\phi=\frac{1}{1+e^{-\eta}}$ 。这正好就是我们之后在 Logistic Function 中会见到的 S 型函数（sigmoid function）！ 在我们把逻辑回归作为一种广义线性模型（GLM）的时候还会遇到伯努利分布以如下情况表示。<br>$$<br>\begin{align}<br>T(y) &amp;= y\\<br>a(\eta)&amp;=-\log{(1-\phi)}\\<br>&amp;=log(1+e^\eta)\\<br>b(y)&amp;=1<br>\end{align}<br>$$<br>接下来就看看高斯分布。在推导线性回归的时候， $\sigma^2$ 的值对我们最终选择的 $\theta $ 和 $h_\theta(x)$ 都没有影响。所以我们可以给 $\sigma^2$ 取一个任意值。为了简化推导过程，就令 $\sigma^2 = 1$ 。然后就有了下面的等式：<br>$$<br>\newcommand{\itm}[1]{\mathcal {#1}\rm}<br>\newcommand{\bgroup}[1]{\left( {#1}\right)}<br>\begin{align}<br>p(y;\mu)&amp;=\frac{1}{\sqrt{2\pi}}\rm{exp}\left(-\frac{1}{2}(\itm{y}\rm{}-\mu)\right)\\<br>&amp;=\frac{1}{\sqrt{2\pi}}\rm{exp}\bgroup{-\frac{1}{2}\itm{y}^2}\cdot \rm{exp}\bgroup{\mu\itm{y}-\frac{1}{2}\mu^2}<br>\end{align}<br>$$</p>
+<p>注：如果我们把 $\sigma^2$ 作为一个变量，高斯分布就也可以表达成指数分布的形式，其中 $\eta \in \mathbb{R}^2$ 就是一个同时依赖  $\mu$  和 $\sigma$ 的二维向量。然而，对于广义线性模型GLMs方面的用途，参数  $\sigma^2$ 就也可以看成是对指数分布族的更泛化的定义：$p(y;\eta,\tau)=b(a,\tau)\rm{exp}((\eta^T\it{T}(\itm{y})-\mathcal{a}(\eta))/\mathcal{c}(\tau))$ 。这里面的 $\tau$ 叫做分散度参数（dispersion parameter），对于高斯分布，$c(\tau)=\sigma^2$ ；不过上文中已经进行了简化，所以就不对各种需要考虑的情况进行更为泛化的定义了。</p>
+<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><h3 id="基本过程"><a href="#基本过程" class="headerlink" title="基本过程"></a>基本过程</h3><p>从最基本开始，我们不使用广义线性模型，对于二分类问题，输出标记 $\pmb{y} \in {0,1} $ ，于是我们使用线性回归最基本的模型 $z=  \pmb{\theta}^{\mathit{T}} \pmb{x}$ 来预测 $\pmb{y}$ ，即我们将 $z$ 转化为 $0/1$ 值。最理想的是 “单位越阶函数”（unit-step function）：<br>$$<br>\newcommand{\itm}[1]{\it {#1}\rm}<br>\newcommand{\bgroup}[1]{\left( {#1}\right)}<br>y=\left\{<br>\begin{aligned}<br>0,&amp; &amp;z&lt;0; \\<br>0.5,&amp; &amp;z=0; \\<br>1, &amp; &amp;z&gt;0;<br>\end{aligned}<br>\right.<br>$$</p>
+<p>但是，很明显，此函数不是很完美，于是，我们找到了一个“替代函数”来近似这个“单位跃阶函数”，并希望它单调可微，对数几率函数（Logistic Function）便满足这样一个条件：<br>$$<br>g(z)=\frac{1}{1+e^{-z}}<br>$$</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fl5zm1lftxj30jc0feq3p.jpg" alt=""></p>
+<p>由图你能直观得看到，当 $z\to+\infty$ 的时候 $g(z)$ 趋向于 $1$ ，而当 $z\to-\infty$ 时 $g(z)$ 趋向于 $0$ 。</p>
+<p>其实 $g(z)$ 也是 $h_\theta(x)$ ，且，像最开始一样，我们规定 $X_0 =1$ ，于是有：$\pmb{\theta}^Tx=\theta_0+\sum^{n}_{j=1}\theta_jx_j$ </p>
+<p>现在我们看看 $g’(z)$ 的特性：<br>$$<br>\begin{align}<br>g’(z) &amp;= \frac{d}{dz}\frac{1}{1+e^{-z}}\\<br>&amp;=\frac{1}{1+e^{-z}}(e^{-z})\\<br>&amp;=\frac{1}{1+e^{-z}}\left(1-\frac{1}{1+e^{-z}}\right)\\<br>&amp;=g(z)(1-g(z)).<br>\end{align}<br>$$<br>接着我们通过对 $h_\theta(x)$ 进行假设，得到：<br>$$<br>p(y|x;\theta)=(h_\theta(x))^y(1-h_\theta(x))^{1-y}<br>$$<br>然后就能写出似然函数：<br>$$<br>L(\pmb{\theta}) = p(\pmb{y}|X;\pmb{\theta})<br>$$<br>又与之前一样写出 $L(\theta)$ 的对数函数 $\ell(\pmb{\theta})$ 以方便计算。</p>
+<p>于是有 cost function：<br>$$<br>J(\theta) = -\frac{1}{m}\ell(\pmb{\theta})<br>$$<br>然后目标就是：<br>$$<br>\DeclareMathOperator*{\argmin}{arg\,min}<br>\pmb{\theta} = \mathop{\argmin}_{}{J(\theta)}<br>$$</p>
+<h2 id="pmb-theta-的求法"><a href="#pmb-theta-的求法" class="headerlink" title="$\pmb{\theta}$ 的求法"></a>$\pmb{\theta}$ 的求法</h2><p>我们从最开始得到的假设函数讲起。如何得到它呢？</p>
+<h3 id="假设函数"><a href="#假设函数" class="headerlink" title="假设函数"></a>假设函数</h3><p>我们首先假设：<br>$$<br>P(y=1|x;\theta)=h_\theta(x)\\<br>P(y=0|x;\theta)=1-h_\theta(x)<br>$$<br>于是，更简单的写法就是：<br>$$<br>p(y|x;\theta)=(h_\theta(x))^y(1-h_\theta(x))^{1-y}<br>$$</p>
+<h3 id="似然函数（likelihood-function）"><a href="#似然函数（likelihood-function）" class="headerlink" title="似然函数（likelihood function）"></a>似然函数（likelihood function）</h3><p>假设 $m$ 个训练样本都是各自独立的，那么就可以按如下的方式来写带参数的似然函数：<br>$$<br>\begin{align}<br>L(\pmb{\theta}) &amp;= p(\pmb{y}|X;\pmb{\theta})\\<br>&amp;=\prod^m_{i=1}p(y^{(i)}|x^{(i)};\pmb{\theta})  &amp;将不同的样本的概率相乘\\<br>&amp;=\prod^m_{i=1}(h_\theta(x^{(i)}))^{y^{(i)}}(1-h_\theta(x^{(i)}))^{1-y^{(i)}}<br>\end{align}<br>$$<br>取对数更容易计算：<br>$$<br>\begin{align}<br>\ell(\pmb{\theta})&amp;=\log{L(\theta)}\\<br>&amp;=\sum^{m}_{i=1}y^{i}\log{h(x^{(i)})}+ (1-y^{i})\log{(1-h(x^{(i)}))}<br>\end{align}<br>$$</p>
+<h3 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h3><p>极大似然函数中，为了求得最优的 $\pmb{\theta}$ ，就是让 $\ell(\pmb{\theta})$ 尽可能得大，于是在 cost function 中，我们加入系数 $-\frac{1}{m}$ ，于是得到了：<br>$$<br>J(\theta) = -\frac{1}{m}\sum^{m}_{i=1}y^{i}\log{h(x^{(i)})}+ (1-y^{i})\log{(1-h(x^{(i)}))}<br>$$</p>
+<h3 id="梯度下降法（gradient-descent）"><a href="#梯度下降法（gradient-descent）" class="headerlink" title="梯度下降法（gradient  descent）"></a>梯度下降法（gradient  descent）</h3><p>其实，可以直接对 $\ell(\pmb{\theta})$ 做梯度上升求得 $\pmb{\theta}$ 。</p>
+<p>按照向量的形式，我们对 $\theta$ 的更新可以写成：<br>$$<br>\pmb{\theta}:=\pmb{\theta}-\alpha \cdot \nabla_{\theta} J(\pmb{\theta})<br>$$<br>找到最优的第一步是对 $J(\pmb{\theta})$ 求导，我们从一个样本开始：<br>$$<br>\begin{align}<br>\frac{\partial}{\partial \theta_j}J(\theta)&amp;=-\frac{1}{m}\ell(\theta)\\<br>&amp;=-\frac{1}{m}\left( {y\frac{1}{g(\theta^Tx)}-(1-y)\frac{1}{1-g(\theta^Tx)}}\right)\frac{\partial}{\partial\theta_j}g(\theta^Tx)\\<br>&amp;=-\frac{1}{m}\left( {y\frac{1}{g(\theta^Tx)}-(1-y)\frac{1}{1-g(\theta^Tx)}}\right)g(\theta^Tx)(1-g(\theta^Tx))\\<br>&amp;=-\frac{1}{m}\left(y(1-g(\theta^Tx))-(1-y)g(\theta^Tx)\right)x_j\\<br>&amp;=\frac{1}{m}(h_\theta(x)-y)x_j<br>\end{align}<br>$$<br>其中，用到了上面提到的  $g’(z)$ 的特性，即 $\frac{\partial}{\partial\theta_j}g(\theta^Tx)=g(\theta^Tx)(1-g(\theta^Tx))$ ，然后梯度上升就简单写为：<br>$$<br>\pmb{\theta}:=\pmb{\theta}-\alpha \cdot \frac{1}{m} (y-h_\theta(x))x_j<br>$$<br>然后，再扩展为一个训练集：<br>$$<br>\begin{align}<br>&amp;\large{重复直到收敛}\{\\<br>&amp; \quad \quad \theta_j := \theta_j +\alpha \cdot \frac{1}{m} \sum^{m}_{i=1}(y^{(i)}-h_{\theta}(x^{(i)}))x_j\\<br> &amp;\}<br>\end{align}<br>$$<br>有趣的是，这个式子正好与线性回归看上去一样，但是这实际上并不相同，原因是，我们对于  $h_\theta(x)$  的定义不同。但为什么相似呢？深层次的原因在于 <strong>广义线性模型</strong> 。</p>
+<h3 id="L-theta-最大的其它算法"><a href="#L-theta-最大的其它算法" class="headerlink" title="$L(\theta)$ 最大的其它算法"></a>$L(\theta)$ 最大的其它算法</h3><p>下面这个方法更好，但是数学难度较高，其基本方法是“求方程零点的牛顿法”。</p>
+<p>具体讲讲。假如我们有一个从实数到实数映射的函数 $\it{f}:\rm{R} \mapsto \rm{R}$，然后要找到一个 $\theta$ ，来满足 $\it{f}\,\rm{ }(\theta)=0$，其中$\theta \in R$是一个实数。牛顿法就是对 $\theta$ 进行如下的更新：<br>$$<br>\theta:=\theta-\frac{f(\theta)}{f’(\theta)}<br>$$<br>对这个公式的简单解释是：通过一条逼近曲线的直线（切线）不断迭代来找到零点。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fl66kyi55pj30co0b6q35.jpg" alt=""></p>
+<p>对于上述的图，在 A 的切线方程为：$y_A = f(x_A)+f’(x_A)(x-x_A)$ 。</p>
+<p>为了求下一个迭代点 B ，则有 $y_B = 0 = f(x_A)+f’(x_A)(x_B-x_A)$ ，</p>
+<p>即：<br>$$<br>\begin{align}<br>&amp;\Longrightarrow x_B=x_a-\frac{f(x_A)}{f’(x_A)}\\<br>&amp;\Longrightarrow x_{n+1}=x_{n}-\frac{f(x_n)}{f’(x_n)}\\<br>&amp;\Longrightarrow \theta:=\theta-\frac{f(\theta)}{f’(\theta)}<br>\end{align}<br>$$<br>用这个办法，我们求解 $\ell(\theta)$ 中 $\theta$ 的最优取值，即算 $\ell(\theta) = 0$ 的解，即可以通过以下迭代式求得：<br>$$<br>\theta:=\theta-\frac{\ell’(\theta)}{\ell’’(\theta)}<br>$$<br>对于向量 $\pmb{\theta}$ 的求解，我们扩展牛顿法到多维的情况，叫做牛顿-拉普森法（Newton-Raphson method），如下：<br>$$<br>\pmb{\theta} := \pmb{\theta}-H^{-1}\nabla_{\theta} \ell(\pmb{\theta})<br>$$<br>其中 $\nabla_{\theta} \ell(\pmb{\theta})$ 是 $\ell(\pmb{\theta})$ 对 $\theta$ 的偏导。$H$ 是一个 $n\times n$ 矩阵（考虑 $\theta_0$ 的话是 $(n+1)\times (n+1)$  ），也可叫做 Hessian，具体定义为：<br>$$<br>H_{ij} = \frac{\partial^2\ell(\theta)}{\partial\theta_i\partial\theta_j}<br>$$<br>注意，当 $n$ 小的时候牛顿法的速度明显更快，但是当 $n$ 较大时，由于需要处理 Hession 矩阵，时间开销急剧增加。</p>
+<h2 id="构建广义线性模型"><a href="#构建广义线性模型" class="headerlink" title="构建广义线性模型"></a>构建广义线性模型</h2><p>设想你要构建一个模型，来估计在给定的某个小时内来到你商店的顾客人数（或者是你的网站的页面访问次数），基于某些确定的特征 $X$ ，例如商店的促销、最近的广告、天气、今天周几啊等等。我们已经知道泊松分布（Poisson distribution）通常能适合用来对访客数目进行建模。知道了这个之后，怎么来建立一个模型来解决咱们这个具体问题呢？非常幸运的是，泊松分布是属于指数分布族的一个分部，所以我们可以使用一个广义线性模型（Generalized Linear Model，缩写为 ExpoFamilyGLM）。</p>
+<p>对刚刚这类问题如何构建广义线性模型呢？</p>
+<p>对于这类问题，我们希望通过一个 $X$ 的函数来预测 $\pmb{y}$ 的值。为了构建出模型，我们先给出3个假设：</p>
+<ol>
+<li>$y|x;\theta \sim \rm{ExponentialFamily(\eta)}$ 。即，给出 $x$ 和 $\eta$ ，则 $y$ 的分布遵循于指数分布。</li>
+<li>给出了 $x$ 我们的目标是预测 $T(y)$ 的期望值。大多数情况下 $T(y) = y$ ，也就是说，我们希望通过假设 $h$ 输出的 $h(x)$ 能满足 $h(x) = E[y|x]$ 。(统计学知识，有点难)  </li>
+<li>$\pmb{\eta}$ 和 $\pmb{x}$ 是线性相关的，</li>
+</ol>
+<h3 id="普通最小二乘（Ordinary-Least-Squares）"><a href="#普通最小二乘（Ordinary-Least-Squares）" class="headerlink" title="普通最小二乘（Ordinary Least Squares）"></a>普通最小二乘（Ordinary Least Squares）</h3><p>普通最小二乘其实是广义线性模型的一个特例，其中 $y$ 是连续的，通过 $x$ 给出的 $y$ 服从高斯分布 $\mathcal{N}(0,\sigma^2)$ ，经过上面的学习我们有：<br>$$<br>\begin{align}<br>h_{\theta}&amp;=E[\pmb{y}|\pmb{x};\pmb{\theta}]\\<br>&amp;=\pmb{\mu}\\<br>&amp;=\pmb{\eta}\\<br>&amp;=\pmb{\theta}^T\pmb{x}.<br>\end{align}<br>$$<br>第一行的等式是基于假设2；第二个等式是基于定理当 $y|x;\theta \sim \mathcal{N}(0,\sigma^2)$ ，则 y 的期望就是 μ；第三个等式是基于假设1，以及之前我们此前将高斯分布写成指数族分布的时候推导出来的性质 $\pmb{\mu}=\pmb{\eta}\$ ；第四个等式就是基于假设3。</p>
+<h3 id="Logistic-Regression-1"><a href="#Logistic-Regression-1" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h3><p>二分类问题 $y\in {0,1}$ ，可以通过伯努利分布（Bernoulli distribution）来对给定 $x$ 的 $y$ 进行建模。</p>
+<p>伯努利分布，有 $\phi=\frac{1}{1+e^{-\eta}}$ ，和在 $ y|x;\theta \sim \rm{Bernoulli}(\phi)$ 下有 $\quad E[y|x;\theta] = \phi$ 。</p>
+<p>则有：<br>$$<br>\begin{align}<br>h_{\theta}&amp;=E[\pmb{y}|\pmb{x};\pmb{\theta}]\\<br>&amp;=\pmb{\phi}\\<br>&amp;=\frac{1}{1+e^{-\pmb{\eta}}}\\<br>&amp;=\frac{1}{1+e^{-\pmb{\theta}^T\pmb{x}}}.<br>\end{align}<br>$$<br>这就是为什么在 Logistic Function 中我们用 $\frac{1}{1+e^{-z}}$  做假设，即，一旦我们假设给定 $x$ 的 $y$ 的分布是伯努利分布，那么根据广义线性模型和指数分布族的定义，就会得出这个式子。</p>
+<p>注：一个自然参数 $\eta$ 的函数 $g$ ，$g(\eta)=E[T(y)|\eta]$，这个函数叫做规范响应函数（canonical response function），它的反函数 $g^{-1}$ 叫做规范链接函数（canonical link function）。因此，对于高斯分布来说，它的规范响应函数正好就是识别函数（identify function）；而对于伯努利分布来说，它的规范响应函数则是 logistic function。</p>
+<h3 id="Softmax-Regression"><a href="#Softmax-Regression" class="headerlink" title="Softmax Regression"></a>Softmax Regression</h3><p>对于多分类问题，有 $y\in {1,2,\cdots,k}$ ，通过多项式分布（multinomial distribution） 建模。</p>
+<p>把多项式推出一个广义线性模型，首先把多项式分布用指数分布族进行描述。</p>
+<p>我们给出  $k$ 个参数 $\phi_1,\cdots,\phi_k$ ，对应各自的输出值的概率，由于 $\sum^k_{i=1}\phi_i=1$ ，所以，有 $\phi_k =1- \sum^{k-1}_{i=1} \phi_i$ 。注意，$\phi_i$ 其实是 $p(u=i;\phi)$ 。现在该出 $T(y)$ ：<br>$$<br>T(1)=\left[\begin{matrix} 1 \\0 \\0 \\ \vdots\\0\end{matrix} \right],<br>T(2)=\left[\begin{matrix} 0 \\1 \\0 \\ \vdots\\0\end{matrix} \right],<br>T(3)=\left[\begin{matrix} 0 \\0 \\ 1 \\ \vdots\\0\end{matrix} \right],\cdots,<br>T(k-1)=\left[\begin{matrix} 0\\0 \\0 \\ \vdots\\1\end{matrix} \right],<br>T(k)=\left[\begin{matrix} 0\\0\\0 \\ \vdots\\0\end{matrix} \right]<br>$$<br>与之前不同，不再有$ T(y) = y$；然后，$T(y)$现在是一个 $k – 1$ 维的向量，而不是一个实数了。向量 $T(y)$ 中的第 i 个元素写成$(T(y))_i$ 。</p>
+<p>给出一个记号：指示函数（indicator function），即 $1{\cdot}$ 。如果参数为真，则等于1；反之则等于0。</p>
+<p>所以我们可以把 $T (y)$ 和 $y$ 的关系写成 $ (T(y))_i = 1{y = i}$。</p>
+<p>现在把多项式写出指数分布族：</p>
+<p>$$<br>\begin{align}<br>p(y;\theta) &amp;= \phi^{1\{y=1\}}_{1} \phi^{1\{y=2\}}_{2} \cdots \phi^{1\{y=k\}}_{k}\\<br>&amp;= \phi^{1\{y=1\}}_{1} \phi^{1\{y=2\}}_{2} \cdots \phi^{1-\sum^{k-1}_{i=1}1\{y=i\}}_{k}\\<br>&amp;= \phi^{(T(y))_1}_{1} \phi^{(T(y))_2}_{2} \cdots  \phi^{1-\sum^{k-1}_{i=1}(T(y))_i}_{k}\\<br>&amp;=\rm{exp}\left((T(y))_1\log{(\phi_1)}+(T(y))_2\log{(\phi_2)} + \cdots + \left(1-\sum^{k-1}_{i=1}(T(y))_i\right)\log{(\phi_k)}\right)\\<br>&amp;=\rm{exp}\left((T(y))_1\log{(\phi_1/\phi_k)}+(T(y))_2\log{(\phi_2/\phi_k)} + \cdots + (T(y))_{k-1}\log{(\phi_{k-1}/\phi_k)} +\log{(\phi_k)}\right)\\<br>&amp;=b(y)\rm{exp}(\eta^T\it{T}\rm{}\,(y)-a(\eta))<br>\end{align}<br>$$</p>
+<p>其中:</p>
+<p>$$<br>\begin{align}<br>\eta&amp;= \left[\begin{matrix} \log{(\phi_1/\phi_k)}\\log{(\phi_2/\phi_k)}\ \vdots\\log{(\phi_{k-1}/\phi_k)}\end{matrix} \right]\\<br>a(\eta) &amp;= -\log{\frac{\phi_i}{\phi_k}}\\<br>b(y) &amp;= 1<br>\end{align}<br>$$</p>
+<p>于是对于每一个 $\eta_i$ 有链接函数：</p>
+<p>$$<br>\eta_i = \log{(\frac{\phi_i}{\phi_k})}<br>$$</p>
+<p>为了简单计算，我们给出定义 $\eta_i = \log{(\phi_k/\phi_k)} = 0$ 。且对链接函数取反函数然后推导出响应函数，就得到了下面的等式：<br>$$<br>\begin{align}<br>e^{\eta_i} &amp; = \frac{\phi_i}{\phi_k}\\<br>\phi_{k}e^{\eta_i} &amp;= \phi_i\\<br>\phi_{k}\sum^k_{i=1}e^{\eta_i}&amp;=\sum^k_{i=1}\phi_i = 1<br>\end{align}<br>$$<br>这样得到 $\phi_k = 1/\sum^k_{i=1}e^{\eta_i}$ ，然后我们我们回代入 $e^{\eta_i} = \frac{\phi_i}{\phi_k}$ ，</p>
+<p>得到相应函数：<br>$$<br>\phi_i = \frac{e^{\eta_i}}{\sum^k_{i=1}e^{\eta_i}}<br>$$<br>上面这个函数从 $\eta$ 映射到了$\phi$ ，称为 Softmax函数。通过假设3，我们有了 $\eta_i =\theta_i^Tx $ ，其中的$\theta_1,\theta_2, \dots ,\theta_{k-1} \in \mathbb{R}^{n+1}$ 就是参数了。我们这里还是定义 $\theta_k=0$ ，这样就有 $\eta_k = \theta_k^T x = 0$ ，与上文相呼应。</p>
+<p>因此，我们有了模型：<br>$$<br>\begin{align}<br>p(y=i|x;\theta) &amp;=\phi_i\\<br>&amp;=\frac{e^{\eta_i}}{\sum^k_{i=1}e^{\eta_i}}\\<br>&amp;=\frac{e^{\theta_i^Tx}}{\sum^k_{i=1}e^{\theta_i^Tx}}<br>\end{align}<br>$$</p>
+<p>于是，我们的假设函数是：</p>
+<p>$$<br>\begin{align}<br>h_\theta(x)&amp;=E[T(y)|x;\theta]\\<br>&amp;=E\left[\begin{array}{c|c}1\{y = 1\} &amp;\\1\{y = 2\}\\1\{y = 3\}&amp; x;\theta\\ \vdots\\1\{y = k-1\}\end{array}\right]\\<br>&amp;=E\left[\begin{array}{c}\phi_1&amp;\\\phi_2\\\phi_3\\ \vdots\\\phi_{k-1}\end{array}\right]\\<br>&amp;=E\left[\begin{array}{c}<br>\frac{\rm{exp}^{\theta_1^Tx}}{\sum^k_{j=1}\rm{exp}^{\theta_j^Tx}}&amp;\\<br>\frac{\rm{exp}^{\theta_2^Tx}}{\sum^k_{j=1}\rm{exp}^{\theta_j^Tx}}\\<br>\frac{\rm{exp}^{\theta_3^Tx}}{\sum^k_{j=1}\rm{exp}^{\theta_j^Tx}}\\\vdots\\<br>\frac{\rm{exp}^{\theta_{k-1}^Tx}}{\sum^k_{j=1}\rm{exp}^{\theta_j^Tx}}\end{array}\right]<br>\end{align}<br>$$</p>
+<p>然后，对于一个训练集来说，我们为了求得 $\pmb{\theta}$ ，写出似然函数的对数：</p>
+<p>$$<br>\begin{align}<br>\ell(\pmb{\theta}) &amp;= \sum^m_{i=1}\log{p(y^{(i)}|x^{(i)};\theta)}\\<br>&amp;=\sum^m_{i=1}\log{\prod^k_{l=1}\left(\frac{\rm{exp}^{\theta_{l}^Tx^{(i)}}}{\sum^k_{j=1}\rm{exp}^{\theta_j^Tx^{(i)}}}\right)^{1{y^{(i)}=l}}}<br>\end{align}<br>$$<br>然后我们可以通过梯度上升法或者牛顿法为求：<br>$$<br>\DeclareMathOperator*{\argmax}{arg\,max}<br>\pmb{\theta} = \mathop{\argmax}_{}{\ell(\theta)}<br>$$</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/03/Liner-Regressionmd/" rel="next" title="Liner Regression">
+                <i class="fa fa-chevron-left"></i> Liner Regression
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/03/Decision-Tree/" rel="prev" title="决策树（decision tree）">
+                决策树（decision tree） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Andy Francis</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简述"><span class="nav-number">1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广义线性模型（Generalized-Linear-Models-）"><span class="nav-number">2.</span> <span class="nav-text">广义线性模型（Generalized Linear Models ）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指数族（The-Exponential-Family-）"><span class="nav-number">2.1.</span> <span class="nav-text">指数族（The Exponential Family ）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic-Regression"><span class="nav-number">3.</span> <span class="nav-text">Logistic Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本过程"><span class="nav-number">3.1.</span> <span class="nav-text">基本过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pmb-theta-的求法"><span class="nav-number">4.</span> <span class="nav-text">$\pmb{\theta}$ 的求法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#假设函数"><span class="nav-number">4.1.</span> <span class="nav-text">假设函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#似然函数（likelihood-function）"><span class="nav-number">4.2.</span> <span class="nav-text">似然函数（likelihood function）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cost-Function"><span class="nav-number">4.3.</span> <span class="nav-text">Cost Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度下降法（gradient-descent）"><span class="nav-number">4.4.</span> <span class="nav-text">梯度下降法（gradient  descent）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L-theta-最大的其它算法"><span class="nav-number">4.5.</span> <span class="nav-text">$L(\theta)$ 最大的其它算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建广义线性模型"><span class="nav-number">5.</span> <span class="nav-text">构建广义线性模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通最小二乘（Ordinary-Least-Squares）"><span class="nav-number">5.1.</span> <span class="nav-text">普通最小二乘（Ordinary Least Squares）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic-Regression-1"><span class="nav-number">5.2.</span> <span class="nav-text">Logistic Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Softmax-Regression"><span class="nav-number">5.3.</span> <span class="nav-text">Softmax Regression</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy Francis</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

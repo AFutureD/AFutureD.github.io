@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数学 数论素数，整数分解，欧拉函数辗转相除法 筛法：       pku2689 Prime Distance（很好的一个应用）   反素数：       zoj2562 More Divisors   素数判断，整数分解：       pku1811 Prime Test       pku2429 GCD &amp;amp; LCM Inverse   欧拉函数：       pku1284 Prim">
+<meta name="keywords" content="数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACM数学知识整理">
+<meta property="og:url" content="http://blog.afuture.me/2018/07/03/ACM数学知识整理/index.html">
+<meta property="og:site_name" content="AFuture&#39;s Blog">
+<meta property="og:description" content="数学 数论素数，整数分解，欧拉函数辗转相除法 筛法：       pku2689 Prime Distance（很好的一个应用）   反素数：       zoj2562 More Divisors   素数判断，整数分解：       pku1811 Prime Test       pku2429 GCD &amp;amp; LCM Inverse   欧拉函数：       pku1284 Prim">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-03T06:29:44.236Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ACM数学知识整理">
+<meta name="twitter:description" content="数学 数论素数，整数分解，欧拉函数辗转相除法 筛法：       pku2689 Prime Distance（很好的一个应用）   反素数：       zoj2562 More Divisors   素数判断，整数分解：       pku1811 Prime Test       pku2429 GCD &amp;amp; LCM Inverse   欧拉函数：       pku1284 Prim">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.afuture.me/2018/07/03/ACM数学知识整理/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ACM数学知识整理 | AFuture's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AFuture's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2018/07/03/ACM数学知识整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Francis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AFuture's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ACM数学知识整理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-03 14:22:46 / 修改时间：14:29:44" itemprop="dateCreated datePublished" datetime="2018-07-03T14:22:46+08:00">2018-07-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>数学</em></p>
+<h2 id="数论"><a href="#数论" class="headerlink" title="数论"></a>数论</h2><h3 id="素数，整数分解，欧拉函数"><a href="#素数，整数分解，欧拉函数" class="headerlink" title="素数，整数分解，欧拉函数"></a>素数，整数分解，欧拉函数</h3><pre><code>辗转相除法
+筛法：  
+    pku2689 Prime Distance（很好的一个应用）  
+反素数：  
+    zoj2562 More Divisors  
+素数判断，整数分解：  
+    pku1811 Prime Test  
+    pku2429 GCD &amp; LCM Inverse  
+欧拉函数：  
+    pku1284 Primitive Roots （很水）  
+    pku2407 Relatives （很水）  
+    pku2773 Happy 2006  
+    pku2478 Farey Sequence （快速求欧拉函数）  
+    pku3090 Visible Lattice Points （法雷级数）  
+推荐：（欧拉函数，费马小定理）  
+    pku3358 Period of an Infinite Binary Expansion 
+整数分解  
+    pku2992 Divisors  
+    fzu1753 Another Easy Problem   
+    hit2813 Garden visiting 
+    pku3101 Astronomy （分数的最小公倍数） 
+</code></pre><h3 id="扩展欧几里得，线性同余，中国剩余定理"><a href="#扩展欧几里得，线性同余，中国剩余定理" class="headerlink" title="扩展欧几里得，线性同余，中国剩余定理"></a>扩展欧几里得，线性同余，中国剩余定理</h3><pre><code>简单题：  
+    pku1006 Biorhythms  
+    pku1061 青蛙的约会
+    pku2891 Strange Way to Express Integers  
+    pku2115 C Looooops  
+    pku2142 The Balance  
+    *强烈推荐：  
+    pku3708 Recurrent Function （经典）
+</code></pre><h3 id="高次同余方程"><a href="#高次同余方程" class="headerlink" title="高次同余方程"></a>高次同余方程</h3><pre><code>pku3243 Clever Y    
+pku2417 Discrete Loggin
+</code></pre><h3 id="高斯消元法解方程"><a href="#高斯消元法解方程" class="headerlink" title="高斯消元法解方程"></a>高斯消元法解方程</h3><pre><code>简单题：  
+    pku1222 EXTENDED LIGHTS OUT    
+    pku1681 Painter&apos;s Problem    
+    pku1830 开关问题    
+推荐：  
+    pku2947 Widget Factory    
+    pku2065 SETI    
+强烈推荐：  
+    pku1753 Flip Game    
+    pku3185 The Water Bowls    
+变态题：  
+    pku1487 Single-Player Games 
+</code></pre><h3 id="数位类统计问题"><a href="#数位类统计问题" class="headerlink" title="数位类统计问题"></a>数位类统计问题</h3><pre><code>简单：  
+    ural1057 Amount of degrees
+    spoj1182 Sorted bit squence 
+    hdu3271 SNIBB    
+较难：  
+    spoj2319 Sequence  
+    sgu390 Tickets 
+</code></pre><h2 id="组合数学"><a href="#组合数学" class="headerlink" title="组合数学"></a>组合数学</h2><h3 id="容斥原理，鸽巢原理"><a href="#容斥原理，鸽巢原理" class="headerlink" title="容斥原理，鸽巢原理"></a>容斥原理，鸽巢原理</h3><pre><code>鸽巢原理：  
+    pku2365 Find a multiple    
+    pku3370 Halloween treats    
+容斥原理：  
+    hdu1695 GCD    
+    hdu2461 Rectangles  
+</code></pre><h3 id="排列组合，区间计数，计数序列"><a href="#排列组合，区间计数，计数序列" class="headerlink" title="排列组合，区间计数，计数序列"></a>排列组合，区间计数，计数序列</h3><pre><code>简单题：  
+    pku1850 Code    
+    pku1150 The Last Non-zero Digit    
+    pku1715 Hexadecimal Numbers    
+    pku2282 The Counting Problem    
+    pku3286 How many 0&apos;s?    
+推荐：  
+    pku3252 Round Numbers    
+计数序列：  
+    pku1430 Binary Stirling Numbers    
+    pku2515 Birthday Cake    
+    pku1707 Sum of powers    
+</code></pre><h3 id="置换，置换的运算"><a href="#置换，置换的运算" class="headerlink" title="置换，置换的运算"></a>置换，置换的运算</h3><pre><code>简单题：（应该理解概念就可以了）  
+    pku3270 Cow Sorting  
+    pku1026 Cipher 
+置换幂运算：  
+    pku1721 CARDS  
+    pku3128 Leonardo&apos;s Notebook            
+推荐：（不错的应用）  
+    pku3590 The shuffle Problem 
+</code></pre><h3 id="burnside定理，polya计数法"><a href="#burnside定理，polya计数法" class="headerlink" title="burnside定理，polya计数法"></a>burnside定理，polya计数法</h3><pre><code>简单题：（直接用套公式就可以了)
+    pku2409 Let it Bead
+    pku2154 Color
+    pku1286 Necklace of Beads
+强烈推荐：（这题很不错哦，很巧妙）  
+    pku2888 Magic Bracelet
+</code></pre><h3 id="稳定婚姻问题"><a href="#稳定婚姻问题" class="headerlink" title="稳定婚姻问题"></a>稳定婚姻问题</h3><pre><code>pku3487 The Stable Marriage Problem    
+zoj1576 Marriage is Stable 
+</code></pre><h3 id="MoBius反演"><a href="#MoBius反演" class="headerlink" title="MoBius反演"></a>MoBius反演</h3><h3 id="偏序关系理论"><a href="#偏序关系理论" class="headerlink" title="偏序关系理论"></a>偏序关系理论</h3><h2 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h2><h3 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h3><pre><code>简单：  
+    pku3070 Fibonacci    
+    pku3233 Matrix Power Series    
+    pku3735 Training little cats 
+</code></pre><h3 id="矩阵变换"><a href="#矩阵变换" class="headerlink" title="矩阵变换"></a>矩阵变换</h3><h3 id="递推关系"><a href="#递推关系" class="headerlink" title="递推关系"></a>递推关系</h3><pre><code>POJ3252
+poj1850
+poj1019
+poj1942
+</code></pre><h3 id="约瑟夫环问题"><a href="#约瑟夫环问题" class="headerlink" title="约瑟夫环问题"></a>约瑟夫环问题</h3><pre><code>简单题：  
+    pku3517 And Then There Was One  
+    pku1781 In Danger  
+    pku1012 Joseph   
+    pku2244 Eeny Meeny Moo   
+</code></pre><h3 id="找规律，推公式"><a href="#找规律，推公式" class="headerlink" title="找规律，推公式"></a>找规律，推公式</h3><pre><code>pku3372 Candy Distribution    
+pku3244 Difference between Triplets    
+pku1809 Regetni    
+pku1831 不定方程组    
+pku1737 Connected Graph    
+pku2480 Longge&apos;s problem    
+pku1792 Hexagonal Routes
+</code></pre><h3 id="二分法求解单调函数相关知识"><a href="#二分法求解单调函数相关知识" class="headerlink" title="二分法求解单调函数相关知识."></a>二分法求解单调函数相关知识.</h3><pre><code>pku3273Monthly Expense 
+pku3258River Hopscotch  
+pku1905Expanding Rods 
+pku3122Pie 
+pku1845 Sumdiv 
+poj3273
+poj3258
+poj1905
+poj3122
+</code></pre><h3 id="三分法求解单峰-单谷-的极值"><a href="#三分法求解单峰-单谷-的极值" class="headerlink" title="三分法求解单峰(单谷)的极值."></a>三分法求解单峰(单谷)的极值.</h3><h3 id="0-1分数规划-poj2976"><a href="#0-1分数规划-poj2976" class="headerlink" title="0/1分数规划. (poj2976)"></a>0/1分数规划. (poj2976)</h3><h3 id="矩阵法"><a href="#矩阵法" class="headerlink" title="矩阵法"></a>矩阵法</h3><h3 id="随机化算法"><a href="#随机化算法" class="headerlink" title="随机化算法"></a>随机化算法</h3><pre><code>poj3318
+poj2454
+</code></pre><h3 id="迭代逼近"><a href="#迭代逼近" class="headerlink" title="迭代逼近"></a>迭代逼近</h3><pre><code>poj3301
+</code></pre><h3 id="扫描线算法"><a href="#扫描线算法" class="headerlink" title="扫描线算法"></a>扫描线算法</h3><h2 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h2><h3 id="巴什博奕（BashGame）"><a href="#巴什博奕（BashGame）" class="headerlink" title="巴什博奕（BashGame）"></a>巴什博奕（BashGame）</h3><h3 id="威佐夫博奕（WythoffGame）"><a href="#威佐夫博奕（WythoffGame）" class="headerlink" title="威佐夫博奕（WythoffGame）"></a>威佐夫博奕（WythoffGame）</h3><h3 id="尼姆博奕（NimmGame）"><a href="#尼姆博奕（NimmGame）" class="headerlink" title="尼姆博奕（NimmGame）"></a>尼姆博奕（NimmGame）</h3><h3 id="组合博弈"><a href="#组合博弈" class="headerlink" title="组合博弈"></a>组合博弈</h3><h2 id="计算几何"><a href="#计算几何" class="headerlink" title="计算几何"></a>计算几何</h2><h3 id="叉积和点积的运用-如线段相交的判定-点到线段的距离等"><a href="#叉积和点积的运用-如线段相交的判定-点到线段的距离等" class="headerlink" title="叉积和点积的运用(如线段相交的判定,点到线段的距离等)."></a>叉积和点积的运用(如线段相交的判定,点到线段的距离等).</h3><pre><code>poj2031
+poj1039
+</code></pre><h3 id="多边型的简单算法-求面积-和相关判定-点在多边型内-多边型是否相交"><a href="#多边型的简单算法-求面积-和相关判定-点在多边型内-多边型是否相交" class="headerlink" title="多边型的简单算法(求面积)和相关判定(点在多边型内,多边型是否相交)"></a>多边型的简单算法(求面积)和相关判定(点在多边型内,多边型是否相交)</h3><pre><code>poj1408
+poj1584
+</code></pre><h3 id="二维、三维凸包"><a href="#二维、三维凸包" class="headerlink" title="二维、三维凸包"></a>二维、三维凸包</h3><pre><code>poj2187
+poj1113
+</code></pre><h3 id="扫描线算法-例如求矩形的面积和周长并-常和线段树或堆一起使用"><a href="#扫描线算法-例如求矩形的面积和周长并-常和线段树或堆一起使用" class="headerlink" title="扫描线算法(例如求矩形的面积和周长并,常和线段树或堆一起使用)."></a>扫描线算法(例如求矩形的面积和周长并,常和线段树或堆一起使用).</h3><h3 id="半平面求交"><a href="#半平面求交" class="headerlink" title="半平面求交"></a>半平面求交</h3><pre><code>poj3384
+poj2540
+poj3130
+poj3335
+</code></pre><h3 id="点集最小圆覆盖"><a href="#点集最小圆覆盖" class="headerlink" title="点集最小圆覆盖."></a>点集最小圆覆盖.</h3><h3 id="对踵点（最远点对）"><a href="#对踵点（最远点对）" class="headerlink" title="对踵点（最远点对）"></a>对踵点（最远点对）</h3><pre><code>poj2079
+</code></pre><h3 id="几何工具的综合应用"><a href="#几何工具的综合应用" class="headerlink" title="几何工具的综合应用."></a>几何工具的综合应用.</h3><pre><code>poj1819
+poj1066
+poj2043
+poj3227
+poj2165
+poj3429
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/03/Codeforces-400-C-Molly-s-Chemicals/" rel="next" title="Codeforces">
+                <i class="fa fa-chevron-left"></i> Codeforces
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/03/隐函数存在定理/" rel="prev" title="隐函数存在定理">
+                隐函数存在定理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Andy Francis</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数论"><span class="nav-number">1.</span> <span class="nav-text">数论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#素数，整数分解，欧拉函数"><span class="nav-number">1.1.</span> <span class="nav-text">素数，整数分解，欧拉函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里得，线性同余，中国剩余定理"><span class="nav-number">1.2.</span> <span class="nav-text">扩展欧几里得，线性同余，中国剩余定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高次同余方程"><span class="nav-number">1.3.</span> <span class="nav-text">高次同余方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高斯消元法解方程"><span class="nav-number">1.4.</span> <span class="nav-text">高斯消元法解方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数位类统计问题"><span class="nav-number">1.5.</span> <span class="nav-text">数位类统计问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合数学"><span class="nav-number">2.</span> <span class="nav-text">组合数学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#容斥原理，鸽巢原理"><span class="nav-number">2.1.</span> <span class="nav-text">容斥原理，鸽巢原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排列组合，区间计数，计数序列"><span class="nav-number">2.2.</span> <span class="nav-text">排列组合，区间计数，计数序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#置换，置换的运算"><span class="nav-number">2.3.</span> <span class="nav-text">置换，置换的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#burnside定理，polya计数法"><span class="nav-number">2.4.</span> <span class="nav-text">burnside定理，polya计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稳定婚姻问题"><span class="nav-number">2.5.</span> <span class="nav-text">稳定婚姻问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MoBius反演"><span class="nav-number">2.6.</span> <span class="nav-text">MoBius反演</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#偏序关系理论"><span class="nav-number">2.7.</span> <span class="nav-text">偏序关系理论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算方法"><span class="nav-number">3.</span> <span class="nav-text">计算方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵"><span class="nav-number">3.1.</span> <span class="nav-text">矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵变换"><span class="nav-number">3.2.</span> <span class="nav-text">矩阵变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递推关系"><span class="nav-number">3.3.</span> <span class="nav-text">递推关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约瑟夫环问题"><span class="nav-number">3.4.</span> <span class="nav-text">约瑟夫环问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找规律，推公式"><span class="nav-number">3.5.</span> <span class="nav-text">找规律，推公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二分法求解单调函数相关知识"><span class="nav-number">3.6.</span> <span class="nav-text">二分法求解单调函数相关知识.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三分法求解单峰-单谷-的极值"><span class="nav-number">3.7.</span> <span class="nav-text">三分法求解单峰(单谷)的极值.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1分数规划-poj2976"><span class="nav-number">3.8.</span> <span class="nav-text">0/1分数规划. (poj2976)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵法"><span class="nav-number">3.9.</span> <span class="nav-text">矩阵法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机化算法"><span class="nav-number">3.10.</span> <span class="nav-text">随机化算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代逼近"><span class="nav-number">3.11.</span> <span class="nav-text">迭代逼近</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扫描线算法"><span class="nav-number">3.12.</span> <span class="nav-text">扫描线算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博弈论"><span class="nav-number">4.</span> <span class="nav-text">博弈论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#巴什博奕（BashGame）"><span class="nav-number">4.1.</span> <span class="nav-text">巴什博奕（BashGame）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#威佐夫博奕（WythoffGame）"><span class="nav-number">4.2.</span> <span class="nav-text">威佐夫博奕（WythoffGame）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尼姆博奕（NimmGame）"><span class="nav-number">4.3.</span> <span class="nav-text">尼姆博奕（NimmGame）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合博弈"><span class="nav-number">4.4.</span> <span class="nav-text">组合博弈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算几何"><span class="nav-number">5.</span> <span class="nav-text">计算几何</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#叉积和点积的运用-如线段相交的判定-点到线段的距离等"><span class="nav-number">5.1.</span> <span class="nav-text">叉积和点积的运用(如线段相交的判定,点到线段的距离等).</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多边型的简单算法-求面积-和相关判定-点在多边型内-多边型是否相交"><span class="nav-number">5.2.</span> <span class="nav-text">多边型的简单算法(求面积)和相关判定(点在多边型内,多边型是否相交)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二维、三维凸包"><span class="nav-number">5.3.</span> <span class="nav-text">二维、三维凸包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扫描线算法-例如求矩形的面积和周长并-常和线段树或堆一起使用"><span class="nav-number">5.4.</span> <span class="nav-text">扫描线算法(例如求矩形的面积和周长并,常和线段树或堆一起使用).</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#半平面求交"><span class="nav-number">5.5.</span> <span class="nav-text">半平面求交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#点集最小圆覆盖"><span class="nav-number">5.6.</span> <span class="nav-text">点集最小圆覆盖.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对踵点（最远点对）"><span class="nav-number">5.7.</span> <span class="nav-text">对踵点（最远点对）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几何工具的综合应用"><span class="nav-number">5.8.</span> <span class="nav-text">几何工具的综合应用.</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy Francis</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

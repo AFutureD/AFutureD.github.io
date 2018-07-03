@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="伸展树——Splay Tree简单介绍伸展树（英语：Splay Tree）是一种二叉查找树，它能在$O(log(n))$内完成插入、查找和删除操作。它是由丹尼尔·斯立特（Daniel Sleator）和羅伯特·塔揚在1985年发明的。在伸展树上的一般操作都基于伸展操作：假设想要对一个二叉查找树执行一系列的查找操作，为了使整个查找时间更小，被查频率高的那些条目就应当经常处于靠近树根的位置。于是想到设">
+<meta name="keywords" content="Splay">
+<meta property="og:type" content="article">
+<meta property="og:title" content="伸展树——Splay Tree">
+<meta property="og:url" content="http://blog.afuture.me/2017/08/18/伸展树——Splay Tree /index.html">
+<meta property="og:site_name" content="AFuture&#39;s Blog">
+<meta property="og:description" content="伸展树——Splay Tree简单介绍伸展树（英语：Splay Tree）是一种二叉查找树，它能在$O(log(n))$内完成插入、查找和删除操作。它是由丹尼尔·斯立特（Daniel Sleator）和羅伯特·塔揚在1985年发明的。在伸展树上的一般操作都基于伸展操作：假设想要对一个二叉查找树执行一系列的查找操作，为了使整个查找时间更小，被查频率高的那些条目就应当经常处于靠近树根的位置。于是想到设">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201210/10/1349877565_2986.png">
+<meta property="og:updated_time" content="2018-07-03T04:02:25.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="伸展树——Splay Tree">
+<meta name="twitter:description" content="伸展树——Splay Tree简单介绍伸展树（英语：Splay Tree）是一种二叉查找树，它能在$O(log(n))$内完成插入、查找和删除操作。它是由丹尼尔·斯立特（Daniel Sleator）和羅伯特·塔揚在1985年发明的。在伸展树上的一般操作都基于伸展操作：假设想要对一个二叉查找树执行一系列的查找操作，为了使整个查找时间更小，被查频率高的那些条目就应当经常处于靠近树根的位置。于是想到设">
+<meta name="twitter:image" content="http://img.my.csdn.net/uploads/201210/10/1349877565_2986.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.afuture.me/2017/08/18/伸展树——Splay Tree /"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>伸展树——Splay Tree | AFuture's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AFuture's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2017/08/18/伸展树——Splay Tree /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Francis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AFuture's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">伸展树——Splay Tree
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-18 19:43:57" itemprop="dateCreated datePublished" datetime="2017-08-18T19:43:57+08:00">2017-08-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-03 12:02:25" itemprop="dateModified" datetime="2018-07-03T12:02:25+08:00">2018-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="伸展树——Splay-Tree"><a href="#伸展树——Splay-Tree" class="headerlink" title="伸展树——Splay Tree"></a>伸展树——Splay Tree</h1><h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p><strong>伸展树</strong>（英语：Splay Tree）是一种二叉查找树，它能在$O(log(n))$内完成插入、查找和删除操作。它是由丹尼尔·斯立特（Daniel Sleator）和羅伯特·塔揚在1985年发明的。<br>在伸展树上的一般操作都基于伸展操作：假设想要对一个二叉查找树执行一系列的查找操作，为了使整个查找时间更小，被查频率高的那些条目就应当经常处于靠近树根的位置。于是想到设计一个简单方法， 在每次查找之后对树进行調整，把被查找的条目搬移到离树根近一些的地方。伸展树是一种自调整形式的二叉查找树，它会沿着从某个节点到树根之间的路径，通过一系列的旋转把这个节点搬移到树根去。<br>它的优势在于不需要记录用于平衡树的冗余信息。</p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>把重要的树节点转移树根。使在最坏的情况下,查询时间复杂度仍然为$O(log(n))$。</p>
+<h2 id="时间复杂度证明"><a href="#时间复杂度证明" class="headerlink" title="时间复杂度证明"></a>时间复杂度证明</h2><p>具体证明请看维基百科的。 <a href="https://en.wikipedia.org/wiki/Splay_tree" target="_blank" rel="noopener">Splay tree - Wikipedia</a></p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="基本操作：旋转"><a href="#基本操作：旋转" class="headerlink" title="基本操作：旋转"></a>基本操作：旋转</h3><p><img src="http://img.my.csdn.net/uploads/201210/10/1349877565_2986.png" alt=""></p>
+<p>首先讲基本旋转之一右旋（zig）：</p>
+<p>解释下上面这个图，对于右旋，P为目标节点，Q为P的父节点，A、B、C则是相关子节点。右旋操作可以将P节点变为Q的父节点，且保持原有的二叉查询树的特性，即对于某一节点，其左子树的所有节点的值都小于该节点而右子树的所有节点的值都大于该节点。</p>
+<p>整个过程分为三步：</p>
+<ol>
+<li>将P的右子树B(如果有的话)作Q的左子树，即让B认Q作爹</li>
+<li>设Z为原本Q结点的父亲，让P认Z做爹(如果Z存在的话)，即将P作为Z的儿子(是左是右得由Q是Z的左儿子还是右儿子决定，要左右一致)</li>
+<li>将Q作为P的右子树，即让Q认P作爹。</li>
+</ol>
+<p>####右旋代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">right_rotate</span><span class="params">(<span class="keyword">long</span> P)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">long</span> Q = father[P];</span><br><span class="line">	<span class="keyword">long</span> Z = father[Q];<span class="comment">//这里的z与上文的Q相关，表示y的父节点。</span></span><br><span class="line">    leftson[Q] = rightson[P];<span class="comment">//第一步，将P的右子树B(如果有的话)作Q的左子树。</span></span><br><span class="line">    <span class="keyword">if</span>(rightson[P] != <span class="number">0</span>)</span><br><span class="line">    	father[rightson[P]] = Q;<span class="comment">//第一步，B认Q为父。</span></span><br><span class="line">    father[P] = Z;<span class="comment">//第二步，P认Z做爹。</span></span><br><span class="line">    <span class="keyword">if</span>(z != <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(leftson[Z] == y)<span class="comment">//判断原来的Q是Z的左节点还是有节点。</span></span><br><span class="line">        	leftson[Z] = P;<span class="comment">//第二步,P做Z儿子。</span></span><br><span class="line">     	<span class="keyword">else</span> </span><br><span class="line">          	rightson[Z] = P;</span><br><span class="line">    &#125;</span><br><span class="line">    rightson[P] = y;<span class="comment">//第三步，Q作为P的右子树</span></span><br><span class="line">  	father[Q] = P;<span class="comment">//第三步，Q认P作爹</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着另一个旋转——左旋（zag）：</p>
+<p>有了上面右旋的基础，就直接说明步骤了：</p>
+<ol>
+<li>将P的左子树B(如果有的话)作Q的右子树，即让B认Q作爹</li>
+<li>设Z为原本Q结点的父亲，让P认Z做爹(如果Z存在的话)，即将P作为Z的儿子(是左是右得由Y是Z的左儿子还是右儿子决定，要左右一致)</li>
+<li>将Q作为P的左子树，即让P认P作爹。</li>
+</ol>
+<h4 id="左旋代码："><a href="#左旋代码：" class="headerlink" title="左旋代码："></a>左旋代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">left_rotate</span><span class="params">(<span class="keyword">long</span> P)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">long</span> Q = father[P];</span><br><span class="line">	<span class="keyword">long</span> Z = father[Q];</span><br><span class="line">	rightson[Q] = leftson[P];</span><br><span class="line">	<span class="keyword">if</span>(leftson[P] != <span class="number">0</span>)</span><br><span class="line">      	father[leftson[P]] = Q;</span><br><span class="line">	father[P]=Z;</span><br><span class="line">	<span class="keyword">if</span>(Z != <span class="number">0</span>)&#123;</span><br><span class="line">    	<span class="keyword">if</span>(leftson[Z] == Q)</span><br><span class="line">          	leftson[Z] = P;</span><br><span class="line">      	<span class="keyword">else</span> </span><br><span class="line">          	rightson[Z] = P;</span><br><span class="line">	&#125;</span><br><span class="line">  	leftson[P] = Q;</span><br><span class="line">  	father[Q] = P;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="核心操作：spaly"><a href="#核心操作：spaly" class="headerlink" title="核心操作：spaly"></a>核心操作：spaly</h3><p>把重要节点通过旋转操作转移为目标节点的父节点。一般为转移到根节点。</p>
+<p>####Splay代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splaQ</span><span class="params">(<span class="keyword">long</span> P,<span class="keyword">long</span> Ancestry)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(father[P] != Ancestry)&#123;</span><br><span class="line">        <span class="keyword">long</span> Q = father[P];</span><br><span class="line">        <span class="keyword">long</span> Z = father[Q];</span><br><span class="line">        <span class="keyword">if</span>(Z == Ancestry)&#123; <span class="comment">//父节点为目标节点</span></span><br><span class="line">            <span class="keyword">if</span>(rightson[Q] == P)</span><br><span class="line">                left_rotate(P);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right_rotate(P);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;<span class="comment">//由左旋和右旋组合产生四种情况</span></span><br><span class="line">            <span class="keyword">if</span>(rightson[Z] == Q &amp;&amp; rightson[Q] == P)&#123;</span><br><span class="line">                left_rotate(Q);</span><br><span class="line">                left_rotate(P);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(rightson[Z] == Q &amp;&amp; leftson[Q] == P)&#123;</span><br><span class="line">                right_rotate(P);</span><br><span class="line">                left_rotate(P);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(leftson[Z] == Q &amp;&amp; leftson[Q] == P)&#123;</span><br><span class="line">                right_rotate(Q);</span><br><span class="line">                right_rotate(P);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                left_rotate(P);</span><br><span class="line">                right_rotate(P);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(Ancestry == <span class="number">0</span>)</span><br><span class="line">        root = P;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入操作-insert"><a href="#插入操作-insert" class="headerlink" title="插入操作 insert"></a>插入操作 insert</h3><ol>
+<li>首先判断是否为空树。如果为空树，则初始化树。</li>
+<li>判断节点值与插入值是否相等，相等则对此节点做相关操作，如数量加一；不相等，执行第3步。</li>
+<li>比较节点值与插入值的大小，找的子节点。如果当前点节点不为空，执行第2步；为空则执行第4步。</li>
+<li>新建节点，树总节点数量（全局变量）加一，初始化父亲节点和子节点，进行splay操作。</li>
+</ol>
+<h4 id="insert代码"><a href="#insert代码" class="headerlink" title="insert代码"></a>insert代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (root==<span class="number">0</span>)&#123; <span class="comment">//若当前为空树则直接加</span></span><br><span class="line">        tree[++sz].num=x;  </span><br><span class="line">        childsz[sz]=cnt[sz]=<span class="number">1</span>; <span class="comment">//size为该子树的节点数目，cnt为同一数值数字数目  </span></span><br><span class="line">        root = sz; <span class="comment">//sz为整棵树的节点数目</span></span><br><span class="line">        <span class="keyword">return</span>;    </span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">int</span> now = root,fa = <span class="number">0</span>; <span class="comment">//now,root等都为节点编号。</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)&#123;  </span><br><span class="line">        <span class="keyword">if</span> (val[now] == x)&#123; <span class="comment">//相等，找到位置</span></span><br><span class="line">            tree[now].cnt++;  </span><br><span class="line">            splay(now);</span><br><span class="line">            <span class="keyword">return</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        fa = now;  </span><br><span class="line">        now = (x&gt;val[now]?rightson[now]:leftson[now]); <span class="comment">//按大小找子节点</span></span><br><span class="line">        <span class="keyword">if</span> (now == <span class="number">0</span>)&#123; <span class="comment">//该点未被添加过，新建节点</span></span><br><span class="line">            sz++; <span class="comment">//节点新建了一个，作为节点编号</span></span><br><span class="line">            val[sz] = x;</span><br><span class="line">            cnt[sz] = childsize[sz] = <span class="number">1</span>;  </span><br><span class="line">            father[sz] = fa;  </span><br><span class="line">            (x &gt; val[fa] ? rightson[fa] : leftson[fa]) = sz; <span class="comment">//设置父亲                    </span></span><br><span class="line">            splay(sz);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###查找操作</p>
+<h4 id="查询某一值的排名"><a href="#查询某一值的排名" class="headerlink" title="查询某一值的排名"></a>查询某一值的排名</h4><p>和其它二叉搜索树的操作基本一样。但是区别是：</p>
+<ol>
+<li>如果x比当前结点小，即应该向左子树寻找，ans不用改变（设想一下，走到整棵树的最左端最底端排名不就是1吗）。</li>
+<li>如果x比当前结点大，即应该向右子树寻找，ans需要加上左子树的大小以及根的大小（这里的大小指的是权值）。</li>
+</ol>
+<p>不要忘记了再splay一下</p>
+<h5 id="find-代码"><a href="#find-代码" class="headerlink" title="find 代码"></a>find 代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>,now = root;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (v &lt; val[now])</span><br><span class="line">            now = leftch[now];</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            ans += (leftch[now] ? size[leftch[now]] : <span class="number">0</span>); </span><br><span class="line">            <span class="comment">//左子树存在的话就为左子树大小，否则为0。</span></span><br><span class="line">            <span class="keyword">if</span> (v == val[now]) &#123;</span><br><span class="line">                splay(now);</span><br><span class="line">                <span class="keyword">return</span> ans+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ans += cnt[now];<span class="comment">//根的大小</span></span><br><span class="line">            now = rightch[now];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询排名为x的点"><a href="#查询排名为x的点" class="headerlink" title="查询排名为x的点"></a>查询排名为x的点</h4><p>如果当前点有左子树，并且x比左子树的大小小的话，即向左子树寻找；</p>
+<p>否则，向右子树寻找：先判断是否有右子树，然后记录右子树的大小以及当前点的大小（都为权值），用于判断是否需要继续向右子树寻找。</p>
+<h5 id="findx-代码"><a href="#findx-代码" class="headerlink" title="findx 代码"></a>findx 代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findx</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> now = root;  </span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)&#123;  </span><br><span class="line">        <span class="keyword">if</span> (leftch[now] &amp;&amp; x &lt;= size[leftch[now]])  </span><br><span class="line">            now = ch[now][<span class="number">0</span>];  </span><br><span class="line">        <span class="keyword">else</span>&#123;  </span><br><span class="line">            <span class="keyword">int</span> temp = (leftchch[now] ? size[leftch[now]] : <span class="number">0</span>) + cnt[now];  </span><br><span class="line">            <span class="keyword">if</span> (x &lt;= temp)  </span><br><span class="line">                <span class="keyword">return</span> key[now];  </span><br><span class="line">            x -= temp;</span><br><span class="line">            now = rightch[now];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##感谢</p>
+<p><a href="http://blog.csdn.net/clove_unique/article/details/50630280" target="_blank" rel="noopener">http://blog.csdn.net/clove_unique/article/details/50630280</a></p>
+<p><a href="http://blog.csdn.net/skydec/article/details/20151805" target="_blank" rel="noopener">http://blog.csdn.net/skydec/article/details/20151805</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Splay/" rel="tag"># Splay</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/18/POJ-2449/" rel="next" title="第k短路的故事">
+                <i class="fa fa-chevron-left"></i> 第k短路的故事
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/03/Codeforces-400-C-Molly-s-Chemicals/" rel="prev" title="Codeforces">
+                Codeforces <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Andy Francis</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#伸展树——Splay-Tree"><span class="nav-number">1.</span> <span class="nav-text">伸展树——Splay Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单介绍"><span class="nav-number">1.1.</span> <span class="nav-text">简单介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目的"><span class="nav-number">1.2.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度证明"><span class="nav-number">1.3.</span> <span class="nav-text">时间复杂度证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作"><span class="nav-number">1.4.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作：旋转"><span class="nav-number">1.4.1.</span> <span class="nav-text">基本操作：旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#左旋代码："><span class="nav-number">1.4.1.1.</span> <span class="nav-text">左旋代码：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心操作：spaly"><span class="nav-number">1.4.2.</span> <span class="nav-text">核心操作：spaly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入操作-insert"><span class="nav-number">1.4.3.</span> <span class="nav-text">插入操作 insert</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#insert代码"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">insert代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询某一值的排名"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">查询某一值的排名</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#find-代码"><span class="nav-number">1.4.3.2.1.</span> <span class="nav-text">find 代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询排名为x的点"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">查询排名为x的点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#findx-代码"><span class="nav-number">1.4.3.3.1.</span> <span class="nav-text">findx 代码</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy Francis</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
