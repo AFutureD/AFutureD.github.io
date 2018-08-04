@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/Hdu-2686 Matrix/">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/威佐夫博奕（Wythoff Game）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andy Francis">
@@ -296,8 +296,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/12/28/Hdu-2686 Matrix/" itemprop="url">
-                  Hdu-2686 Matrix
+                <a class="post-title-link" href="/2016/12/28/威佐夫博奕（Wythoff Game）/" itemprop="url">
+                  51nod 威佐夫博奕（Wythoff Game）
                 </a>
               
             
@@ -340,7 +340,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-03 14:29:52" itemprop="dateModified" datetime="2018-07-03T14:29:52+08:00">2018-07-03</time>
+                <time title="修改时间：2018-07-03 14:29:49" itemprop="dateModified" datetime="2018-07-03T14:29:49+08:00">2018-07-03</time>
               
             
           </span>
@@ -393,20 +393,27 @@
       
         
           
-            <p><em>类型：多线程DP</em></p>
-<h3 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h3><p>Yifenfei very like play a number game in the n*n Matrix. A positive integer number is put in each area of the Matrix.<br>Every time yifenfei should to do is that choose a detour which frome the top left point to the bottom right point and than back to the top left point with the maximal values of sum integers that area of Matrix yifenfei choose. But from the top to the bottom can only choose right and down, from the bottom to the top can only choose left and up. And yifenfei can not pass the same area of the Matrix except the start and end. </p>
-<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>The input contains multiple test cases.<br>Each case first line given the integer n (2&lt;n&lt;30)<br>Than n lines,each line include n positive integers.(&lt;100)</p>
-<h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><p>For each test case output the maximal values yifenfei can get.</p>
-<h3 id="sample-Input"><a href="#sample-Input" class="headerlink" title="sample Input"></a>sample Input</h3><p>2<br>10 3<br>5 10<br>3<br>10 3 3<br>2 5 3<br>6 7 10<br>5<br>1 2 3 4 5<br>2 3 4 5 6<br>3 4 5 6 7<br>4 5 6 7 8<br>5 6 7 8 9</p>
-<h3 id="Samput-Output"><a href="#Samput-Output" class="headerlink" title="Samput Output"></a>Samput Output</h3><p>28<br>46<br>80</p>
-<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>这个题目是一道 <strong>多线程DP</strong> ，题目简单的可理解为，在矩阵中选择两条不相交的最优路径，最优理解为使路径上数字的和最大。简单分析之后，可以发现此题由原来方向为==左上 -&gt; 右下 -&gt; 左上== 的路径可转换为两条方向为==左上 -&gt; 右下== 的路径同时出发，且不相交，<strong>多线程 </strong> 得到体现。</p>
-<p>规定dp[x~1~][y~1~][x~2~][y~2~]表示为两条路径的终点分别为（x~1~ ，y~1~）,（x~2~ ,y~2~），原矩阵数据存在MAP[][]中。对于当前时刻的状态，因为一个点的位置的前一个状态有两种可能性，所以一共有四种可能性，状态转移方程具体为：</p>
-<p>dp[x~1~][y~1~][x~2~][y~2~] = max(dp[x~1~-1][y~1~][x~2~-1][y~2~],dp[x~1~-1][y~1~][x~2~][y~2~-1],dp[x~1~][y~1~-1][x~2~-1][y~2~],dp[x~1~][y~1~-1][x~2~][y~2~-1]) + MAP[x~1~][y~1~]</p>
-<p>当x~1~ != x~2~ 或 y~1~ != y~2~ 时dp[x~1~][y~1~][x~2~][y~2~] += MAP[x~2~][y~2~]</p>
-<p>分析下时间复杂度为O(n^4^)，空间复杂度为O(n^4^)。如何优化呢？</p>
-<p>有这么一个事实，当明确一个终点的距离原点的距离后，如果知道该终点的横左边，那么由距离可知唯一的纵左边，并且两个不同的重点有唯一相同属性<strong>到原点的距离</strong> ，即x~1~ + y~1~ = x~2~ + y~2~。</p>
-<p>那么我们可以设一个变量L，用来存坐标与原点的距离。dp[l][x~1~][x~2~] 则可以简单的表示出原来的dp[x~1~][y~1~][x~2~][y~2~] ，但是空间与时间复杂度变为O(n^3^).</p>
-<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">include &lt;iostream&gt;</span><br><span class="line">include &lt;cstdio&gt;</span><br><span class="line">include &lt;cstring&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c,<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp1 = max(a,b);</span><br><span class="line">    <span class="keyword">int</span> tmp2 = max(c,d);</span><br><span class="line">    <span class="keyword">return</span> max(tmp1,tmp2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> MAP[<span class="number">40</span>][<span class="number">40</span>],dp[<span class="number">80</span>][<span class="number">40</span>][<span class="number">40</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) != EOF )&#123;</span><br><span class="line">        <span class="built_in">memset</span>(MAP,<span class="number">0</span>,<span class="keyword">sizeof</span>(MAP));</span><br><span class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j)&#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;MAP[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">1</span>; l &lt;= (<span class="number">2</span> * n - <span class="number">1</span>); ++l)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x1 = <span class="number">1</span>; x1 &lt;= n; ++x1)</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> x2 = <span class="number">1</span>; x2 &lt;=n; ++x2)&#123;</span><br><span class="line">                    <span class="keyword">int</span> tmp_y1 = l - x1 + <span class="number">1</span>,tmp_y2 = l - x2 + <span class="number">1</span>;</span><br><span class="line">                    dp[l][x1][x2] = max(dp[l<span class="number">-1</span>][x1<span class="number">-1</span>][x2<span class="number">-1</span>],dp[l<span class="number">-1</span>][x1][x2],</span><br><span class="line">                                        dp[l<span class="number">-1</span>][x1<span class="number">-1</span>][x2],dp[l<span class="number">-1</span>][x1][x2<span class="number">-1</span>]) + MAP[x1][tmp_y1];</span><br><span class="line">                    <span class="keyword">if</span> (x1 != x2 || tmp_y1 != tmp_y2)</span><br><span class="line">                        dp[l][x1][x2] += MAP[x2][tmp_y2];</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; dp[<span class="number">2</span>*n<span class="number">-1</span>][n][n]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p><em>类型：Wythoff Game</em></p>
+<h3 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h3><p>​    有2堆石子。A，B两个人轮流拿，A先拿。每次可以从一堆中取任意个或从2堆中取相同数量的石子，但不可不取。拿到最后1颗石子的人获胜。假设A，B都非常聪明，拿石子的过程中不会出现失误。给出2堆石子的数量，问最后谁能赢得比赛。</p>
+<h4 id="例如："><a href="#例如：" class="headerlink" title="例如："></a>例如：</h4><p>​    2堆石子分别为3颗和5颗。那么不论A怎样拿，B都有对应的方法拿到最后1颗。</p>
+<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>我们用，，，，表示两堆物品的数量并称其为<strong>局势</strong>，如果甲面对(0,0)，那么甲已经输了，这种局势我们称为<strong>奇异局势</strong>。前几个奇异局势是：（0，0）、（1，2）、（3，5）、（4，7）、（6，10）、（8，13）、（9，15）、（11，18）、（12，20）。</p>
+<p>可以看出，<code>$a_0=b_0=0$ 、 $ a_k$是未在前面出现过的最小自然数,而 $b_k= a_k + k$</code>，奇异局势有如下三条性质:</p>
+<blockquote>
+<p>1.任何自然数都包含在一个且仅有一个奇异局势中。</p>
+</blockquote>
+<p>由于是未在前面出现过的最小自然数，所以有，而  。所以性质1成立。</p>
+<blockquote>
+<p>2.任意操作都可将奇异局势变为非奇异局势。</p>
+</blockquote>
+<p>事实上，若只改变奇异局势（，）的某一个分量，那么另一个分量不可能在其他奇异局势中，所以必然是非奇异局势。如果使（，）的两个分量同时减少，则由于其差不变，且不可能是其他奇异局势的差，因此也是非奇异局势。</p>
+<blockquote>
+<p>3.采用适当的方法，可以将非奇异局势变为奇异局势。</p>
+</blockquote>
+<p>假设面对的局势是（），若，则同时从两堆中取走 a 个物体，就变为了奇异局势（0，0）；如果，，那么，取走个物体，即变为奇异局势；如果 ， ,则同时从两堆中拿走个物体,变为奇异局势；如果，则从第一堆中拿走多余的数量即可；如果， ，分两种情况，第一种，,从第二里面拿走  即可；第二种，,从第二堆里面拿走 即可。</p>
+<p>从如上性质可知，两个人如果都采用正确操作，那么<strong>面对非奇异局势，先拿者必胜</strong>；反之，则后拿者取胜。</p>
+<p>那么任给一个局势（a，b），怎样判断它是不是奇异局势呢？我们有如下公式：</p>
+<p>，，方括号表示取整函数奇妙的是其中出现了黄金分割数,因此发现对于任意的局势(a,b)，a&lt;b, 根据上述公式，其中k明显为a与b的差值，也正是根据这个差值来确认（a，b）是否为奇异局势。具体过程为，如果则为奇异局势。</p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">include &lt;stdio.h&gt;</span><br><span class="line">include &lt;math.h&gt;</span><br><span class="line">include &lt;iostream&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, a, b, m;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        <span class="keyword">if</span> (a &gt; b)</span><br><span class="line">            swap(a,b);</span><br><span class="line">        m = (<span class="keyword">int</span>)((b-a) * (<span class="number">1</span> + <span class="built_in">sqrt</span>(<span class="number">5</span>)) / <span class="number">2.0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, a == m ? <span class="string">"B"</span> : <span class="string">"A"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -460,7 +467,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/最大子矩阵和/">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/HDU-2544 最短路/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andy Francis">
@@ -479,8 +486,195 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/12/28/最大子矩阵和/" itemprop="url">
-                  51NOD DP-最大子矩阵和
+                <a class="post-title-link" href="/2016/12/28/HDU-2544 最短路/" itemprop="url">
+                  HDU-2544  最短路
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-12-28 16:31:57" itemprop="dateCreated datePublished" datetime="2016-12-28T16:31:57+08:00">2016-12-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-03 14:29:53" itemprop="dateModified" datetime="2018-07-03T14:29:53+08:00">2018-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><em>类型： dijkstra</em></p>
+<h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>在每年的校赛里，所有进入决赛的同学都会获得一件很漂亮的t-shirt。但是每当我们的工作人员把上百件的衣服从商店运回到赛场的时候，却是非常累的！所以现在他们想要寻找最短的从商店到赛场的路线，你可以帮助他们吗？</p>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>输入包括多组数据。每组数据第一行是两个整数N、M（N&lt;=100，M&lt;=10000），N表示成都的大街上有几个路口，标号为1的路口是商店所在地，标号为N的路口是赛场所在地，M则表示在成都有几条路。N=M=0表示输入结束。接下来M行，每行包括3个整数A，B，C（1&lt;=A,B&lt;=N,1&lt;=C&lt;=1000）,表示在路口A与路口B之间有一条路，我们的工作人员需要C分钟的时间走过这条路。</p>
+<p>输入保证至少存在1条商店到赛场的路线。</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>对于每组输入，输出一行，表示工作人员从商店走到赛场的最短时间</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><p>2 1</p>
+<p>1 2 3</p>
+<p>3 3</p>
+<p>1 2 5</p>
+<p>2 3 5</p>
+<p>3 1 2</p>
+<p>0 0</p>
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><p>3</p>
+<p>2</p>
+<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题解包括dijkstra的讲解。</p>
+<p><strong>dijistra的简述：</strong>将源点(初始点)放入一个空集合U，初始化距离(指图中的任意一点距离源点最短的距离)为0，由源点开始广度遍历，寻找到离源点最近的相邻点后加入U中，从这个点V继续广度遍历，对于每个相邻的点P，对比已知距离和由当前点V加V、P两点间边的权值，取最小后更新，在这些相邻的点中取离源点最近的点，加入集合U中，重复操作，直到U的大小等于图的点的集合。</p>
+<p><strong>题目简述：</strong> 简单的最短路。</p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">include &lt;iostream&gt;</span><br><span class="line">include &lt;cstring&gt;</span><br><span class="line">include &lt;<span class="built_in">vector</span>&gt;</span><br><span class="line">include &lt;<span class="built_in">queue</span>&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> vertex, weight;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Graph</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">vector</span>&lt;Edge&gt; * edges;</span><br><span class="line">    <span class="keyword">bool</span> * visited;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> * dist;</span><br><span class="line">	Graph (<span class="keyword">int</span> input_n) &#123;</span><br><span class="line">		n = input_n;</span><br><span class="line">		edges = <span class="keyword">new</span> <span class="built_in">vector</span>&lt;Edge&gt;[n];</span><br><span class="line">		dist = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        visited = <span class="keyword">new</span> <span class="keyword">bool</span>[n];</span><br><span class="line">        <span class="built_in">memset</span>(visited, <span class="number">0</span>, n);</span><br><span class="line">		<span class="built_in">memset</span>(dist, <span class="number">0x3f</span>, n * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	~Graph() &#123;</span><br><span class="line">		<span class="keyword">delete</span>[] dist;</span><br><span class="line">		<span class="keyword">delete</span>[] edges;</span><br><span class="line">        <span class="keyword">delete</span>[] visited;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> weight)</span> </span>&#123;</span><br><span class="line">        edges[x].push_back(Edge&#123;y, weight&#125;);</span><br><span class="line">        edges[y].push_back(Edge&#123;x, weight&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        dist[v] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> min_dist = INF,min_vertex;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(!visited[j] &amp;&amp; dist[j] &lt; min_dist)&#123;</span><br><span class="line">                    min_dist = dist[j];</span><br><span class="line">                    min_vertex = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            visited[min_vertex] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(Edge &amp;j: edges[min_vertex])&#123;</span><br><span class="line">                <span class="keyword">if</span>( min_dist + j.weight &lt; dist[j.vertex])&#123;</span><br><span class="line">                    dist[j.vertex] = min_dist + j.weight;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	<span class="keyword">while</span> ((<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m) &amp;&amp; n &amp;&amp; m)&#123;</span><br><span class="line">	<span class="function">Graph <span class="title">g</span><span class="params">(n)</span></span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> a, b, c;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">		g.insert(a<span class="number">-1</span>, b<span class="number">-1</span>, c);</span><br><span class="line">	&#125;</span><br><span class="line">	g.dijkstra(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.dist[n<span class="number">-1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/裴蜀等式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Francis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AFuture's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/28/裴蜀等式/" itemprop="url">
+                  裴蜀等式
                 </a>
               
             
@@ -576,191 +770,12 @@
       
         
           
-            <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>一个M*N的矩阵，找到此矩阵的一个子矩阵，并且这个子矩阵的元素的和是最大的，输出这个最大的    值。例如：3*3的矩阵：</p>
-<p>-1  3 -1<br> 2 -1  3<br>-3  1  2</p>
-<p>和最大的子矩阵是：</p>
-<p> 3 -1<br>-1  3<br> 1  2</p>
-<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>第1行：M和N，中间用空格隔开（2 &lt;= M,N &lt;= 500)。<br>第2 - N + 1行：矩阵中的元素，每行M个数，中间用空格隔开。(-10^9 &lt;= M[i] &lt;= 10^9)</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>输出和的最大值。如果所有数都是负数，就输出0。</p>
-<h3 id="Input-示例"><a href="#Input-示例" class="headerlink" title="Input 示例"></a>Input 示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 3  3</span><br><span class="line">-1  3 -1</span><br><span class="line"> 2 -1  3</span><br><span class="line">-3  1  2</span><br></pre></td></tr></table></figure>
-<h3 id="Output示例"><a href="#Output示例" class="headerlink" title="Output示例"></a>Output示例</h3><p>7</p>
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/HDU-2066 一个人的旅行/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Andy Francis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AFuture's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/28/HDU-2066 一个人的旅行/" itemprop="url">
-                  HDU-2066 一个人的旅行
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-12-28 16:31:57" itemprop="dateCreated datePublished" datetime="2016-12-28T16:31:57+08:00">2016-12-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-03 14:29:55" itemprop="dateModified" datetime="2018-07-03T14:29:55+08:00">2018-07-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><em>类型： 最短路，多集合到多集合</em></p>
-<h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>虽然草儿是个路痴（就是在杭电待了一年多，居然还会在校园里迷路的人，汗~),但是草儿仍然很喜欢旅行，因为在旅途中 会遇见很多人（白马王子，^0^），很多事，还能丰富自己的阅历，还可以看美丽的风景……草儿想去很多地方，她想要去东京铁塔看夜景，去威尼斯看电影，去阳明山上看海芋，去纽约纯粹看雪景，去巴黎喝咖啡写信，去北京探望孟姜女……眼看寒假就快到了，这么一大段时间，可不能浪费啊，一定要给自己好好的放个假，可是也不能荒废了训练啊，所以草儿决定在要在最短的时间去一个自己想去的地方！因为草儿的家在一个小镇上，没有火车经过，所以她只能去邻近的城市坐火车（好可怜啊~）。</p>
-<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>输入数据有多组，每组的第一行是三个整数T，S和D，表示有T条路，和草儿家相邻的城市的有S个，草儿想去的地方有D个；<br> 接着有T行，每行有三个整数a，b，time,表示a,b城市之间的车程是time小时；(1=&lt;(a,b)&lt;=1000;a,b 之间可能有多条路)<br> 接着的第T+1行有S个数，表示和草儿家相连的城市；<br> 接着的第T+2行有D个数，表示草儿想去地方。</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>输出草儿能去某个喜欢的城市的最短时间。</p>
-<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><p>6 2 3<br>1 3 5<br>1 4 7<br>2 8 12<br>3 8 4<br>4 9 12<br>9 10 2<br>1 2<br>8 9 10</p>
-<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><p>9</p>
-<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>对于集合到集合的最短路题，一种简单的做法是构建两个虚拟点，一个是虚拟起点，一个是虚拟终点，虚拟起点到起点集合的各个点的距离为0，虚拟终点到终点集合的各个点的距离为0。然后对虚拟起点和终点求一边最短路即可求得答案。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">include &lt;iostream&gt;</span><br><span class="line">include &lt;cstring&gt;</span><br><span class="line">include &lt;<span class="built_in">vector</span>&gt;</span><br><span class="line">include &lt;<span class="built_in">queue</span>&gt;</span><br><span class="line">include &lt;cstdio&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> vertex, weight;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Graph</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">vector</span>&lt;Edge&gt; * edges;</span><br><span class="line">    <span class="keyword">bool</span> * visited;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> * dist;</span><br><span class="line">	Graph (<span class="keyword">int</span> input_n) &#123;</span><br><span class="line">		n = input_n;</span><br><span class="line">		edges = <span class="keyword">new</span> <span class="built_in">vector</span>&lt;Edge&gt;[n];</span><br><span class="line">		dist = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        visited = <span class="keyword">new</span> <span class="keyword">bool</span>[n];</span><br><span class="line">        <span class="built_in">memset</span>(visited, <span class="number">0</span>, n);</span><br><span class="line">		<span class="built_in">memset</span>(dist, <span class="number">0x3f</span>, n * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	~Graph() &#123;</span><br><span class="line">		<span class="keyword">delete</span>[] dist;</span><br><span class="line">		<span class="keyword">delete</span>[] edges;</span><br><span class="line">        <span class="keyword">delete</span>[] visited;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> weight)</span> </span>&#123;</span><br><span class="line">        edges[x].push_back(Edge&#123;y, weight&#125;);</span><br><span class="line">        edges[y].push_back(Edge&#123;x, weight&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        dist[v] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> min_dist = INF,min_vertex;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(!visited[j] &amp;&amp; dist[j] &lt; min_dist)&#123;</span><br><span class="line">                    min_dist = dist[j];</span><br><span class="line">                    min_vertex = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            visited[min_vertex] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(Edge &amp;j: edges[min_vertex])&#123;</span><br><span class="line">                <span class="keyword">if</span>( min_dist + j.weight &lt; dist[j.vertex])&#123;</span><br><span class="line">                    dist[j.vertex] = min_dist + j.weight;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> T,S,D,maxn;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;T,&amp;S,&amp;D)!=EOF)&#123;</span><br><span class="line">        <span class="function">Graph <span class="title">g</span><span class="params">(<span class="number">1010</span>)</span></span>;</span><br><span class="line">        maxn = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; T; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> a, b, c;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">            maxn = max(max(a,b),maxn);</span><br><span class="line">            g.insert(a, b, c);</span><br><span class="line">        &#125;</span><br><span class="line">        maxn++;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; S; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; tmp;</span><br><span class="line">            g.insert(<span class="number">0</span>, tmp, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; D; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; tmp;</span><br><span class="line">            g.insert(maxn, tmp, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        g.dijkstra(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; g.dist[maxn] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>在数论中，<strong>裴蜀等式（Bézout’s identity）</strong> 或 <strong>裴蜀定理</strong> 是一个关于最大公因数的定理：</p>
+<blockquote>
+<p>对于正整数 a, b，存在s,t∈Z 使 sa + t b = gcd (a,b) 成立。</p>
+</blockquote>
+<h4 id="根据互质的定义证明以下命题"><a href="#根据互质的定义证明以下命题" class="headerlink" title="根据互质的定义证明以下命题:"></a>根据互质的定义证明以下命题:</h4><p>​    正整数a,b∈$Z^+$互质当且仅当存在整数s,t∈$Z $满足 sa+tb=1。</p>
+<h4 id="证明："><a href="#证明：" class="headerlink" title="证明："></a>证明：</h4><p>​    1. 已知整数 $a$ 和 $b$ 互质，那么$gcd{(a,b)}=1$，所以存在整数$s,t$ 使得 $1 = sa+tb$；<br>​    2. 假设存在一个整数 dd 是正整数 aa 和正整数 bb 的公共因子，则$ d\mid a$且 $d\mid b$；<br>​    3. 因为 $d$ 是 $a $的因数，且 $s$ 是整数，所以 $d$ 也一定是 $sa$ 的因数，也就是说 $d\mid  sa,d∣sa$；<br>​    4. 因为 $d$ 是 $b$ 的因数,且 $t$ 是整数,所以 $d$ 也一定是 $tb$ 的因数，也就是说 $d\mid tb,d∣tb$；<br>​    5. 存在整数 $m,n$ 使得我们可以将 $sa$ 表示为 $md$，将 $tb$ 表示为 $nd$；所以，我们可以得 $sa+tb = md+nd = (m+n)d$；由此我们可以知道 $d\mid (sa+tb)$；<br>​    6. 因为我们已知 $sa+tb = 1$,所以 $d \mid 1$。由此，我们只能是 $d = 1$ 或 $d = -1$。所以 $a$ 和 $b$的公共正整数因子只有 1，所以 $a,b\in \mathbb{Z^+}$  互质；<br>​    7. 综上可得“正整数 $a,b\in \mathbb{Z^+}$。</p>
 
           
         
@@ -992,7 +1007,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/裴蜀等式/">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/巴什博奕（Bash Game）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andy Francis">
@@ -1011,8 +1026,625 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/12/28/裴蜀等式/" itemprop="url">
-                  裴蜀等式
+                <a class="post-title-link" href="/2016/12/28/巴什博奕（Bash Game）/" itemprop="url">
+                  51nod 巴什博奕（Bash Game）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-12-28 16:31:57" itemprop="dateCreated datePublished" datetime="2016-12-28T16:31:57+08:00">2016-12-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-03 14:29:47" itemprop="dateModified" datetime="2018-07-03T14:29:47+08:00">2018-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h3><p>有一堆石子共有N个。A，B两个人轮流拿，A先拿。每次最少拿1颗，最多拿K颗，拿到最后1颗石子的人获胜。假设A，B都非常聪明，拿石子的过程中不会出现失误。给出N和K，问最后谁能赢得比赛。</p>
+<h4 id="例如："><a href="#例如：" class="headerlink" title="例如："></a>例如：</h4><p>N = 3，K = 2。无论A如何拿，B都可以拿到最后1颗石子。</p>
+<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>显然，如果N=K+1，那么由于一次最多只能取K个，所以，无论A拿走多少个，B都能够一次拿走剩余的物品，B取胜。因此我们发现了如何取胜的法则：如果，（X为任意自然数，Y≤K)，那么A要拿走Y个物品，如果B拿走T（T≤K)个，那么A再拿走个，结果剩下个，以后保持这样的取法，那么A肯定获胜。总之，要保持给对手留下的倍数，就能最后获胜。</p>
+<h4 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h4><p>这个游戏还可以有一种变相的玩法：两个人轮流报数，每次至少报一个，最多报十个，谁能报到100者胜。</p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">include&lt;stdio.h&gt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> N,K;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;N,&amp;K);</span><br><span class="line">        <span class="keyword">if</span>(N % (K + <span class="number">1</span>))</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"A\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"B\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/康托展开/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Francis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AFuture's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/28/康托展开/" itemprop="url">
+                  康托展开
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-12-28 16:31:57" itemprop="dateCreated datePublished" datetime="2016-12-28T16:31:57+08:00">2016-12-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-03 14:29:46" itemprop="dateModified" datetime="2018-07-03T14:29:46+08:00">2018-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>康托展开是一个全排列到一个自然数的双射，常用于构建哈希表时的空间压缩。 康托展开的实质是计算当前排列在所有由小到大全排列中的顺序，因此是可逆的。</p>
+<h2 id="公式："><a href="#公式：" class="headerlink" title="公式："></a>公式：</h2><p>$$X=a_n(n-1)!+a_{n-1}(n-2)!+\ldots+a_1\cdot0! + 1$$</p>
+<p>其中，$a_i$为整数，并且$0\le a_i \le i,1\le i \le n.$</p>
+<h2 id="用途："><a href="#用途：" class="headerlink" title="用途："></a>用途：</h2><p>n位（0~n-1）全排列后，其康托展开唯一且最大约为n!，因此可以由更小的空间来储存这些排列。由公式可将X逆推出唯一的一个排列。</p>
+<h2 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h2><p>对于一个有n个不同元素的集合${1,2,3,4,\dots,n}$的从小到大排序（从大到小 同理）的全排列 显然它有$n！$项。如n=4，那么就有$4！=4×3×2×1=24$项。</p>
+<p>与自然数$1，2，3，4，\dots n！$与之一一对应。比如  $1～4$四个数的全排列按字典序如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">1234：第一个</th>
+<th style="text-align:center">2134：第七个</th>
+<th style="text-align:center">3124：第13个</th>
+<th style="text-align:center">4123：第19个</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1243：第二个</td>
+<td style="text-align:center">2143：第八个</td>
+<td style="text-align:center">3142：第14个</td>
+<td style="text-align:center">4132：第20个</td>
+</tr>
+<tr>
+<td style="text-align:center">1324：第三个</td>
+<td style="text-align:center">2314：第九个</td>
+<td style="text-align:center">3214：第15个</td>
+<td style="text-align:center">4213：第21个</td>
+</tr>
+<tr>
+<td style="text-align:center">1342：第四个</td>
+<td style="text-align:center">2341：第十个</td>
+<td style="text-align:center">3241：第16个</td>
+<td style="text-align:center">4231：第22个</td>
+</tr>
+<tr>
+<td style="text-align:center">1423：第五个</td>
+<td style="text-align:center">2413：第11个</td>
+<td style="text-align:center">3412：第17个</td>
+<td style="text-align:center">4312：第23个</td>
+</tr>
+<tr>
+<td style="text-align:center">1432：第六个</td>
+<td style="text-align:center">2431：第12个</td>
+<td style="text-align:center">3421：第18个</td>
+<td style="text-align:center">4321：第24个</td>
+</tr>
+</tbody>
+</table>
+<p><strong>问：求4132是第几个排列？</strong></p>
+<p>解：总共4个数，所以n=4.ans:=0;</p>
+<ol>
+<li><p>第一个数是4，研究比4小的并且还没有出现过的数有3个：1，2，3。</p>
+<p>其中，a4 = 3 ，那么ans:=ans+3*(n-1)!所以  ans:= ans+ 3*(4-1)!  =18</p>
+</li>
+<li><p>第二个数是1，研究比1小的并且还没有出现过的数为 0个。</p>
+<p>其中，a3 = 0 ，那么ans:=ans+0 * (n-2)!，那么ans不变。</p>
+</li>
+<li><p>第三个数是3，研究比3小的并且还没有出现过的数为1个：1，2。</p>
+<p>其中，a2 = 2 ，那么ans:=ans+ 1<em> (n-3)!,那么ans:=18+1</em> (4-3)!=19</p>
+</li>
+<li><p>第四个数是2，研究比2小的并且还没有出现过的数为0个。</p>
+<p>其中，a1 = 0 ，那么ans不变。</p>
+</li>
+</ol>
+<p>最后ans怎么等于19啊？？代表它前面有19个排列嘛，那么4132自己就是第20个罗（ 最后ans:=ans+1）</p>
+<h2 id="逆展开："><a href="#逆展开：" class="headerlink" title="逆展开："></a>逆展开：</h2><p><strong>例：</strong>1～5从小到大全排列中，找出第96个排列？</p>
+<ol>
+<li>首先用96-1得到95，说明X之前有95个排列.(将此数本身减去！)</li>
+<li>用95去除4! 得到3余23，说明有3个数比第1位小，所以第一位是4.</li>
+<li>用23去除3! 得到3余5，说明有3个数比第2位小，所以是4，但是4已出现过，因此是5.</li>
+<li>用5去除2!得到2余1，类似地，这一位是3.</li>
+<li>用1去除1!得到1余0，这一位是2.</li>
+<li>最后一位只能是1.</li>
+<li>所以这个数是45321.</li>
+</ol>
+<h2 id="总结-代码："><a href="#总结-代码：" class="headerlink" title="总结 + 代码："></a>总结 + 代码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fac[] = &#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">24</span>,<span class="number">120</span>,<span class="number">720</span>,<span class="number">5040</span>,<span class="number">40320</span>&#125;; <span class="comment">//阶乘</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//康托展开</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kt</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> s[])</span></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>,smallNum;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        smallNum = <span class="number">0</span>; <span class="comment">//比当前数小的数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;n; j++)</span><br><span class="line">            <span class="keyword">if</span>(s[i] &gt; s[j]) smallNum++;</span><br><span class="line">        sum += smallNum * fac[n-i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//康托逆展开</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">invKT</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="keyword">int</span> s[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,j;</span><br><span class="line">    <span class="keyword">bool</span> visit[<span class="number">10</span>] = &#123;<span class="literal">false</span>&#125;; <span class="comment">//需要记录该数是否已在前面出现过</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</span><br><span class="line">        t = k/fac[n-i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!visit[j])&#123;</span><br><span class="line">                <span class="keyword">if</span>(t == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">                t--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        s[i] = j;</span><br><span class="line">        visit[j] = <span class="literal">true</span>;</span><br><span class="line">        k %= fac[n-i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/抽屉原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Francis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AFuture's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/28/抽屉原理/" itemprop="url">
+                  抽屉原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-12-28 16:31:57" itemprop="dateCreated datePublished" datetime="2016-12-28T16:31:57+08:00">2016-12-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-03 14:29:46" itemprop="dateModified" datetime="2018-07-03T14:29:46+08:00">2018-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="抽屉原理简述："><a href="#抽屉原理简述：" class="headerlink" title="抽屉原理简述："></a>抽屉原理简述：</h2><h3 id="第一抽屉原理："><a href="#第一抽屉原理：" class="headerlink" title="第一抽屉原理："></a>第一抽屉原理：</h3><blockquote>
+<ol>
+<li>把多于n+k个的物体放到n个抽屉里，则至少有一个抽屉里的东西不少于两件。</li>
+<li>把多于mn(m乘以n)+1（n不为0）个的物体放到n个抽屉里，则至少有一个抽屉里有不少于（m+1）的物体。</li>
+<li>把无穷多件物体放入n个抽屉，则至少有一个抽屉里 有无穷个物体。</li>
+</ol>
+</blockquote>
+<h3 id="第二抽屉原理："><a href="#第二抽屉原理：" class="headerlink" title="第二抽屉原理："></a>第二抽屉原理：</h3><blockquote>
+<ol>
+<li>把$（mn－1）$个物体放入n个抽屉中，其中必有一个抽屉中至多有$（m—1）$个物体 (例如，将3×5-1=14个物体放入5个抽屉中，则必定有一个抽屉中的物体数少于等于3-1=2)。</li>
+</ol>
+</blockquote>
+<h2 id="HDU-1205-吃糖果"><a href="#HDU-1205-吃糖果" class="headerlink" title="HDU_1205 吃糖果"></a>HDU_1205 吃糖果</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>HOHO，终于从Speakless手上赢走了所有的糖果，是Gardon吃糖果时有个特殊的癖好，就是不喜欢将一样的糖果放在一起吃，喜欢先吃一种，下一次吃另一种，这样；可是Gardon不知道是否存在一种吃糖果的顺序使得他能把所有糖果都吃完？请你写个程序帮忙计算一下。</p>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>第一行有一个整数T，接下来T组数据，每组数据占2行，第一行是一个整数N（0&lt;N&lt;=1000000)，第二行是N个数，表示N种糖果的数目Mi(0&lt;Mi&lt;=1000000)。</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>对于每组数据，输出一行，包含一个”Yes”或者”No”。</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><p>2<br>3<br>4 1 1<br>5<br>5 4 3 2 1</p>
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><p>No<br>Yes</p>
+<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>设其中某类糖果的数量最多，数量为max，总的糖果数为sum，如果mam&gt;sum-max+1；则一定不能吃完，否则能吃完。</p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">  	__int64  n,m,t,max,sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        sum=<span class="number">0</span>;</span><br><span class="line">        max=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>,&amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>,&amp;m);</span><br><span class="line">            sum+=m;</span><br><span class="line">            <span class="keyword">if</span>(max&lt;m)</span><br><span class="line">            	max=m;        </span><br><span class="line">        &#125;</span><br><span class="line">        sum-=max;</span><br><span class="line">        <span class="keyword">if</span>(max&gt;sum+<span class="number">1</span>)</span><br><span class="line">        	<span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        	<span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="HDU-1808-Halloween-treats"><a href="#HDU-1808-Halloween-treats" class="headerlink" title="HDU_1808 Halloween treats"></a>HDU_1808 Halloween treats</h1><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Every year there is the same problem at Halloween: Each neighbour is only willing to give a certain total number of sweets on that day, no matter how many children call on him, so it may happen that a child will get nothing if it is too late. To avoid conflicts, the children have decided they will put all sweets together and then divide them evenly among themselves. From last year’s experience of Halloween they know how many sweets they get from each neighbour. Since they care more about justice than about the number of sweets they get, they want to select a subset of the neighbours to visit, so that in sharing every child receives the same number of sweets. They will not be satisfied if they have any sweets left which cannot be divided. </p>
+<p>Your job is to help the children and present a solution. </p>
+<h3 id="Input-1"><a href="#Input-1" class="headerlink" title="Input"></a>Input</h3><p>The input contains several test cases.<br>The first line of each test case contains two integers c and n (1 ≤ c ≤ n ≤ 100000), the number of children and the number of neighbours, respectively. The next line contains n space separated integers a1 , … , an (1 ≤ ai ≤ 100000 ), where ai represents the number of sweets the children get if they visit neighbour i. </p>
+<p>The last test case is followed by two zeros. </p>
+<h3 id="Output-1"><a href="#Output-1" class="headerlink" title="Output"></a>Output</h3><p>For each test case output one line with the indices of the neighbours the children should select (here, index i corresponds to neighbour i who gives a total number of ai sweets). If there is no solution where each child gets at least one sweet, print “no sweets” instead. Note that if there are several solutions where each child gets at least one sweet, you may print any of them.</p>
+<h3 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input"></a>Sample Input</h3><p>4 5<br>1 2 3 7 5<br>3 6<br>7 11 2 5 13 17<br>0 0</p>
+<h3 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output"></a>Sample Output</h3><p>3 5<br>2 3 4</p>
+<h3 id="题解：-1"><a href="#题解：-1" class="headerlink" title="题解："></a>题解：</h3><p>有c个孩子，去n个邻居家要糖果，现在已知每个邻居所能给的糖果数ai，问怎么个要法能保证全部所得的糖果能被c个孩子平分。</p>
+<p>我们考虑前k个邻居的糖果总数，那么这样的和一共有n个，a1，a1+a2，…，a1+…+an，如果将他们分别除以孩子的个数c，那么余数只可能在1~c-1之间，换句话说，和有n个，而余数有c-1个，并且从题目中可知c&lt;=n，那么根据抽屉原理可知，必然有两个和的余数是相同的，这也就意味着这两个和中包含的公有项的和能被c整除，即为所求答案。</p>
+<h3 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">include &lt;cstdio&gt;</span><br><span class="line">include &lt;cstring&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> a[MAXN], SumMod[MAXN], flag[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c, n;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;c, &amp;n) &amp;&amp; (c+n))</span><br><span class="line">    &#123;</span><br><span class="line">        SumMod[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(flag, <span class="number">0</span>, <span class="keyword">sizeof</span>(flag));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            SumMod[i] = (SumMod[i<span class="number">-1</span>] + a[i]) % c;  <span class="comment">// 处理前缀和，并取模</span></span><br><span class="line">            <span class="keyword">if</span>(flag[SumMod[i]] == <span class="number">0</span>)</span><br><span class="line">                flag[SumMod[i]] = i;</span><br><span class="line">            <span class="keyword">else</span>                                   <span class="comment">// 如果相同的余数在前面出现过</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> j = flag[SumMod[i]] + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">int</span> k = j;</span><br><span class="line">                <span class="keyword">for</span>(; j&lt;=i; ++j)                   <span class="comment">// 公共项即为答案</span></span><br><span class="line">                    <span class="keyword">if</span>(j == k) <span class="built_in">printf</span>(<span class="string">"%d"</span>, j);</span><br><span class="line">                    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">" %d"</span>, j);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/最大子矩阵和/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Francis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AFuture's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/28/最大子矩阵和/" itemprop="url">
+                  51NOD DP-最大子矩阵和
                 </a>
               
             
@@ -1108,214 +1740,15 @@
       
         
           
-            <p>在数论中，<strong>裴蜀等式（Bézout’s identity）</strong> 或 <strong>裴蜀定理</strong> 是一个关于最大公因数的定理：</p>
-<blockquote>
-<p>对于正整数 a, b，存在s,t∈Z 使 sa + t b = gcd (a,b) 成立。</p>
-</blockquote>
-<h4 id="根据互质的定义证明以下命题"><a href="#根据互质的定义证明以下命题" class="headerlink" title="根据互质的定义证明以下命题:"></a>根据互质的定义证明以下命题:</h4><p>​    正整数a,b∈$Z^+$互质当且仅当存在整数s,t∈$Z $满足 sa+tb=1。</p>
-<h4 id="证明："><a href="#证明：" class="headerlink" title="证明："></a>证明：</h4><p>​    1. 已知整数 $a$ 和 $b$ 互质，那么$gcd{(a,b)}=1$，所以存在整数$s,t$ 使得 $1 = sa+tb$；<br>​    2. 假设存在一个整数 dd 是正整数 aa 和正整数 bb 的公共因子，则$ d\mid a$且 $d\mid b$；<br>​    3. 因为 $d$ 是 $a $的因数，且 $s$ 是整数，所以 $d$ 也一定是 $sa$ 的因数，也就是说 $d\mid  sa,d∣sa$；<br>​    4. 因为 $d$ 是 $b$ 的因数,且 $t$ 是整数,所以 $d$ 也一定是 $tb$ 的因数，也就是说 $d\mid tb,d∣tb$；<br>​    5. 存在整数 $m,n$ 使得我们可以将 $sa$ 表示为 $md$，将 $tb$ 表示为 $nd$；所以，我们可以得 $sa+tb = md+nd = (m+n)d$；由此我们可以知道 $d\mid (sa+tb)$；<br>​    6. 因为我们已知 $sa+tb = 1$,所以 $d \mid 1$。由此，我们只能是 $d = 1$ 或 $d = -1$。所以 $a$ 和 $b$的公共正整数因子只有 1，所以 $a,b\in \mathbb{Z^+}$  互质；<br>​    7. 综上可得“正整数 $a,b\in \mathbb{Z^+}$。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/HDU-1272 小希的迷宫/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Andy Francis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AFuture's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/28/HDU-1272 小希的迷宫/" itemprop="url">
-                  HDU-1272 小希的迷宫
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-12-28 16:31:57" itemprop="dateCreated datePublished" datetime="2016-12-28T16:31:57+08:00">2016-12-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-03 14:29:56" itemprop="dateModified" datetime="2018-07-03T14:29:56+08:00">2018-07-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><em>类型： 并查集</em></p>
-<h2 id="并查集简述："><a href="#并查集简述：" class="headerlink" title="并查集简述："></a>并查集简述：</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><p>并查集(union-find sets)是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。</p>
-<h3 id="基本操作："><a href="#基本操作：" class="headerlink" title="基本操作："></a>基本操作：</h3><ol>
-<li><p>Make_Set(x) 把每一个元素<strong>初始化</strong>为一个集合：</p>
-<p>初始化后每一个元素的父亲节点是它本身，每一个元素的祖先节点也是它本身（也可以根据情况而变）。</p>
-</li>
-<li><p>Find_Set(x) 查找一个元素所在的集合:</p>
-<p>查找一个元素所在的集合，其精髓是找到<strong>这个元素所在集合的祖先</strong>！这个才是并查集判断和合并的最终依据。判断两个元素是否属于同一集合，只要看他们所在集合的祖先是否相同即可。</p>
-</li>
-<li><p>Union(x,y) 合并x,y所在的两个集合：</p>
-<p>合并两个集合，也是使一个集合的祖先成为另一个集合的祖先。具体过程为，利用Find_Set找到其中两个集合的祖先，将一个集合的祖先指向另一个集合的祖先。</p>
-</li>
-<li><p>Find_Set(x)时 路径压缩：</p>
-<p>寻找祖先时我们一般采用递归查找，但是当元素很多亦或是整棵树变为一条链时，每次Find_Set(x)都是O(n)的复杂度，有没有办法减小这个复杂度呢？</p>
-<p>答案是肯定的，这就是路径压缩，即当我们经过”递推”找到祖先节点后，<strong>“回溯”的时候顺便将它的子孙节点都直接指向祖先</strong>，这样以后再次Find_Set(x)时复杂度就变成O(1)了。</p>
-</li>
-<li><p>Union(x,y)时 按秩合并：</p>
-<p>即合并的时候将元素少的集合合并到元素多的集合中，这样合并之后树的高度会相对较小。</p>
-</li>
-</ol>
-<h2 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>上次Gardon的迷宫城堡小希玩了很久（见Problem B），现在她也想设计一个迷宫让Gardon来走。但是她设计迷宫的思路不一样，首先她认为所有的通道都应该是双向连通的，就是说如果有一个通道连通了房间A和B，那么既可以通过它从房间A走到房间B，也可以通过它从房间B走到房间A，为了提高难度，小希希望任意两个房间有且仅有一条路径可以相通（除非走了回头路）。小希现在把她的设计图给你，让你帮忙判断她的设计图是否符合她的设计思路。比如下面的例子，前两个是符合条件的，但是最后一个却有两种方法从5到达8。 </p>
-<p><img src="HDU_1272.png" alt="HDU_1272"></p>
-<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>输入包含多组数据，每组数据是一个以0 0结尾的整数对列表，表示了一条通道连接的两个房间的编号。房间的编号至少为1，且不超过100000。每两组数据之间有一个空行。<br>整个文件以两个-1结尾。</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>对于输入的每一组数据，输出仅包括一行。如果该迷宫符合小希的思路，那么输出”Yes”，否则输出”No”。</p>
-<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><p>6 8  5 3  5 2  6 4<br>5 6  0 0</p>
-<p>8 1  7 3  6 2  8 9  7 5<br>7 4  7 8  7 6  0 0</p>
-<p>3 8  6 8  6 4<br>5 3  5 6  5 2  0 0</p>
-<p>-1 -1</p>
-<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><p>Yes<br>Yes<br>No</p>
-<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题是并查集的基本应用。只需要使用并查集判断是否有环路 且 是否只有单个集合。</p>
-<p>有坑。。。 输入 0 0 输出Yes</p>
-<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">include &lt;iostream&gt;</span><br><span class="line">include &lt;cstdio&gt;</span><br><span class="line">include &lt;cstring&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> flag = <span class="number">0</span>,maxx=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> vis[MAX],pre[MAX]; <span class="comment">// pre用来存index的父节点，路径压缩后存的是根节点。</span></span><br><span class="line">					   <span class="comment">//vis用来判断是否用到这个点。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;  <span class="comment">//初始化</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAX; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		pre[i] = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">	flag = <span class="number">0</span>;</span><br><span class="line">	maxx=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123; <span class="comment">// find操作</span></span><br><span class="line">	<span class="keyword">int</span> r = v;</span><br><span class="line">	<span class="keyword">while</span>(pre[r] != r)&#123; <span class="comment">// 寻到当前状态的根节点</span></span><br><span class="line">		r = pre[r];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> i = v,j;</span><br><span class="line">	<span class="keyword">while</span>(i != r)&#123; <span class="comment">// 回溯过程 将所有子节点的pre改为父节点。</span></span><br><span class="line">		j = pre[i];</span><br><span class="line">		pre[i] = r;</span><br><span class="line">		i = j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">int</span> v1,<span class="keyword">int</span> v2)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> newX = find(v1),newY = find(v2);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(newX == newY &amp;&amp; v1 != v2) <span class="comment">// 使用并查集判断时候有环路。</span></span><br><span class="line">	&#123;</span><br><span class="line">		flag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		pre[newX] = newY; <span class="comment">// 吧点加入集合</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">isconnect</span><span class="params">()</span></span>&#123; <span class="comment">// 判断是否有只有单个图。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> val = find(pre[maxx]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxx; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[i] != <span class="number">0</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(find(pre[i]) != find(pre[maxx]))&#123;</span><br><span class="line">				flag = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y))</span><br><span class="line">    &#123;</span><br><span class="line">    	init();</span><br><span class="line">    	<span class="keyword">if</span>(x==<span class="number">0</span>&amp;&amp;y==<span class="number">0</span>)&#123;</span><br><span class="line">    		<span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">    		<span class="keyword">continue</span>;</span><br><span class="line">    	&#125;</span><br><span class="line"></span><br><span class="line">    	<span class="keyword">if</span>(x == <span class="number">-1</span> &amp;&amp; y == <span class="number">-1</span>)</span><br><span class="line">    		<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        vis[x] = <span class="number">1</span>;</span><br><span class="line">        vis[y] = <span class="number">1</span>;</span><br><span class="line">        maxx = max(maxx,max(x,y));</span><br><span class="line">        join(x,y);</span><br><span class="line"></span><br><span class="line">    	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y) &amp;&amp; x &amp;&amp; y)&#123;</span><br><span class="line">    		vis[x] = <span class="number">1</span>;</span><br><span class="line">    		vis[y] = <span class="number">1</span>;</span><br><span class="line">    		maxx = max(maxx,max(x,y));</span><br><span class="line">    		join(x,y);</span><br><span class="line">    	&#125;</span><br><span class="line"></span><br><span class="line">    	isconnect();</span><br><span class="line"></span><br><span class="line">    	<span class="keyword">if</span>(flag)</span><br><span class="line">    		<span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">    	<span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>一个M*N的矩阵，找到此矩阵的一个子矩阵，并且这个子矩阵的元素的和是最大的，输出这个最大的    值。例如：3*3的矩阵：</p>
+<p>-1  3 -1<br> 2 -1  3<br>-3  1  2</p>
+<p>和最大的子矩阵是：</p>
+<p> 3 -1<br>-1  3<br> 1  2</p>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>第1行：M和N，中间用空格隔开（2 &lt;= M,N &lt;= 500)。<br>第2 - N + 1行：矩阵中的元素，每行M个数，中间用空格隔开。(-10^9 &lt;= M[i] &lt;= 10^9)</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>输出和的最大值。如果所有数都是负数，就输出0。</p>
+<h3 id="Input-示例"><a href="#Input-示例" class="headerlink" title="Input 示例"></a>Input 示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 3  3</span><br><span class="line">-1  3 -1</span><br><span class="line"> 2 -1  3</span><br><span class="line">-3  1  2</span><br></pre></td></tr></table></figure>
+<h3 id="Output示例"><a href="#Output示例" class="headerlink" title="Output示例"></a>Output示例</h3><p>7</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3>
           
         
       
@@ -1556,200 +1989,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/Nim游戏/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Andy Francis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AFuture's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/28/Nim游戏/" itemprop="url">
-                  51nod Nim游戏
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-12-28 16:31:57" itemprop="dateCreated datePublished" datetime="2016-12-28T16:31:57+08:00">2016-12-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-03 14:29:51" itemprop="dateModified" datetime="2018-07-03T14:29:51+08:00">2018-07-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><em>类型：Nim游戏</em></p>
-<h3 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h3><p>有N堆石子。A B两个人轮流拿，A先拿。每次只能从一堆中取若干个，可将一堆全取走，但不可不取，拿到最后1颗石子的人获胜。假设A B都非常聪明，拿石子的过程中不会出现失误。给出N及每堆石子的数量，问最后谁能赢得比赛。</p>
-<h4 id="例如："><a href="#例如：" class="headerlink" title="例如："></a>例如：</h4><p>3堆石子，每堆1颗。A拿1颗，B拿1颗，此时还剩1堆，所以A可以拿到最后1颗石子。</p>
-<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>定义P-position和N-position，其中P代表Previous，N代表Next。直观的说，上一次move的人有必胜策略的局面是P-position，也就是“后手可保证必胜”或者“先手必败”，现在轮到move的人有必胜策略的局面是N-position，也就是“先手可保证必胜”。</p>
-<p><strong>更严谨的定义</strong>是:</p>
-<blockquote>
-<p>1.无法进行任何移动的局面（也就是terminal position）是P-position；</p>
-<p>2.可以移动到P-position的局面是N-position；</p>
-<p>3.所有移动都导致N-position的局面是P-position。</p>
-</blockquote>
-<p>按照这个定义，如果局面不可能重现，或者说positions的集合可以进行拓扑排序，那么每个position或者是P-position或者是N-position，而且可以通过定义计算出来。</p>
-<p><strong>结论</strong>：对于一个Nim游戏的局面(a1,a2,…,an)，它是P-position当且仅当a1 ^ a2 ^ … ^ an=0，其中^表示异或(<a href="http://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=64448407" target="_blank" rel="noopener">xor</a>)运算。</p>
-<p><strong>简单证明</strong></p>
-<p>根据定义，证明一种判断position的性质的方法的正确性，只需证明三个命题：</p>
-<ol>
-<li>这个判断将所有terminal position判为P-position；</li>
-<li>根据这个判断被判为N-position的局面一定可以移动到某个P-position；</li>
-<li>根据这个判断被判为P-position的局面无法移动到某个P-position。</li>
-</ol>
-<p>第一个命题，显然terminal position只有一个，就是全0，异或仍然是0。</p>
-<p>第二个命题，对于某个局面(a1,a2,…,an)，若a1 ^ a2 ^ … ^ an != 0，一定存在某个合法的移动，将ai改变成ai’后满足a1 ^ a2 ^ … ^ ai’ ^ … ^ an = 0。不妨设a1 ^ a2 ^ … ^ an = k，则一定存在某个ai，它的二进制表示在k的最高位上是1（否则k的最高位那个1是怎么得到的）。这时ai ^ k &lt; ai一定成立。则我们可以将ai改变成ai’ = ai ^ k，此时a1 ^ a2 ^ … ^ ai’ ^ … ^ an = a1 ^ a2 ^ … ^ an ^ k=0。</p>
-<p>第三个命题，对于某个局面(a1,a2,…,an)，若a1 ^ a2 ^ … ^ an = 0，一定不存在某个合法的移动，将ai改变成ai’后满足a1 ^ a2 ^ … ^ ai’ ^ … ^ an = 0。因为异或运算满足消去率，由a1 ^ a2 ^ … ^ an = a1 ^ a2 ^ … ^ ai’ ^ … ^ an可以得到ai = ai’。所以将ai改变成ai’不是一个合法的移动。证毕。</p>
-<p>根据这个定理，我们可以在O(n)的时间内判断一个Nim的局面的性质，且如果它是N-position，也可以在O(n)的时间内找到所有的必胜策略。Nim问题就这样基本上完美的解决了。</p>
-<h4 id="附加："><a href="#附加：" class="headerlink" title="附加："></a>附加：</h4><p>当题目条件增加‘最多取k个’时，对每一堆石子mod(k+1)。</p>
-<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">include &lt;stdio.h&gt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n, x, r = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;n );</span><br><span class="line">  <span class="keyword">while</span>( n-- ) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;x );</span><br><span class="line">    r ^= x;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>( <span class="string">"%c\n"</span>, r == <span class="number">0</span> ? <span class="string">'B'</span> : <span class="string">'A'</span> );</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/28/51nod bash v2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1910,553 +2149,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.afuture.me/2016/12/27/博客的开始——如何搭建Hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Andy Francis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AFuture's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/27/博客的开始——如何搭建Hexo/" itemprop="url">
-                  博客的开始——如何搭建Hexo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-12-27 09:43:57" itemprop="dateCreated datePublished" datetime="2016-12-27T09:43:57+08:00">2016-12-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-03 14:29:50" itemprop="dateModified" datetime="2018-07-03T14:29:50+08:00">2018-07-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术类/" itemprop="url" rel="index"><span itemprop="name">技术类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h4 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h4><blockquote>
-<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="noopener">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。并且能一键部署到GitHub Pages。</p>
-</blockquote>
-<p>首先，不论这篇文章主要是为了安装什么，第一步该做的是先说明一遍大致的过程，以使读者能够清楚，自己究竟在干什么、还有什么没有完成、为什么要这么做。当然，我会给出一些必要的网站，它们以官网为主，庆幸的是，这些官网都有简体中文的支持。最后，说明一下作者的系统为Mint Linux，它和Ubuntu是一样的，并且作者是一个大二菜鸟，如果有错的话，希望大家能够指出错误，我也会立即改正。</p>
-<h3 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h3><ol>
-<li>准备安装环境 <ul>
-<li>Node.js</li>
-<li>Git</li>
-</ul>
-</li>
-<li>安装Hexo</li>
-<li>开始搭建博客<ul>
-<li>初始化Hexo</li>
-<li>修改全局配置文件</li>
-<li>一次简单的同步</li>
-</ul>
-</li>
-<li>添加新文章</li>
-<li>更换主题</li>
-</ol>
-<h3 id="给出网址"><a href="#给出网址" class="headerlink" title="给出网址"></a>给出网址</h3><ul>
-<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo官方网站</a></li>
-<li><a href="https://material.vss.im/" target="_blank" rel="noopener">Material主题官网</a></li>
-<li><a href="https://xuanwo.org/2015/03/26/hexo-intor/" target="_blank" rel="noopener">史上最详细的Hexo博客搭建图文教程</a></li>
-</ul>
-<h2 id="准备安装环境"><a href="#准备安装环境" class="headerlink" title="准备安装环境"></a>准备安装环境</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>很不幸运的是官方给出的 Node.js 安装方法并不是非常有效。因此我通过Baidu找到了一种简单的方法，在此给出过程。</p>
-<ol>
-<li><p>下载</p>
-<p>第一步很简单，就是从官网上下载二进制包。给出地址。</p>
-<ul>
-<li><a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js官网下载地址</a></li>
-</ul>
-</li>
-<li><p>解压下载好的 node-v6.9.2-linux-x64.tar.xz 压缩包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf node-v6.9.2-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
-<p>这样，你可以得到一个名为 node-v6.9.2-linux-x64 的文件夹。</p>
-</li>
-<li><p>验证 Node.js 的版本</p>
-<p>首先进入 node-v6.9.2-linux-x64 文件夹下的 bin 目录，你会发现有两个可执行文件。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd node-v6.9.2-linux-x64/bin</span><br><span class="line">$ ls</span><br><span class="line">node  npm</span><br></pre></td></tr></table></figure>
-<p>接着我们来看看 Node.js 的版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./node -v</span><br><span class="line">v6.9.2</span><br></pre></td></tr></table></figure>
-<p>很好，它是最新的6.9.2版本。</p>
-</li>
-<li><p>把二进制包放到较为规范的地方。</p>
-<p>什么叫较为规范的地方？举个例子，在Windows下，排除自己定义安装路径的软件，你所有的软件都会在这样一个地址下 <code>C:\Program Files</code> 。在Mint Linux上，我把它规定为 <code>/opt</code> ，这个路径包含了所有我手动安装的软件，毕竟虽然有 <strong>apt</strong> ，但是总有些软件不能通过apt安装。很好，下面让我们把它挪到那个规范的地方。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv node-v6.9.2-linux-x64 /opt/</span><br><span class="line">$ cd /opt</span><br><span class="line">$ ls</span><br><span class="line">clion  eclipse  google  node-v6.9.2-linux-x64  pycharm  sublime_text</span><br></pre></td></tr></table></figure>
-<p>由此你可以发现，我已经成功移动了文件。这里有个小问题，在执行第一句命令的时候，会提示需要密码，不要担心，直接输入root密码就行，它不是明文的，并不会显示字符。</p>
-</li>
-<li><p>建立软链接，设置全局</p>
-<p>怎么在shell中直接访问呢？就是通过软链接实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ln -s /opt/node-v6.9.2-linux-x64/bin/node /usr/local/bin/node</span><br><span class="line">$ sudo ln -s /opt/node-v6.9.2-linux-x64/bin/npm /usr/local/bin/npm</span><br><span class="line">$ cd /usr/local/bin/</span><br><span class="line">$ ls |grep &apos;^[n]&apos;</span><br><span class="line">node</span><br><span class="line">npm</span><br></pre></td></tr></table></figure>
-<p>你会发现，在 <code>/usr/local/bin</code>这个目录下已经有 <strong>node</strong> 、<strong>npm</strong> 两个文件了。</p>
-</li>
-<li><p>验证成功</p>
-<p>打开terminal，输入<code>node -v</code>和<code>npm -v</code> 来检查是否成功。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">v6.9.2</span><br><span class="line">$ npm -v</span><br><span class="line">3.10.9</span><br></pre></td></tr></table></figure>
-<p>由此Node.js安装完成，看似很复杂，其实很简单。</p>
-</li>
-</ol>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>Git的安装是通过apt，极其便捷。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
-<p>这样就安装完了。这就是包管理的好处。</p>
-<p>其次，ssh的配置安装则参考<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374385852170d9c7adf13c30429b9660d0eb689dd43a000" target="_blank" rel="noopener">Git教程 - <em>廖雪峰的官方网站</em></a> ,这是非常好的git教程网站。</p>
-<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。根据官方教程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>如果出现WARNING，那么你可以忽视它。如果出现ERROR，那么请你使用Baidu或者Bing来解决问题，作者病不能，开速有效的替你解决。</p>
-<h2 id="开始搭建博客"><a href="#开始搭建博客" class="headerlink" title="开始搭建博客"></a>开始搭建博客</h2><h3 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h3><p>首先，我打算把博客的根地址定在 <code>～/Document/</code> 。那么开始</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/Documents/</span><br><span class="line">$ hexo init Blog</span><br><span class="line">$ cd Blog</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-<p>新建完成后，指定文件夹的目录如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-<p>注意，这里有一些问题。执行第二个命令时常常由于网络的问题卡住，那么建议你把npm的源改为淘宝源，具体教程查看<a href="http://www.jianshu.com/p/fb7251740107/comments/330864" target="_blank" rel="noopener">npm设置淘宝镜像</a></p>
-<h3 id="修改全局配置文件"><a href="#修改全局配置文件" class="headerlink" title="修改全局配置文件"></a>修改全局配置文件</h3><p>您可以在 <code>_config.yml</code> 中修改大部份的配置。当然参考<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="noopener">官方文档</a>以获得最好的支持</p>
-<p>当然你可以查看我的修改方法。</p>
-<h4 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>我的配置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>title</td>
-<td>网站标题</td>
-<td>Francis’Blog</td>
-</tr>
-<tr>
-<td>subtitle</td>
-<td>网站副标题</td>
-<td></td>
-</tr>
-<tr>
-<td>description</td>
-<td>网站描述</td>
-<td></td>
-</tr>
-<tr>
-<td>author</td>
-<td>作者的名字</td>
-<td>Andy Francis</td>
-</tr>
-<tr>
-<td>language</td>
-<td>网站使用的语言</td>
-<td>zh-CN</td>
-</tr>
-<tr>
-<td>timezone</td>
-<td>网站时区</td>
-<td>Asia/Shanghai</td>
-</tr>
-</tbody>
-</table>
-<h4 id="网址"><a href="#网址" class="headerlink" title="网址"></a>网址</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>我的配置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>url</code></td>
-<td>网址</td>
-<td><a href="https://dongfrancis.github.io/" target="_blank" rel="noopener">https://dongfrancis.github.io/</a></td>
-</tr>
-<tr>
-<td><code>root</code></td>
-<td>网站根目录</td>
-<td>/</td>
-</tr>
-<tr>
-<td><code>permalink</code></td>
-<td>文章的 <a href="https://hexo.io/zh-cn/docs/permalinks.html" target="_blank" rel="noopener">永久链接</a> 格式</td>
-<td><code>:year/:month/:day/:title/</code></td>
-</tr>
-<tr>
-<td><code>permalink_default</code></td>
-<td>永久链接中各部分的默认值</td>
-</tr>
-</tbody>
-</table>
-<h4 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>我的配置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>source_dir</code></td>
-<td>资源文件夹，这个文件夹用来存放内容。</td>
-<td><code>source</code></td>
-</tr>
-<tr>
-<td><code>public_dir</code></td>
-<td>公共文件夹，这个文件夹用于存放生成的站点文件。</td>
-<td><code>public</code></td>
-</tr>
-<tr>
-<td><code>tag_dir</code></td>
-<td>标签文件夹</td>
-<td><code>tags</code></td>
-</tr>
-<tr>
-<td><code>archive_dir</code></td>
-<td>归档文件夹</td>
-<td><code>archives</code></td>
-</tr>
-<tr>
-<td><code>category_dir</code></td>
-<td>分类文件夹</td>
-<td><code>categories</code></td>
-</tr>
-<tr>
-<td><code>code_dir</code></td>
-<td>Include code 文件夹</td>
-<td><code>downloads/code</code></td>
-</tr>
-<tr>
-<td><code>i18n_dir</code></td>
-<td>国际化（i18n）文件夹</td>
-<td><code>:lang</code></td>
-</tr>
-<tr>
-<td><code>skip_render</code></td>
-<td>跳过指定文件的渲染，您可使用 <a href="https://github.com/isaacs/node-glob" target="_blank" rel="noopener">glob 表达式</a>来匹配路径。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>我的配置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>new_post_name</code></td>
-<td>新文章的文件名称</td>
-<td>:title.md</td>
-</tr>
-<tr>
-<td><code>default_layout</code></td>
-<td>预设布局</td>
-<td>post</td>
-</tr>
-<tr>
-<td><code>auto_spacing</code></td>
-<td>在中文和英文之间加入空格</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>titlecase</code></td>
-<td>把标题转换为 title case</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>external_link</code></td>
-<td>在新标签中打开链接</td>
-<td>true</td>
-</tr>
-<tr>
-<td><code>filename_case</code></td>
-<td>把文件名称转换为 (1) 小写或 (2) 大写</td>
-<td>0</td>
-</tr>
-<tr>
-<td><code>render_drafts</code></td>
-<td>显示草稿</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>post_asset_folder</code></td>
-<td>启动 <a href="https://hexo.io/zh-cn/docs/asset-folders.html" target="_blank" rel="noopener">Asset 文件夹</a></td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>relative_link</code></td>
-<td>把链接改为与根目录的相对位址</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>future</code></td>
-<td>显示未来的文章</td>
-<td>true</td>
-</tr>
-<tr>
-<td><code>highlight</code></td>
-<td>代码块的设置</td>
-</tr>
-</tbody>
-</table>
-<h4 id="分类-amp-标签"><a href="#分类-amp-标签" class="headerlink" title="分类 &amp; 标签"></a>分类 &amp; 标签</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>我的配置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>default_category</code></td>
-<td>默认分类</td>
-<td><code>uncategorized</code></td>
-</tr>
-<tr>
-<td><code>category_map</code></td>
-<td>分类别名</td>
-<td></td>
-</tr>
-<tr>
-<td><code>tag_map</code></td>
-<td>标签别名</td>
-</tr>
-</tbody>
-</table>
-<h4 id="日期-时间格式"><a href="#日期-时间格式" class="headerlink" title="日期 / 时间格式"></a>日期 / 时间格式</h4><p>Hexo 使用 <a href="http://momentjs.com/" target="_blank" rel="noopener">Moment.js</a> 来解析和显示时间。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>我的配置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>date_format</code></td>
-<td>日期格式</td>
-<td><code>YYYY-MM-DD</code></td>
-</tr>
-<tr>
-<td><code>time_format</code></td>
-<td>时间格式</td>
-<td><code>H:mm:ss</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>我的配置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>per_page</code></td>
-<td>每页显示的文章量 (0 = 关闭分页功能)</td>
-<td><code>10</code></td>
-</tr>
-<tr>
-<td><code>pagination_dir</code></td>
-<td>分页目录</td>
-<td><code>page</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>我的配置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>theme</code></td>
-<td>当前主题名称。值为<code>false</code>时禁用主题</td>
-<td>material</td>
-</tr>
-</tbody>
-</table>
-<p>此theme的配置默认为landscape，我这里的material为其它主题。</p>
-<h4 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h4><blockquote>
-<p>deploy:<br>​     type: git<br>​     repo: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:DongFrancis/DongFrancis.github.io.git<br>​     branch: master</p>
-</blockquote>
-<h3 id="一次简单的同步"><a href="#一次简单的同步" class="headerlink" title="一次简单的同步"></a>一次简单的同步</h3><h4 id="本地尝试"><a href="#本地尝试" class="headerlink" title="本地尝试"></a>本地尝试</h4><p>如果以上内容你已经完成那么我们可以试着在本地测试一下，首先你必须进入博客的根目录，其次启动服务。想这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/Documents/Blog</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>然后打开浏览器，进入地址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，你会发现你的个人博客已经搭建完成！！！</p>
-<h4 id="同步到Github-Pages"><a href="#同步到Github-Pages" class="headerlink" title="同步到Github Pages"></a>同步到Github Pages</h4><blockquote>
-<p>如果你想同步到Github Pages，确保你已经完成了 <strong>git的安装与配置</strong>、 <strong>git的ssh设置</strong>、 <strong>Github Pages的申请与建立</strong>、<strong>Deployment的配置</strong> 。</p>
-</blockquote>
-<p>很好，现在我们可以继续了。</p>
-<h5 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h5><p>进入Blog根目录，执行如下操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<h5 id="同步——deploy"><a href="#同步——deploy" class="headerlink" title="同步——deploy"></a>同步——deploy</h5><p>在Blog根目录，执行如下操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>打开Github pages的个人主页，如 <a href="https://DongFrancis.github.io.git，你可以验证是否同步成功。" target="_blank" rel="noopener">https://DongFrancis.github.io.git，你可以验证是否同步成功。</a></p>
-<h2 id="四、添加新文章"><a href="#四、添加新文章" class="headerlink" title="四、添加新文章"></a>四、添加新文章</h2><h4 id="创建一篇新文章"><a href="#创建一篇新文章" class="headerlink" title="创建一篇新文章"></a>创建一篇新文章</h4><p>在Blog根目录下，你可以使用 <code>new</code>命令来新建文章。如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;my-first-blog&quot;</span><br></pre></td></tr></table></figure>
-<p>执行完此命令后，在<code>source/_posts/</code> 目录下会有一个新的文件 <code>my-first-blog.md</code> 。</p>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>毫无疑问，对于自己些的文章，你总希望确认一下是否完美，这样你才可以展示给其它人看。</p>
-<p>具体这样来完成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>很熟悉的俩句话是么？没错，这就是本地测试的俩个命令，第一句的意思是<em>生成文件</em>，第二局的意思是<em>打开本地服务器</em>  。</p>
-<h4 id="同步到Github-Pages-1"><a href="#同步到Github-Pages-1" class="headerlink" title="同步到Github Pages"></a>同步到Github Pages</h4><p>很简单使用 <strong>deploy</strong> 命令即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>执行完命令后，你便可以在Github Pages上查看了。</p>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>我选择的是 Meterial 主题，一句话：好看！</p>
-<p>具体的过程和<a href="https://material.vss.im/start/" target="_blank" rel="noopener">官网的教程</a>一样这里就不详细讲了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>搭建博客的作用对于不同的人有不同的作用。对于我来说，是希望将自己所学的知识进一步整理与归纳，以此逐步提升自己。希望这篇教程对大家有所帮助。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2499,7 +2196,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
