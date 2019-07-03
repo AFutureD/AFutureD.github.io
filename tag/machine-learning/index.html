@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Machine-Learning | AFuture&#39;s Blog</title>
-<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1562152191264">
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1562152277965">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://afutured.github.io">
-  <img class="avatar" src="https://afutured.github.io/images/avatar.png?v=1562152191264" alt="">
+  <img class="avatar" src="https://afutured.github.io/images/avatar.png?v=1562152277965" alt="">
   </a>
   <h1 class="site-title">
     AFuture&#39;s Blog
@@ -93,7 +93,11 @@
       </div>
       
       <div class="post-abstract">
-        
+        <h2 id="简述">简述</h2>
+<p>Normalization 就是把数据进行前处理，从而使数值都落入到统一的数值范围，从而在建模过程中，各个特征量没差别对待。normalization 一般是把数据限定在需要的范围，比如一般都是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{0,1\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">}</span></span></span></span> ，从而消除了数据量纲对建模的影响。并且对基于 gradient descent 的算法友好，能加快训练速度，促进算法的收敛。</p>
+<p>注：Standardization 是 Normalization 的一种特殊情况，它对数据进行正态化处理，使数据的平均值为1，方差为0。</p>
+<p>Regularization 是在 cost function 里面加惩罚项，增加建模的模糊性，从而把捕捉到的趋势从局部细微趋势，调整到整体大概趋势。虽然一定程度上的放宽了建模要求，但是能有效防止过拟合（over-fitting）的问题。</p>
+
       </di>
     </article>
   
@@ -113,7 +117,10 @@
       </div>
       
       <div class="post-abstract">
-        
+        <h2 id="简述">简述</h2>
+<p>决策树本事上是一棵树，树的根节点包含了样本全集，从根出发到叶节点的路径对应了一个判定测试序列，而每个内部节点包含的样本集合则根据相应属性的测试结果而划分到子节点中。</p>
+<p>注：决策树在 Coursera 和 Stanford 的公开课中并未提到，相关知识完全通过《机器学习》和互联网获得。</p>
+
       </di>
     </article>
   
@@ -133,7 +140,9 @@
       </div>
       
       <div class="post-abstract">
-        
+        <h2 id="简述">简述</h2>
+<p>在 Liner Regression 中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold-italic">y</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">y</span></span></span></span></span></span> 是一个连续值，那么当我们解决一个二分类问题时 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold-italic">y</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">y</span></span></span></span></span></span> 则是一个离散值，只有两个取值（ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 或 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> ），这时可以通过广义线性模型来解决。通过广义线性模型，我们找到一个单调可微函数将分类任务的标记 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold-italic">y</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">y</span></span></span></span></span></span> 与线性模型的预测值联系起来。最后我们找到 Logistic Function 来作为线性模型。</p>
+
       </di>
     </article>
   
@@ -153,7 +162,10 @@
       </div>
       
       <div class="post-abstract">
-        
+        <h2 id="简述">简述</h2>
+<p>在统计学中，线性回归(Linear Regression)是利用称为线性回归方程的最小平方函数对一个或多个自变量和因变量之间关系进行建模的一种回归分析。这种函数是一个或多个称为回归系数的模型参数的线性组合。
+机器学习中，我们通过线性回归得到的模型对其它的输入值预测出相对应的输出值。上述的模型我们称它为 假设，函数表达为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="script">X</mi><mo>↦</mo><mi mathvariant="script">Y</mi></mrow><annotation encoding="application/x-tex">h(x):\mathcal{X}\mapsto\mathcal{Y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69433em;vertical-align:-0.011em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">↦</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.78055em;vertical-align:-0.09722em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.08222em;">Y</span></span></span></span></span></p>
+
       </di>
     </article>
   

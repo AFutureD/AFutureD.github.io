@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Normalization and Regularization | AFuture&#39;s Blog</title>
-<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1562152191264">
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1562152277965">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://afutured.github.io">
-  <img class="avatar" src="https://afutured.github.io/images/avatar.png?v=1562152191264" alt="">
+  <img class="avatar" src="https://afutured.github.io/images/avatar.png?v=1562152277965" alt="">
   </a>
   <h1 class="site-title">
     AFuture&#39;s Blog
@@ -92,6 +92,7 @@
 <p>Normalization 就是把数据进行前处理，从而使数值都落入到统一的数值范围，从而在建模过程中，各个特征量没差别对待。normalization 一般是把数据限定在需要的范围，比如一般都是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{0,1\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">}</span></span></span></span> ，从而消除了数据量纲对建模的影响。并且对基于 gradient descent 的算法友好，能加快训练速度，促进算法的收敛。</p>
 <p>注：Standardization 是 Normalization 的一种特殊情况，它对数据进行正态化处理，使数据的平均值为1，方差为0。</p>
 <p>Regularization 是在 cost function 里面加惩罚项，增加建模的模糊性，从而把捕捉到的趋势从局部细微趋势，调整到整体大概趋势。虽然一定程度上的放宽了建模要求，但是能有效防止过拟合（over-fitting）的问题。</p>
+<!-- more -->
 <h2 id="normalization">Normalization</h2>
 <p>Normalization 的手段很多，主要有：</p>
 <ol>

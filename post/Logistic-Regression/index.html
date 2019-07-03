@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Logistic Regression | AFuture&#39;s Blog</title>
-<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1562152191264">
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1562152277965">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://afutured.github.io">
-  <img class="avatar" src="https://afutured.github.io/images/avatar.png?v=1562152191264" alt="">
+  <img class="avatar" src="https://afutured.github.io/images/avatar.png?v=1562152277965" alt="">
   </a>
   <h1 class="site-title">
     AFuture&#39;s Blog
@@ -90,6 +90,7 @@
             <div class="post-content">
               <h2 id="简述">简述</h2>
 <p>在 Liner Regression 中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold-italic">y</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">y</span></span></span></span></span></span> 是一个连续值，那么当我们解决一个二分类问题时 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold-italic">y</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">y</span></span></span></span></span></span> 则是一个离散值，只有两个取值（ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 或 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> ），这时可以通过广义线性模型来解决。通过广义线性模型，我们找到一个单调可微函数将分类任务的标记 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold-italic">y</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">y</span></span></span></span></span></span> 与线性模型的预测值联系起来。最后我们找到 Logistic Function 来作为线性模型。</p>
+<!-- more -->
 <h2 id="广义线性模型generalized-linear-models">广义线性模型（Generalized Linear Models ）</h2>
 <p>在笔记中，我先把广义线性模型梳理一遍，这有助于我更好得学习机器学习。</p>
 <p>当然如果仅仅是为了学习 Logistic Function 那么可以先看看后面的内容，之后再看这部分内容。</p>
