@@ -1,0 +1,337 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AFuture&#39;s Blog</title>
+<meta name="description" content="Life & Knowledge" />
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1566878844178">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="https://afutured.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://afutured.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://afutured.github.io/images/avatar.png?v=1566878844178" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Made by <a href="https://afutured.github.io" target="_blank">AFuture</a> Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://afutured.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">HDU-2196 Computer</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2016-12-28 / 3 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p><em>类型： 树形DP 、树的最长路</em></p>
+<!-- more -->
+<h3 id="description">Description</h3>
+<p>A school bought the first computer some time ago(so this computer's id is 1). During the recent years the school bought N-1 new computers. Each new computer was connected to one of settled earlier. Managers of school are anxious about slow functioning of the net and want to know the maximum distance Si for which i-th computer needs to send signal (i.e. length of cable to the most distant computer). You need to provide this information.</p>
+<p>​							 <img src="C:%5CUsers%5CAndyFrancis%5CDesktop%5Chdu_2196.jpg" alt="hdu_2196"></p>
+<p>Hint: the example input is corresponding to this graph. And from the graph, you can see that the computer 4 is farthest one from 1, so S1 = 3. Computer 4 and 5 are the farthest ones from 2, so S2 = 2. Computer 5 is the farthest one from 3, so S3 = 3. we also get S4 = 4, S5 = 4.</p>
+<h3 id="input">Input</h3>
+<p>Input file contains multiple test cases.In each case there is natural number N (N&lt;=10000) in the first line, followed by (N-1) lines with descriptions of computers. i-th line contains two natural numbers - number of computer, to which i-th computer is connected and length of cable used for connection. Total length of cable does not exceed 10^9. Numbers in lines of input are separated by a space.</p>
+<h3 id="output">Output</h3>
+<p>For each case output N lines. i-th line must contain number Si for i-th computer (1&lt;=i&lt;=N).</p>
+<h3 id="sample-input">Sample Input</h3>
+<p>5<br>
+1 1<br>
+2 1<br>
+3 1<br>
+1 1</p>
+<h3 id="sample-output">Sample Output</h3>
+<p>3<br>
+2<br>
+3<br>
+4<br>
+4</p>
+<h3 id="题解">题解：</h3>
+<p>此题的意思为：树中一共n个节点，输出每个节点到其中任意一个节点的最远花费的值。</p>
+<p>有这么一个定理：</p>
+<blockquote>
+<p>首先假设树的最长路的两个叶子节点为v1,v2，那么现有结论，从任意一点u出发走到的最远的点一定是（v1,v2）中的一点，然后再从v1或者v2出发走到的最远点一定是v2或者v1。</p>
+</blockquote>
+<p>因此，经过三次搜索就能找到任意一点最长路径或者说是话费。</p>
+<h3 id="代码">代码：</h3>
+<pre><code class="language-c++">include &lt;iostream&gt;
+include &lt;cstdio&gt;
+include &lt;algorithm&gt;
+include &lt;vector&gt;
+include &lt;queue&gt;
+include &lt;cmath&gt;
+include &lt;cstring&gt;
+using namespace std;
+
+const int MAX = 10010;
+
+struct Tree{
+    int v;
+    int dis;
+};
+vector &lt;struct Tree &gt; tree[MAX];
+int ans[MAX];
+int max_len,root;
+
+init(){
+    memset(ans,0,sizeof(ans));
+    memset(tree,0,sizeof(tree));
+}
+
+void trees(int u,int v,int len){ // v为当前节点，u为父节点
+    if(max_len &lt; len ){
+        max_len = len;
+        root = v;
+    }
+
+    for(int i = 0;i &lt; tree[v].size();i++){
+        struct Tree new_v = tree[v][i];
+        if(new_v.v == u)
+            continue;
+        trees(v,new_v.v,len + new_v.dis);
+        ans[new_v.v] = max (ans[new_v.v],new_v.dis + len);
+    }
+}
+
+int main()
+{
+    int n;
+    while(scanf(&quot;%d&quot;,&amp;n) != EOF){
+        init();
+        int max_w = 0, w = 1;
+        for(int i = 2;i &lt;= n; i++){
+            int tmp,tmp_d; cin &gt;&gt; tmp &gt;&gt; tmp_d;
+            tree[tmp].push_back(Tree{i,tmp_d});
+            tree[i].push_back(Tree{tmp,tmp_d});
+        }
+
+        max_len = 0;
+        trees(-1,1,0);
+        trees(-1,root,0);
+        trees(-1,root,0);
+
+        for(int i = 1;i &lt;= n; i++){
+            cout &lt;&lt; ans[i] &lt;&lt;endl;
+        }
+    }
+    return 0;
+}
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/shu-xing-dp">
+            <span class="flex-auto">树形DP</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://afutured.github.io/post/HDU-2066 一个人的旅行">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  HDU-2066 一个人的旅行
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://afutured.github.io/post/HDU-2444 The Accomodation of Students">
+                <h3 class="post-title">
+                  HDU-2444 The Accomodation of Students
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <script src="https://afutured.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>

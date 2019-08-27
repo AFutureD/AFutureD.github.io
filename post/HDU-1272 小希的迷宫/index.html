@@ -1,0 +1,407 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AFuture&#39;s Blog</title>
+<meta name="description" content="Life & Knowledge" />
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1566878844178">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="https://afutured.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://afutured.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://afutured.github.io/images/avatar.png?v=1566878844178" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%B9%B6%E6%9F%A5%E9%9B%86%E7%AE%80%E8%BF%B0">并查集简述：</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89">定义：</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">基本操作：</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题：</a>
+<ul>
+<li><a href="#problem-description">Problem Description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Made by <a href="https://afutured.github.io" target="_blank">AFuture</a> Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://afutured.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">HDU-1272 小希的迷宫</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2016-12-28 / 2 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p><em>类型： 并查集</em></p>
+<!-- more -->
+<h2 id="并查集简述">并查集简述：</h2>
+<h3 id="定义">定义：</h3>
+<p>并查集(union-find sets)是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。</p>
+<h3 id="基本操作">基本操作：</h3>
+<ol>
+<li>
+<p>Make_Set(x) 把每一个元素<strong>初始化</strong>为一个集合：</p>
+<p>初始化后每一个元素的父亲节点是它本身，每一个元素的祖先节点也是它本身（也可以根据情况而变）。</p>
+</li>
+<li>
+<p>Find_Set(x) 查找一个元素所在的集合:</p>
+<p>查找一个元素所在的集合，其精髓是找到<strong>这个元素所在集合的祖先</strong>！这个才是并查集判断和合并的最终依据。判断两个元素是否属于同一集合，只要看他们所在集合的祖先是否相同即可。</p>
+</li>
+<li>
+<p>Union(x,y) 合并x,y所在的两个集合：</p>
+<p>合并两个集合，也是使一个集合的祖先成为另一个集合的祖先。具体过程为，利用Find_Set找到其中两个集合的祖先，将一个集合的祖先指向另一个集合的祖先。</p>
+</li>
+<li>
+<p>Find_Set(x)时 路径压缩：</p>
+<p>寻找祖先时我们一般采用递归查找，但是当元素很多亦或是整棵树变为一条链时，每次Find_Set(x)都是O(n)的复杂度，有没有办法减小这个复杂度呢？</p>
+<p>答案是肯定的，这就是路径压缩，即当我们经过&quot;递推&quot;找到祖先节点后，<strong>&quot;回溯&quot;的时候顺便将它的子孙节点都直接指向祖先</strong>，这样以后再次Find_Set(x)时复杂度就变成O(1)了。</p>
+</li>
+<li>
+<p>Union(x,y)时 按秩合并：</p>
+<p>即合并的时候将元素少的集合合并到元素多的集合中，这样合并之后树的高度会相对较小。</p>
+</li>
+</ol>
+<h2 id="例题">例题：</h2>
+<h3 id="problem-description">Problem Description</h3>
+<p>上次Gardon的迷宫城堡小希玩了很久（见Problem B），现在她也想设计一个迷宫让Gardon来走。但是她设计迷宫的思路不一样，首先她认为所有的通道都应该是双向连通的，就是说如果有一个通道连通了房间A和B，那么既可以通过它从房间A走到房间B，也可以通过它从房间B走到房间A，为了提高难度，小希希望任意两个房间有且仅有一条路径可以相通（除非走了回头路）。小希现在把她的设计图给你，让你帮忙判断她的设计图是否符合她的设计思路。比如下面的例子，前两个是符合条件的，但是最后一个却有两种方法从5到达8。</p>
+<p><img src="HDU_1272.png" alt="HDU_1272"></p>
+<h3 id="input">Input</h3>
+<p>输入包含多组数据，每组数据是一个以0 0结尾的整数对列表，表示了一条通道连接的两个房间的编号。房间的编号至少为1，且不超过100000。每两组数据之间有一个空行。<br>
+整个文件以两个-1结尾。</p>
+<h3 id="output">Output</h3>
+<p>对于输入的每一组数据，输出仅包括一行。如果该迷宫符合小希的思路，那么输出&quot;Yes&quot;，否则输出&quot;No&quot;。</p>
+<h3 id="sample-input">Sample Input</h3>
+<p>6 8  5 3  5 2  6 4<br>
+5 6  0 0</p>
+<p>8 1  7 3  6 2  8 9  7 5<br>
+7 4  7 8  7 6  0 0</p>
+<p>3 8  6 8  6 4<br>
+5 3  5 6  5 2  0 0</p>
+<p>-1 -1</p>
+<h3 id="sample-output">Sample Output</h3>
+<p>Yes<br>
+Yes<br>
+No</p>
+<h3 id="题解">题解：</h3>
+<p>此题是并查集的基本应用。只需要使用并查集判断是否有环路 且 是否只有单个集合。</p>
+<p>有坑。。。 输入 0 0 输出Yes</p>
+<h3 id="代码">代码：</h3>
+<pre><code class="language-c++">include &lt;iostream&gt;
+include &lt;cstdio&gt;
+include &lt;cstring&gt;
+using namespace std;
+
+const int MAX = 100005;
+int flag = 0,maxx=0;
+int vis[MAX],pre[MAX]; // pre用来存index的父节点，路径压缩后存的是根节点。
+					   //vis用来判断是否用到这个点。
+
+void init(){  //初始化
+	for (int i = 0; i &lt; MAX; ++i)
+	{
+		pre[i] = i;
+	}
+	memset(vis,0,sizeof(vis));
+	flag = 0;
+	maxx=0;
+}
+int find(int v){ // find操作
+	int r = v;
+	while(pre[r] != r){ // 寻到当前状态的根节点
+		r = pre[r];
+	}
+
+	int i = v,j;
+	while(i != r){ // 回溯过程 将所有子节点的pre改为父节点。
+		j = pre[i];
+		pre[i] = r;
+		i = j;
+	}
+	return r;
+}
+
+void join(int v1,int v2){
+	int newX = find(v1),newY = find(v2);
+
+	if(newX == newY &amp;&amp; v1 != v2) // 使用并查集判断时候有环路。
+	{
+		flag = 1;
+	}
+	else
+	{
+		pre[newX] = newY; // 吧点加入集合
+	}
+}
+
+void isconnect(){ // 判断是否有只有单个图。
+
+    int val = find(pre[maxx]);
+	for (int i = 0; i &lt; maxx; ++i)
+	{
+		if(vis[i] != 0){
+			if(find(pre[i]) != find(pre[maxx])){
+				flag = 1;
+				break;
+			}
+
+		}
+	}
+}
+
+int main()
+{
+
+    int x,y;
+    while(scanf(&quot;%d%d&quot;,&amp;x,&amp;y))
+    {
+    	init();
+    	if(x==0&amp;&amp;y==0){
+    		printf(&quot;Yes\n&quot;);
+    		continue;
+    	}
+
+    	if(x == -1 &amp;&amp; y == -1)
+    		break;
+
+        vis[x] = 1;
+        vis[y] = 1;
+        maxx = max(maxx,max(x,y));
+        join(x,y);
+
+    	while(scanf(&quot;%d%d&quot;,&amp;x,&amp;y) &amp;&amp; x &amp;&amp; y){
+    		vis[x] = 1;
+    		vis[y] = 1;
+    		maxx = max(maxx,max(x,y));
+    		join(x,y);
+    	}
+
+    	isconnect();
+
+    	if(flag)
+    		printf(&quot;No\n&quot;);
+    	else
+            printf(&quot;Yes\n&quot;);
+    }
+    return 0;
+}
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/tu-lun">
+            <span class="flex-auto">图论</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/bing-cha-ji">
+            <span class="flex-auto">并查集</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://afutured.github.io/post/HDU-1043 Eight">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  HDU-1043 Eight
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://afutured.github.io/post/HDU-1851 A Simple Game">
+                <h3 class="post-title">
+                  HDU-1851 A Simple Game
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <script src="https://afutured.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>

@@ -1,0 +1,438 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AFuture&#39;s Blog</title>
+<meta name="description" content="Life & Knowledge" />
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1566878844178">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="https://afutured.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://afutured.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://afutured.github.io/images/avatar.png?v=1566878844178" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E7%AC%ACk%E7%9F%AD%E8%B7%AF%E7%9A%84%E6%95%85%E4%BA%8B">第k短路的故事</a>
+<ul>
+<li><a href="#description">description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解</a>
+<ul>
+<li><a href="#a%E7%AE%97%E6%B3%95">A*算法：</a></li>
+<li><a href="#%E7%AC%ACk%E8%B7%AF">第K路</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Made by <a href="https://afutured.github.io" target="_blank">AFuture</a> Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://afutured.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">第k短路的故事</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2017-08-18 / 4 min read
+        </div>
+        
+        <div class="post-content yue">
+          <h1 id="第k短路的故事">第k短路的故事</h1>
+<p><em>A*、第 k 短路</em></p>
+<!-- more -->
+<h2 id="description">description</h2>
+<p>&quot;Good man never makes girls wait or breaks an appointment!&quot; said the mandarin duck father. Softly touching his little ducks' head, he told them a story.</p>
+<p>&quot;Prince Remmarguts lives in his kingdom UDF – United Delta of Freedom. One day their neighboring country sent them Princess Uyuw on a diplomatic mission.&quot;</p>
+<p>&quot;Erenow, the princess sent Remmarguts a letter, informing him that she would come to the hall and hold commercial talks with UDF if and only if the prince go and meet her via the K-th shortest path. (in fact, Uyuw does not want to come at all)&quot;</p>
+<p>Being interested in the trade development and such a lovely girl, Prince Remmarguts really became enamored. He needs you - the prime minister's help!</p>
+<p>DETAILS: UDF's capital consists of N stations. The hall is numbered S, while the station numbered T denotes prince' current place. M muddy directed sideways connect some of the stations. Remmarguts' path to welcome the princess might include the same station twice or more than twice, even it is the station with number S or T. Different paths with same length will be considered disparate.</p>
+<h2 id="input">Input</h2>
+<p>The first line contains two integer numbers N and M (1 &lt;= N &lt;= 1000, 0 &lt;= M &lt;= 100000). Stations are numbered from 1 to N. Each of the following M lines contains three integer numbers A, B and T (1 &lt;= A, B &lt;= N, 1 &lt;= T &lt;= 100). It shows that there is a directed sideway from A-th station to B-th station with time T.</p>
+<p>The last line consists of three integer numbers S, T and K (1 &lt;= S, T &lt;= N, 1 &lt;= K &lt;= 1000).</p>
+<h2 id="output">Output</h2>
+<p>A single line consisting of a single integer number: the length (time required) to welcome Princess Uyuw using the K-th shortest path. If K-th shortest path does not exist, you should output &quot;-1&quot; (without quotes) instead.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2 2
+1 2 5
+2 1 4
+1 2 2
+</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>14
+</code></pre>
+<h2 id="题解">题解</h2>
+<h3 id="a算法">A*算法：</h3>
+<p>为启发式算法中很重要的一种，被广泛应用在最优路径求解和一些策略设计的问题中。而A<em>算法最为核心的部分，就在于它的一个估值函数的设计上：<br>
+<strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mi>g</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>+</mo><mi>h</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">f(n)=g(n)+h(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></strong><br>
+其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>是每个可能试探点的估值，它有两部分组成：一部分为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">g(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>，它表示从起始搜索点到当前点的代价（通常用某结点在搜索树中的深度来表示）。另一部分，即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">h(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>，它表示启发式搜索中最为重要的一部分，即当前结点到目标结点的估值，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">h(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>设计的好坏，直接影响着具有此种启发式函数的启发式算法的是否能称为A</em>算法。</p>
+<p><strong>一种具有f(n)=g(n)+h(n)策略的启发式算法能成为A*算法的充分条件是：</strong></p>
+<ol>
+<li>搜索树上存在着从起始点到终了点的最优路径。</li>
+<li>问题域是有限的。</li>
+<li>所有结点的子结点的搜索代价值&gt;0。</li>
+<li>h(n) &lt;= h * (n) （h*(n)为实际问题的代价值）。</li>
+</ol>
+<p>一般的搜索前三条都可以满足，而第四点就要视情况而定了。</p>
+<h3 id="第k路">第K路</h3>
+<p><strong>K短路的定义：<strong>假设从1出发，有M条长度不同的路径可以到达点N，则K短路就是这M条路径中第K小的路径长度。<br>
+以上所述，设f[n]为最终所求，则f(n)=g(n)+h(n)；h(n)就是我们所说的‘启发式函数’，表示为</strong>重点t到其余一点p的路径长度</strong>，g（n）表示<strong>g当前从s到p所走的路径的长度。</strong><br>
+即</p>
+<p><strong>估价函数=当前值+当前位置到终点的距离</strong></p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>将有向图的所有边反向,以原终点t为源点,求解t到所有点的最短距离;</li>
+<li>新建一个优先队列,将源点s加入到队列中;</li>
+<li>从优先级队列中弹出f(p)最小的点p,如果点p就是t,则计算t出队的次数;</li>
+</ol>
+<p>如果当前为t的第k次出队,则当前路径的长度就是s到t的第k短路的长度,算法结束;<br>
+否则遍历与p相连的所有的边,将扩展出的到p的邻接点信息加入到优先级队列;</p>
+<h2 id="代码">代码</h2>
+<pre><code class="language-c++">#include&lt;string.h&gt;
+#include&lt;algorithm&gt;
+#include&lt;queue&gt; 
+using namespace std;
+#define INF 0xffffff
+#define MAXN 100010
+struct node
+{
+    int to;
+    int val;
+    int next;
+};
+struct node2
+{
+    int to;
+    int g,f;
+    bool operator&lt;(const node2 &amp;r ) const  
+    {  
+        if(r.f==f)  
+            return r.g&lt;g;  
+        return r.f&lt;f;  
+    }   
+};
+node edge[MAXN],edge2[MAXN];
+int n,m,s,t,k,cnt,cnt2,ans;
+int dis[1010],visit[1010],head[1010],head2[1010];
+void init()
+{
+    memset(head,-1,sizeof(head));
+    memset(head2,-1,sizeof(head2));
+    cnt=cnt2=1;
+}
+void addedge(int from,int to,int val)
+{
+    edge[cnt].to=to;
+    edge[cnt].val=val;
+    edge[cnt].next=head[from];
+    head[from]=cnt++;
+}
+void addedge2(int from,int to,int val)
+{
+    edge2[cnt2].to=to;
+    edge2[cnt2].val=val;
+    edge2[cnt2].next=head2[from];
+    head2[from]=cnt2++;
+}
+bool spfa(int s,int n,int head[],node edge[],int dist[])  
+{  
+    queue&lt;int&gt;Q1;  
+    int inq[1010];  
+    for(int i=0;i&lt;=n;i++)  
+    {  
+        dis[i]=INF;  
+        inq[i]=0;  
+    }  
+    dis[s]=0;  
+    Q1.push(s);  
+    inq[s]++;  
+    while(!Q1.empty())  
+    {  
+        int q=Q1.front();  
+        Q1.pop();  
+        inq[q]--;  
+        if(inq[q]&gt;n)
+            return false;  
+        int k=head[q];  
+        while(k&gt;=0)  
+        {  
+            if(dist[edge[k].to]&gt;dist[q]+edge[k].val)  
+            {  
+                dist[edge[k].to]=edge[k].val+dist[q];  
+                if(!inq[edge[k].to])  
+                {  
+                    inq[edge[k].to]++;  
+                    Q1.push(edge[k].to);  
+                }  
+            }  
+            k=edge[k].next;  
+        }  
+    }  
+    return true;  
+}
+int A_star(int s,int t,int n,int k,int head[],node edge[],int dist[]) 
+{  
+    node2 e,ne;  
+    int cnt=0;  
+    priority_queue&lt;node2&gt;Q;  
+    if(s==t)
+        k++;  
+    if(dis[s]==INF)  
+        return -1;  
+    e.to=s;  
+    e.g=0;  
+    e.f=e.g+dis[e.to];  
+    Q.push(e);  
+
+    while(!Q.empty())  
+    {  
+        e=Q.top();  
+        Q.pop();  
+        if(e.to==t)//找到一条最短路径  
+        {  
+            cnt++;  
+        }  
+        if(cnt==k)//找到k短路  
+        {  
+            return e.g;  
+        }  
+        for(int i=head[e.to]; i!=-1; i=edge[i].next)  
+        {  
+            ne.to=edge[i].to;  
+            ne.g=e.g+edge[i].val;  
+            ne.f=ne.g+dis[ne.to];  
+            Q.push(ne);  
+        }  
+    }  
+    return -1;  
+}  
+int main()
+{
+    while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+    {
+        init();
+        for(int i=1;i&lt;=m;i++)
+        {
+            int a,b,c;
+            scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
+            addedge(a,b,c);
+            addedge2(b,a,c);
+        }
+        scanf(&quot;%d%d%d&quot;,&amp;s,&amp;t,&amp;k);
+        spfa(t,n,head2,edge2,dis);
+        ans=A_star(s,t,n,k,head,edge,dis);
+        printf(&quot;%d\n&quot;,ans);
+    }
+
+    return 0;
+} 
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/a">
+            <span class="flex-auto">A\*</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/tu-lun">
+            <span class="flex-auto">图论</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://afutured.github.io/post/Codeforces-400-C-Molly-s-Chemicals">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  Codeforces
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://afutured.github.io/post/伸展树——Splay Tree ">
+                <h3 class="post-title">
+                  伸展树——Splay Tree
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <script src="https://afutured.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>

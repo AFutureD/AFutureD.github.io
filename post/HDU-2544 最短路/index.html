@@ -1,0 +1,345 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AFuture&#39;s Blog</title>
+<meta name="description" content="Life & Knowledge" />
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1566878844178">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="https://afutured.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://afutured.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://afutured.github.io/images/avatar.png?v=1566878844178" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#problem-description">Problem Description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Made by <a href="https://afutured.github.io" target="_blank">AFuture</a> Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://afutured.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">HDU-2544  最短路</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2016-12-28 / 2 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p><em>类型： dijkstra</em></p>
+<!-- more -->
+<h3 id="problem-description">Problem Description</h3>
+<p>在每年的校赛里，所有进入决赛的同学都会获得一件很漂亮的t-shirt。但是每当我们的工作人员把上百件的衣服从商店运回到赛场的时候，却是非常累的！所以现在他们想要寻找最短的从商店到赛场的路线，你可以帮助他们吗？</p>
+<h3 id="input">Input</h3>
+<p>输入包括多组数据。每组数据第一行是两个整数N、M（N&lt;=100，M&lt;=10000），N表示成都的大街上有几个路口，标号为1的路口是商店所在地，标号为N的路口是赛场所在地，M则表示在成都有几条路。N=M=0表示输入结束。接下来M行，每行包括3个整数A，B，C（1&lt;=A,B&lt;=N,1&lt;=C&lt;=1000）,表示在路口A与路口B之间有一条路，我们的工作人员需要C分钟的时间走过这条路。</p>
+<p>输入保证至少存在1条商店到赛场的路线。</p>
+<h3 id="output">Output</h3>
+<p>对于每组输入，输出一行，表示工作人员从商店走到赛场的最短时间</p>
+<h3 id="sample-input">Sample Input</h3>
+<p>2 1</p>
+<p>1 2 3</p>
+<p>3 3</p>
+<p>1 2 5</p>
+<p>2 3 5</p>
+<p>3 1 2</p>
+<p>0 0</p>
+<h3 id="sample-output">Sample Output</h3>
+<p>3</p>
+<p>2</p>
+<h3 id="题解">题解：</h3>
+<p>此题解包括dijkstra的讲解。</p>
+<p>**dijistra的简述：**将源点(初始点)放入一个空集合U，初始化距离(指图中的任意一点距离源点最短的距离)为0，由源点开始广度遍历，寻找到离源点最近的相邻点后加入U中，从这个点V继续广度遍历，对于每个相邻的点P，对比已知距离和由当前点V加V、P两点间边的权值，取最小后更新，在这些相邻的点中取离源点最近的点，加入集合U中，重复操作，直到U的大小等于图的点的集合。</p>
+<p><strong>题目简述：</strong> 简单的最短路。</p>
+<h3 id="代码">代码：</h3>
+<pre><code class="language-c++">include &lt;iostream&gt;
+include &lt;cstring&gt;
+include &lt;vector&gt;
+include &lt;queue&gt;
+using namespace std;
+
+const int INF = 0x3f3f3f3f;
+
+struct Edge {
+	int vertex, weight;
+};
+
+class Graph {
+private:
+	int n;
+	vector&lt;Edge&gt; * edges;
+    bool * visited;
+public:
+	int * dist;
+	Graph (int input_n) {
+		n = input_n;
+		edges = new vector&lt;Edge&gt;[n];
+		dist = new int[n];
+        visited = new bool[n];
+        memset(visited, 0, n);
+		memset(dist, 0x3f, n * sizeof(int));
+	}
+	~Graph() {
+		delete[] dist;
+		delete[] edges;
+        delete[] visited;
+	}
+    void insert(int x, int y, int weight) {
+        edges[x].push_back(Edge{y, weight});
+        edges[y].push_back(Edge{x, weight});
+    }
+    void dijkstra(int v) {
+        dist[v] = 0;
+        for(int i = 0;i &lt; n;i++){
+            int min_dist = INF,min_vertex;
+            for(int j = 0;j &lt; n; j++){
+                if(!visited[j] &amp;&amp; dist[j] &lt; min_dist){
+                    min_dist = dist[j];
+                    min_vertex = j;
+                }
+            }
+            visited[min_vertex] = 1;
+            for(Edge &amp;j: edges[min_vertex]){
+                if( min_dist + j.weight &lt; dist[j.vertex]){
+                    dist[j.vertex] = min_dist + j.weight;
+                }
+            }
+        }
+    }
+};
+
+int main() {
+	int n, m;
+	while ((cin &gt;&gt; n &gt;&gt; m) &amp;&amp; n &amp;&amp; m){
+	Graph g(n);
+	for (int i = 0; i &lt; m; i++) {
+		int a, b, c;
+		cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+		g.insert(a-1, b-1, c);
+	}
+	g.dijkstra(0);
+
+		cout &lt;&lt; g.dist[n-1] &lt;&lt; endl;
+    }
+	return 0;
+}
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/tu-lun">
+            <span class="flex-auto">图论</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/dijkstra">
+            <span class="flex-auto">dijkstra</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://afutured.github.io/post/HDU-2444 The Accomodation of Students">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  HDU-2444 The Accomodation of Students
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://afutured.github.io/post/Hdu-2686 Matrix">
+                <h3 class="post-title">
+                  Hdu-2686 Matrix
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <script src="https://afutured.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>

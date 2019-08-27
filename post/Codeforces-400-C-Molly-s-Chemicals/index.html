@@ -1,0 +1,347 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AFuture&#39;s Blog</title>
+<meta name="description" content="Life & Knowledge" />
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1566878844178">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="https://afutured.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://afutured.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://afutured.github.io/images/avatar.png?v=1566878844178" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#description">description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#examples">Examples</a>
+<ul>
+<li><a href="#input-2">input</a></li>
+<li><a href="#output-2">output</a></li>
+<li><a href="#input-3">input</a></li>
+<li><a href="#output-3">output</a></li>
+</ul>
+</li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
+<li><a href="#code">code</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Made by <a href="https://afutured.github.io" target="_blank">AFuture</a> Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://afutured.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Codeforces</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2018-07-03 / 2 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p><em>思维技巧</em></p>
+<h2 id="description">description</h2>
+<blockquote>
+<p>Molly Hooper has n different kinds of chemicals arranged in a line. Each of the chemicals has an affection value, The i-th of them has affection value ai.<br>
+Molly wants Sherlock to fall in love with her. She intends to do this by mixing a contiguous segment of chemicals together to make a love potion with total affection value as a non-negative integer power of k. Total affection value of a continuous segment of chemicals is the sum of affection values of each chemical in that segment.<br>
+Help her to do so in finding the total number of such segments.</p>
+</blockquote>
+<!-- more -->
+<h2 id="input">Input</h2>
+<blockquote>
+<p>The first line of input contains two integers, n and k, the number of chemicals and the number, such that the total affection value is a non-negative power of this number k. (1 ≤ n ≤ 105, 1 ≤ |k| ≤ 10).<br>
+Next line contains n integers a1, a2, ..., an ( - 109 ≤ ai ≤ 109) — affection values of chemicals.</p>
+</blockquote>
+<h2 id="output">Output</h2>
+<blockquote>
+<p>Output a single integer — the number of valid segments.</p>
+</blockquote>
+<h2 id="examples">Examples</h2>
+<h3 id="input-2">input</h3>
+<blockquote>
+<p>4 2<br>
+2 2 2 2</p>
+</blockquote>
+<h3 id="output-2">output</h3>
+<blockquote>
+<p>8</p>
+</blockquote>
+<h3 id="input-3">input</h3>
+<blockquote>
+<p>4 -3<br>
+3 -6 -3 12</p>
+</blockquote>
+<h3 id="output-3">output</h3>
+<blockquote>
+<p>3</p>
+</blockquote>
+<h2 id="题解">题解</h2>
+<blockquote>
+<p>首先输入n，k。之后输入n个数，求子序列和为 k ^ m ( m = 0,1,2,3 ...) 的数量。<br>
+定义 sum[i] 为前i个数的和，则有 sum[i] - sum[j] == k ^ m, 但是算两次 sum[i] 和 sum[j] 时间复杂度就较大；我们来转化一下公式，使它变成 以下这样  sum[i] - k ^ m ==  sum[j] ，我们可以发现，如果存在 sum[i] - k ^ m 的值，那么就可以说明有这么一对 i ， j 使结果存在，但是时间复杂度为 o( m lg n )。</p>
+</blockquote>
+<h2 id="code">code</h2>
+<pre><code class="language-c++">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;map&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cctype&gt;
+#include &lt;set&gt;
+#define For(i,a,b) for(int (i)=(a);(i) &lt; (b); ++(i))
+#define Fors(i,a,b) for(int (i)=(a);(i) &gt; (b); --(i))
+#define sd(x) cout &lt;&lt; &quot;start debug:&quot; &lt;&lt; (x) &lt;&lt; endl;
+#define ed(x) cout &lt;&lt; &quot;end debug:&quot; &lt;&lt; (x) &lt;&lt; endl;
+#define rei(x) scanf(&quot;%d&quot;,&amp;x)
+#define rel(x) scanf(&quot;%lld&quot;,&amp;x)
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; pii;
+typedef vector&lt;int&gt; vi;
+typedef queue&lt;int&gt; qi;
+typedef long long LL;
+const LL INF = 1e14;
+
+int n;
+LL k,sum[100050];
+map&lt;LL,LL&gt;x;
+set&lt;LL&gt;a;
+set&lt;LL&gt;::iterator it;
+
+int main()
+{
+    while(~scanf(&quot;%d %lld&quot;,&amp;n,&amp;k))
+    {
+        x.clear();
+        a.clear();
+        sum[0]=0;
+        for(int i=1;i&lt;=n;i++) scanf(&quot;%lld&quot;,&amp;sum[i]),sum[i]+=sum[i-1];
+
+        a.insert(1);
+        LL temp=k;
+        for(int i=1;i&lt;=60;i++){
+            if(temp&gt;INF) break;
+            a.insert(temp);
+            temp*=k;
+        }
+
+        LL ans=0;
+        x[0]=1;
+        for(int i=1;i&lt;=n;i++){
+            for(it=a.begin();it!=a.end();it++) ans+=x[sum[i]-*it];
+            x[sum[i]]++;
+        }
+        printf(&quot;%lld\n&quot;,ans);
+    }
+    return 0;
+}
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/si-wei-ji-qiao">
+            <span class="flex-auto">思维技巧</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://afutured.github.io/post/ACM数学知识整理">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  ACM数学知识整理
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://afutured.github.io/post/POJ-2449">
+                <h3 class="post-title">
+                  第k短路的故事
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <script src="https://afutured.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>

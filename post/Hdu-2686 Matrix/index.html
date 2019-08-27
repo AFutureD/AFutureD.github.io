@@ -1,0 +1,326 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AFuture&#39;s Blog</title>
+<meta name="description" content="Life & Knowledge" />
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1566878844178">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="https://afutured.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://afutured.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://afutured.github.io/images/avatar.png?v=1566878844178" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%8F%8F%E8%BF%B0">描述：</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">output</a></li>
+<li><a href="#sample-input">sample Input</a></li>
+<li><a href="#samput-output">Samput Output</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解：</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Made by <a href="https://afutured.github.io" target="_blank">AFuture</a> Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://afutured.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Hdu-2686 Matrix</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2016-12-28 / 2 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p><em>类型：多线程DP</em></p>
+<!-- more -->
+<h3 id="描述">描述：</h3>
+<p>Yifenfei very like play a number game in the n*n Matrix. A positive integer number is put in each area of the Matrix.<br>
+Every time yifenfei should to do is that choose a detour which frome the top left point to the bottom right point and than back to the top left point with the maximal values of sum integers that area of Matrix yifenfei choose. But from the top to the bottom can only choose right and down, from the bottom to the top can only choose left and up. And yifenfei can not pass the same area of the Matrix except the start and end.</p>
+<h3 id="input">Input</h3>
+<p>The input contains multiple test cases.<br>
+Each case first line given the integer n (2&lt;n&lt;30)<br>
+Than n lines,each line include n positive integers.(&lt;100)</p>
+<h3 id="output">output</h3>
+<p>For each test case output the maximal values yifenfei can get.</p>
+<h3 id="sample-input">sample Input</h3>
+<p>2<br>
+10 3<br>
+5 10<br>
+3<br>
+10 3 3<br>
+2 5 3<br>
+6 7 10<br>
+5<br>
+1 2 3 4 5<br>
+2 3 4 5 6<br>
+3 4 5 6 7<br>
+4 5 6 7 8<br>
+5 6 7 8 9</p>
+<h3 id="samput-output">Samput Output</h3>
+<p>28<br>
+46<br>
+80</p>
+<h3 id="题解">题解：</h3>
+<p>这个题目是一道 <strong>多线程DP</strong> ，题目简单的可理解为，在矩阵中选择两条不相交的最优路径，最优理解为使路径上数字的和最大。简单分析之后，可以发现此题由原来方向为<mark>左上 -&gt; 右下 -&gt; 左上</mark> 的路径可转换为两条方向为<mark>左上 -&gt; 右下</mark> 的路径同时出发，且不相交，**多线程 ** 得到体现。</p>
+<p>规定dp[x<sub>1</sub>][y<sub>1</sub>][x<sub>2</sub>][y<sub>2</sub>]表示为两条路径的终点分别为（x<sub>1</sub> ，y<sub>1</sub>）,（x<sub>2</sub> ,y<sub>2</sub>），原矩阵数据存在MAP[][]中。对于当前时刻的状态，因为一个点的位置的前一个状态有两种可能性，所以一共有四种可能性，状态转移方程具体为：</p>
+<p>dp[x<sub>1</sub>][y<sub>1</sub>][x<sub>2</sub>][y<sub>2</sub>] = max(dp[x<sub>1</sub>-1][y<sub>1</sub>][x<sub>2</sub>-1][y<sub>2</sub>],dp[x<sub>1</sub>-1][y<sub>1</sub>][x<sub>2</sub>][y<sub>2</sub>-1],dp[x<sub>1</sub>][y<sub>1</sub>-1][x<sub>2</sub>-1][y<sub>2</sub>],dp[x<sub>1</sub>][y<sub>1</sub>-1][x<sub>2</sub>][y<sub>2</sub>-1]) + MAP[x<sub>1</sub>][y<sub>1</sub>]</p>
+<p>当x<sub>1</sub> != x<sub>2</sub> 或 y<sub>1</sub> != y<sub>2</sub> 时dp[x<sub>1</sub>][y<sub>1</sub>][x<sub>2</sub>][y<sub>2</sub>] += MAP[x<sub>2</sub>][y<sub>2</sub>]</p>
+<p>分析下时间复杂度为O(n<sup>4</sup>)，空间复杂度为O(n<sup>4</sup>)。如何优化呢？</p>
+<p>有这么一个事实，当明确一个终点的距离原点的距离后，如果知道该终点的横左边，那么由距离可知唯一的纵左边，并且两个不同的重点有唯一相同属性<strong>到原点的距离</strong> ，即x<sub>1</sub> + y<sub>1</sub> = x<sub>2</sub> + y<sub>2</sub>。</p>
+<p>那么我们可以设一个变量L，用来存坐标与原点的距离。dp[l][x<sub>1</sub>][x<sub>2</sub>] 则可以简单的表示出原来的dp[x<sub>1</sub>][y<sub>1</sub>][x<sub>2</sub>][y<sub>2</sub>] ，但是空间与时间复杂度变为O(n<sup>3</sup>).</p>
+<h3 id="代码">代码：</h3>
+<pre><code class="language-c++">include &lt;iostream&gt;
+include &lt;cstdio&gt;
+include &lt;cstring&gt;
+using namespace std;
+
+int max(int a,int b,int c,int d){
+    int tmp1 = max(a,b);
+    int tmp2 = max(c,d);
+    return max(tmp1,tmp2);
+}
+
+int main()
+{
+    int n;
+    int MAP[40][40],dp[80][40][40];
+
+    while (scanf(&quot;%d&quot;,&amp;n) != EOF ){
+        memset(MAP,0,sizeof(MAP));
+        memset(dp,0,sizeof(dp));
+        for (int i = 1; i &lt;= n; ++i){
+            for (int j = 1; j &lt;= n; ++j){
+                scanf(&quot;%d&quot;,&amp;MAP[i][j]);
+            }
+        }
+
+        for (int l = 1; l &lt;= (2 * n - 1); ++l)
+            for (int x1 = 1; x1 &lt;= n; ++x1)
+                for (int x2 = 1; x2 &lt;=n; ++x2){
+                    int tmp_y1 = l - x1 + 1,tmp_y2 = l - x2 + 1;
+                    dp[l][x1][x2] = max(dp[l-1][x1-1][x2-1],dp[l-1][x1][x2],
+                                        dp[l-1][x1-1][x2],dp[l-1][x1][x2-1]) + MAP[x1][tmp_y1];
+                    if (x1 != x2 || tmp_y1 != tmp_y2)
+                        dp[l][x1][x2] += MAP[x2][tmp_y2];
+                }
+                
+        cout &lt;&lt; dp[2*n-1][n][n]&lt;&lt;endl;
+    }
+    return 0;
+}
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/muti-treaded">
+            <span class="flex-auto">Muti-treaded</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://afutured.github.io/tag/dp">
+            <span class="flex-auto">DP</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://afutured.github.io/post/HDU-2544 最短路">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  HDU-2544  最短路
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://afutured.github.io/post/Nim游戏">
+                <h3 class="post-title">
+                  51nod Nim游戏
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <script src="https://afutured.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
