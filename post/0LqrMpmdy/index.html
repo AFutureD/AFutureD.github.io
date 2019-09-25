@@ -1,0 +1,366 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AFuture&#39;s Blog</title>
+<meta name="description" content="Life & Knowledge" />
+<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1569422219265">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="https://afutured.github.io/atom.xml">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140024243-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-140024243-3');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://afutured.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://afutured.github.io/images/avatar.png?v=1569422219265" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#detection">Detection</a>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E7%A7%8D-one-stage">第一种 One-Stage</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D-two-stage">第二种 Two-Stage</a></li>
+</ul>
+</li>
+<li><a href="#r-cnn-%E5%92%8C-fast-r-cnn">R-CNN 和 Fast R-CNN</a>
+<ul>
+<li><a href="#r-cnn">R-CNN[^2]</a></li>
+<li><a href="#fast-r-cnn">Fast R-CNN[^3]</a>
+<ul>
+<li><a href="#sppnet">SPPNet</a></li>
+<li><a href="#fast-r-cnn-%E7%9A%84%E5%85%B7%E4%BD%93%E8%BF%87%E7%A8%8B">Fast R-CNN 的具体过程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Made by <a href="https://afutured.github.io" target="_blank">AFuture</a> Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
+    <a class="rss" href="https://afutured.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Faster R-CNN</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2019-08-29 / 7 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p>上个月，组里进行论文学习的时候我给大家讲的是 Faster R-CNN，为了不白看论文，我决定重新组织一下自己对这个模型的了解，顺便写一篇 Blog。</p>
+<!-- more -->
+<h2 id="detection">Detection</h2>
+<p>什么是 Detecion ？与 Detection 相关的 Classification 和 Segmentation 呢？<br>
+<img src="https://afutured.github.io/post-images/1567064326919.png" alt="Fig 1"><br>
+看上图<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，子图 (a) 的情况就是Classification，对于输入的图片只给出了图里存在的物品类别；子图(b)则相对于 (a) 来说，不仅给出了类别还给出了这个物品的位置，这就是 Object Detection；子图 (c)、(d) 则是 Segmentaion 的两个方向，这里不做细说。</p>
+<p>知道了 Detection 是什么后，我们来说说 CV 领域关于 Detection 的发展方向。首先，Detection 的主要问题是：图里有什么（Classification），物体具体在图的哪里且大小如何（Localization）。<br>
+Detection 有两个方向解决上面提到的两个问题：</p>
+<h3 id="第一种-one-stage">第一种 One-Stage</h3>
+<p>这个方法使用 Regression 的思路。普通 Classification 能获取物体的类别但是不知道位置，那么既然能知道类那能不能也知道位置呢？于是基于普通的 Classification 在某个 Feature Map 的基础上兵分两路，一路是 Classification（原来的路径），另一路则利用 Regression 通过 Feature Map 获得 Localization 需要的东西——坐标。<br>
+其简单结构可以看下图。<br>
+<img src="https://afutured.github.io/post-images/1567066135173.png" alt=""></p>
+<h3 id="第二种-two-stage">第二种 Two-Stage</h3>
+<p>这种办法与 One-Stage 不同在，它先需要先产生多个  Localization 需要的坐标，然后再逐一判断每个坐标对应的候选框哪个“最好”。<br>
+<img src="https://afutured.github.io/post-images/1567067209283.png" alt=""><br>
+当然，产生的坐标方式有很多，最笨的办法是暴力枚举。好的办法当然有，比如本文讲的 Faster R-CNN 的鼻祖——RCNN。</p>
+<h2 id="r-cnn-和-fast-r-cnn">R-CNN 和 Fast R-CNN</h2>
+<h3 id="r-cnn">R-CNN<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h3>
+<p>比暴力好的办法当然有，R-CNN 就算一个。</p>
+<p>R-CNN 的具体过程：</p>
+<ol>
+<li>
+<p>利用图片本身来获取一些物体可能存在的候选区域（Region Proposal）其中，候选区域使用 Selective Search<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> 算法。</p>
+<p>注意：通过 Selective Search 获取候选区域后会有一个小问题，就是候选区域的大小都是不同的，于是需要利用缩放将所有候选区域统一到一个大小（论文中为227）。这样，就可以得到统一的、可以放入 CNN 的候选区域了。</p>
+</li>
+<li>
+<p>对于这些统一的候选区域，通过 CNN 做一次 forward 计算，就可以得到 Feature Map 了，这样可以继续后面的操作。</p>
+<p>同时，这些候选区域根据 Ground Truth 通过 NMS 方法过滤大部分无用的候选区域，且为有用的候选区域确定其对应的类别标签。</p>
+</li>
+<li>
+<p>对于这些 Feature Map 以及其对应的类别标签，我们把他们送入<strong>各个类的</strong>类别分类器（论文中为 SVM，切有20个分类器）进行训练。当测试时，遍历这些 SVM 来判断其是否属于该类。由于负样本很多，使用hard negative mining 方法。</p>
+</li>
+<li>
+<p>对于这些 Feature Map 以及其对应的 Ground Truth，再利用 Regression 进行训练。测试时，获取候选框的修正量，以便获取更为准确的候选框。</p>
+</li>
+</ol>
+<h3 id="fast-r-cnn">Fast R-CNN<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></h3>
+<p>但是，R-CNN 有两个明显的问题：</p>
+<ol>
+<li>输入特征提取网络 CNN 的候选区域是固定大小的，为了统一大小而进行的操作 crop 和 warp等，都会导致各种问题（crop 导致可能无法包括整个物体；wrap 导致因为形变而丧失几何结构信息）。</li>
+<li>候选区域的数量很多，相互之间的重叠也很严重，存在大量的无用计算，耗费时间很长。</li>
+</ol>
+<p>为了解决第上面两个问题，提出了 Fast R-CNN。</p>
+<p>讲 Fast R-CNN 之前要先讲讲 Fast RCNN 借鉴的一个重要方法 SPPNet<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup> 。</p>
+<h4 id="sppnet">SPPNet</h4>
+<p>SPPNet 的提出主要是解决 R-CNN 的第一个问题，即输入固定的问题。</p>
+<p>研究 “图片 --&gt; 卷积层 --&gt; 全连接层” 这个结构，你会发现 “图片 --&gt; 卷积” 这个结构尺寸匹配没有问题，有问题在于之后的 “卷积层 --&gt; 全连接层” 这个结构。</p>
+<p>那么，解决这个问题有两个方法：</p>
+<ol>
+<li>不懂全连接层，采取其他手段保证输入全连接层尺寸固定。</li>
+<li>搞定卷积层的输出，使其统一大小。</li>
+</ol>
+<p>SPPNet 选择第二种办法，通过 SPP (Spatial Pyramid Pooling) 这个结构解决了输入固定的问题。</p>
+<p>具体结构如下图</p>
+<figure data-type="image" tabindex="1"><img src="https://afutured.github.io/post-images/image-20190925204611195.png" alt="image-20190925204611195"></figure>
+<p>框内的结构就是 SPP 。可以明显看出，对于 SPP 的输入（卷积层的结果），使用3种尺度的 pooling 层来获得固定的输出，具体来说（以中间为例），对于卷积层的结果先经过第一个pooling层，获得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的固定输出（例子如下图），同理可以获得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4 \times 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 \times 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 的结果，于是将其展开可以获得估计为 21 的输出（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>16</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">16 + 4 + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>）。</p>
+<figure data-type="image" tabindex="2"><img src="https://afutured.github.io/post-images/image-20190925210822411.png" alt="image-20190925210822411"></figure>
+<h4 id="fast-r-cnn-的具体过程">Fast R-CNN 的具体过程</h4>
+<p>有了 SPPNet 的结构的基础，才有了 Fast R-CNN 的提出。</p>
+<p>与 R-CNN 相比，Fast R-CNN 有两点改进：</p>
+<ol>
+<li>使用了 ROI Pooling，这是 SPP 结构的变体；</li>
+<li>使用了多分类，取代了 SVM 分类。</li>
+</ol>
+<p>具体过程：</p>
+<ol>
+<li>Fast R-CNN 和 R-CNN 一样对图片使用 Selective Search 提取 Region Proposal；</li>
+<li>其次再把图片放入神经网络提取 Feature Map。</li>
+<li>将 Region Proposal 映射到 Feature Map 上提取 Region Proposal 对应的 <strong>子 Feature Map</strong>；</li>
+<li>子 Feature Map 送入 ROI Pooling，再经过全连接层；全连接层的输出有以下两条路：
+<ol>
+<li>加上其对应的类别标签进行多分类器的训练。测试时，通过多分类获得类别。</li>
+<li>加上其对应的 Ground Truth 进行回归器的训练。测试时，通过回归器获得坐标的修正参数。</li>
+</ol>
+</li>
+</ol>
+<p>对于这个 ROI Pooling，其实就是 SPP 的变体，其不再是多个 Pooling 层，而是只有一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn><mo>×</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">6 \times 6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span>  Pooling 层。</p>
+<p>结构可见下图：</p>
+<p><img src="https://afutured.github.io/post-images/20180502185247910.png" alt="20180502185247910">至此，Fast R-CNN 的训练过程结束。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://arxiv.org/abs/1704.06857">A Review on Deep Learning Techniques Applied to Semantic Segmentation,Fig 1</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><a href="https://arxiv.org/abs/1311.2524">R. Girshick, J. Donahue, T. Darrell, and J. Malik, “Rich feature hierarchies for accurate object detection and semantic segmentation,” in IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2014.</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p><a href="http://www.huppelen.nl/publications/selectiveSearchDraft.pdf">J. Uijlings, K. van de Sande, T. Gevers, and A. Smeulders.Selective search for object recognition. IJCV, 2013.</a> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p><a href="https://arxiv.org/abs/1504.08083">R. Girshick, “Fast R-CNN,” in IEEE International Conference on Computer Vision (ICCV), 2015.</a> <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p><a href="https://arxiv.org/abs/1406.4729">K. He, X. Zhang, S. Ren, and J. Sun, “Spatial pyramid pooling in deep convolutional networks for visual recognition,” in<em>European Conference on Computer Vision (ECCV)</em>, 2014.</a> <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+        </div>
+
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://afutured.github.io/post/数列极限-题一">
+                <h3 class="post-title">
+                  数列极限 题一
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'bd6ae660d2f64dde8485',
+    clientSecret: 'b1b266a3462d7f5d52b94f69423b9988c37cba4b',
+    repo: 'afutured.github.io',
+    owner: 'afutured',
+    admin: ['afutured'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://afutured.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
