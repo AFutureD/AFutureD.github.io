@@ -4,14 +4,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AFuture&#39;s Blog</title>
 <meta name="description" content="Life & Knowledge" />
-<link rel="shortcut icon" href="https://afutured.github.io/favicon.ico?v=1569422219265">
+<link rel="shortcut icon" href="http://blog.afuture.me/favicon.ico?v=1569506528287">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
-<link rel="stylesheet" href="https://afutured.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="https://afutured.github.io/atom.xml">
+<link rel="stylesheet" href="http://blog.afuture.me/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="AFuture&#39;s Blog - Atom Feed" href="http://blog.afuture.me/atom.xml">
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140024243-3"></script>
@@ -32,8 +32,8 @@
     <div class="sidebar-content">
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
-        <a href="https://afutured.github.io">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://afutured.github.io/images/avatar.png?v=1569422219265" alt="">
+        <a href="http://blog.afuture.me">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="http://blog.afuture.me/images/avatar.png?v=1569506528287" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
       </div>
@@ -105,7 +105,7 @@
   </div>
   <div class="site-footer">
     <div class="py-4 text-gray-700">Made by <a href="https://afutured.github.io" target="_blank">AFuture</a> Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a></div>
-    <a class="rss" href="https://afutured.github.io/atom.xml" target="_blank">RSS</a>
+    <a class="rss" href="http://blog.afuture.me/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
 <div class="mask" onclick="closeMenu()">
@@ -121,17 +121,17 @@
 <!-- more -->
 <h2 id="detection">Detection</h2>
 <p>什么是 Detecion ？与 Detection 相关的 Classification 和 Segmentation 呢？<br>
-<img src="https://afutured.github.io/post-images/1567064326919.png" alt="Fig 1"><br>
+<img src="http://blog.afuture.me/post-images/1567064326919.png" alt="Fig 1"><br>
 看上图<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，子图 (a) 的情况就是Classification，对于输入的图片只给出了图里存在的物品类别；子图(b)则相对于 (a) 来说，不仅给出了类别还给出了这个物品的位置，这就是 Object Detection；子图 (c)、(d) 则是 Segmentaion 的两个方向，这里不做细说。</p>
 <p>知道了 Detection 是什么后，我们来说说 CV 领域关于 Detection 的发展方向。首先，Detection 的主要问题是：图里有什么（Classification），物体具体在图的哪里且大小如何（Localization）。<br>
 Detection 有两个方向解决上面提到的两个问题：</p>
 <h3 id="第一种-one-stage">第一种 One-Stage</h3>
 <p>这个方法使用 Regression 的思路。普通 Classification 能获取物体的类别但是不知道位置，那么既然能知道类那能不能也知道位置呢？于是基于普通的 Classification 在某个 Feature Map 的基础上兵分两路，一路是 Classification（原来的路径），另一路则利用 Regression 通过 Feature Map 获得 Localization 需要的东西——坐标。<br>
 其简单结构可以看下图。<br>
-<img src="https://afutured.github.io/post-images/1567066135173.png" alt=""></p>
+<img src="http://blog.afuture.me/post-images/1567066135173.png" alt=""></p>
 <h3 id="第二种-two-stage">第二种 Two-Stage</h3>
 <p>这种办法与 One-Stage 不同在，它先需要先产生多个  Localization 需要的坐标，然后再逐一判断每个坐标对应的候选框哪个“最好”。<br>
-<img src="https://afutured.github.io/post-images/1567067209283.png" alt=""><br>
+<img src="http://blog.afuture.me/post-images/1567067209283.png" alt=""><br>
 当然，产生的坐标方式有很多，最笨的办法是暴力枚举。好的办法当然有，比如本文讲的 Faster R-CNN 的鼻祖——RCNN。</p>
 <h2 id="r-cnn-和-fast-r-cnn">R-CNN 和 Fast R-CNN</h2>
 <h3 id="r-cnn">R-CNN<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h3>
@@ -147,7 +147,7 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 <p>同时，这些候选区域根据 Ground Truth 通过 NMS 方法过滤大部分无用的候选区域，且为有用的候选区域确定其对应的类别标签。</p>
 </li>
 <li>
-<p>对于这些 Feature Map 以及其对应的类别标签，我们把他们送入<strong>各个类的</strong>类别分类器（论文中为 SVM，切有20个分类器）进行训练。当测试时，遍历这些 SVM 来判断其是否属于该类。由于负样本很多，使用hard negative mining 方法。</p>
+<p>对于这些 Feature Map 以及其对应的类别标签，我们把他们送入<strong>各个类的</strong>类别分类器（论文中为 SVM，且有20个分类器）进行训练。当测试时，遍历这些 SVM 来判断其是否属于该类。由于负样本很多，使用hard negative mining 方法。</p>
 </li>
 <li>
 <p>对于这些 Feature Map 以及其对应的 Ground Truth，再利用 Regression 进行训练。测试时，获取候选框的修正量，以便获取更为准确的候选框。</p>
@@ -166,14 +166,14 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 <p>研究 “图片 --&gt; 卷积层 --&gt; 全连接层” 这个结构，你会发现 “图片 --&gt; 卷积” 这个结构尺寸匹配没有问题，有问题在于之后的 “卷积层 --&gt; 全连接层” 这个结构。</p>
 <p>那么，解决这个问题有两个方法：</p>
 <ol>
-<li>不懂全连接层，采取其他手段保证输入全连接层尺寸固定。</li>
+<li>不动全连接层，采取其他手段保证全连接层的输入的尺寸固定。</li>
 <li>搞定卷积层的输出，使其统一大小。</li>
 </ol>
 <p>SPPNet 选择第二种办法，通过 SPP (Spatial Pyramid Pooling) 这个结构解决了输入固定的问题。</p>
 <p>具体结构如下图</p>
-<figure data-type="image" tabindex="1"><img src="https://afutured.github.io/post-images/image-20190925204611195.png" alt="image-20190925204611195"></figure>
+<figure data-type="image" tabindex="1"><img src="http://blog.afuture.me/post-images/image-20190925204611195.png" alt="image-20190925204611195"></figure>
 <p>框内的结构就是 SPP 。可以明显看出，对于 SPP 的输入（卷积层的结果），使用3种尺度的 pooling 层来获得固定的输出，具体来说（以中间为例），对于卷积层的结果先经过第一个pooling层，获得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的固定输出（例子如下图），同理可以获得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4 \times 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 \times 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 的结果，于是将其展开可以获得估计为 21 的输出（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>16</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">16 + 4 + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>）。</p>
-<figure data-type="image" tabindex="2"><img src="https://afutured.github.io/post-images/image-20190925210822411.png" alt="image-20190925210822411"></figure>
+<figure data-type="image" tabindex="2"><img src="http://blog.afuture.me/post-images/image-20190925210822411.png" alt="image-20190925210822411"></figure>
 <h4 id="fast-r-cnn-的具体过程">Fast R-CNN 的具体过程</h4>
 <p>有了 SPPNet 的结构的基础，才有了 Fast R-CNN 的提出。</p>
 <p>与 R-CNN 相比，Fast R-CNN 有两点改进：</p>
@@ -195,7 +195,7 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 </ol>
 <p>对于这个 ROI Pooling，其实就是 SPP 的变体，其不再是多个 Pooling 层，而是只有一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn><mo>×</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">6 \times 6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span>  Pooling 层。</p>
 <p>结构可见下图：</p>
-<p><img src="https://afutured.github.io/post-images/20180502185247910.png" alt="20180502185247910">至此，Fast R-CNN 的训练过程结束。</p>
+<p><img src="http://blog.afuture.me/post-images/20180502185247910.png" alt="20180502185247910">至此，Fast R-CNN 的训练过程结束。</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
@@ -215,6 +215,18 @@ Detection 有两个方向解决上面提到的两个问题：</p>
         </div>
 
         
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="http://blog.afuture.me/tag/_024hYonv">
+            <span class="flex-auto">DeepLearning</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="http://blog.afuture.me/tag/E84nBkc2YY">
+            <span class="flex-auto">CV</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="http://blog.afuture.me/tag/xaNQGzBfay">
+            <span class="flex-auto">R-CNN</span>
+          </a>
+        
 
 
         <div class="flex justify-between py-8">
@@ -222,7 +234,7 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 
           
             <div class="next-post">
-              <a href="https://afutured.github.io/post/数列极限-题一">
+              <a href="http://blog.afuture.me/post/数列极限-题一">
                 <h3 class="post-title">
                   数列极限 题一
                   <i class="remixicon-arrow-right-line"></i>
@@ -263,7 +275,7 @@ Detection 有两个方向解决上面提到的两个问题：</p>
       </div>
     </div>
 
-    <script src="https://afutured.github.io/media/prism.js"></script>  
+    <script src="http://blog.afuture.me/media/prism.js"></script>  
 <script>
 
 Prism.highlightAll()

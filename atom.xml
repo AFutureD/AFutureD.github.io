@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://afutured.github.io</id>
+    <id>http://blog.afuture.me</id>
     <title>AFuture&apos;s Blog</title>
-    <updated>2019-09-25T14:37:03.961Z</updated>
+    <updated>2019-09-26T14:02:13.988Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://afutured.github.io"/>
-    <link rel="self" href="https://afutured.github.io/atom.xml"/>
+    <link rel="alternate" href="http://blog.afuture.me"/>
+    <link rel="self" href="http://blog.afuture.me/atom.xml"/>
     <subtitle>Life &amp; Knowledge</subtitle>
-    <logo>https://afutured.github.io/images/avatar.png</logo>
-    <icon>https://afutured.github.io/favicon.ico</icon>
+    <logo>http://blog.afuture.me/images/avatar.png</logo>
+    <icon>http://blog.afuture.me/favicon.ico</icon>
     <rights>All rights reserved 2019, AFuture&apos;s Blog</rights>
     <entry>
         <title type="html"><![CDATA[Faster R-CNN]]></title>
-        <id>https://afutured.github.io/post/0LqrMpmdy</id>
-        <link href="https://afutured.github.io/post/0LqrMpmdy">
+        <id>http://blog.afuture.me/post/0LqrMpmdy</id>
+        <link href="http://blog.afuture.me/post/0LqrMpmdy">
         </link>
         <updated>2019-08-29T06:05:14.000Z</updated>
         <summary type="html"><![CDATA[<p>上个月，组里进行论文学习的时候我给大家讲的是 Faster R-CNN，为了不白看论文，我决定重新组织一下自己对这个模型的了解，顺便写一篇 Blog。</p>
@@ -22,17 +22,17 @@
 <!-- more -->
 <h2 id="detection">Detection</h2>
 <p>什么是 Detecion ？与 Detection 相关的 Classification 和 Segmentation 呢？<br>
-<img src="https://afutured.github.io/post-images/1567064326919.png" alt="Fig 1"><br>
+<img src="http://blog.afuture.me/post-images/1567064326919.png" alt="Fig 1"><br>
 看上图<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，子图 (a) 的情况就是Classification，对于输入的图片只给出了图里存在的物品类别；子图(b)则相对于 (a) 来说，不仅给出了类别还给出了这个物品的位置，这就是 Object Detection；子图 (c)、(d) 则是 Segmentaion 的两个方向，这里不做细说。</p>
 <p>知道了 Detection 是什么后，我们来说说 CV 领域关于 Detection 的发展方向。首先，Detection 的主要问题是：图里有什么（Classification），物体具体在图的哪里且大小如何（Localization）。<br>
 Detection 有两个方向解决上面提到的两个问题：</p>
 <h3 id="第一种-one-stage">第一种 One-Stage</h3>
 <p>这个方法使用 Regression 的思路。普通 Classification 能获取物体的类别但是不知道位置，那么既然能知道类那能不能也知道位置呢？于是基于普通的 Classification 在某个 Feature Map 的基础上兵分两路，一路是 Classification（原来的路径），另一路则利用 Regression 通过 Feature Map 获得 Localization 需要的东西——坐标。<br>
 其简单结构可以看下图。<br>
-<img src="https://afutured.github.io/post-images/1567066135173.png" alt=""></p>
+<img src="http://blog.afuture.me/post-images/1567066135173.png" alt=""></p>
 <h3 id="第二种-two-stage">第二种 Two-Stage</h3>
 <p>这种办法与 One-Stage 不同在，它先需要先产生多个  Localization 需要的坐标，然后再逐一判断每个坐标对应的候选框哪个“最好”。<br>
-<img src="https://afutured.github.io/post-images/1567067209283.png" alt=""><br>
+<img src="http://blog.afuture.me/post-images/1567067209283.png" alt=""><br>
 当然，产生的坐标方式有很多，最笨的办法是暴力枚举。好的办法当然有，比如本文讲的 Faster R-CNN 的鼻祖——RCNN。</p>
 <h2 id="r-cnn-和-fast-r-cnn">R-CNN 和 Fast R-CNN</h2>
 <h3 id="r-cnn">R-CNN<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h3>
@@ -48,7 +48,7 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 <p>同时，这些候选区域根据 Ground Truth 通过 NMS 方法过滤大部分无用的候选区域，且为有用的候选区域确定其对应的类别标签。</p>
 </li>
 <li>
-<p>对于这些 Feature Map 以及其对应的类别标签，我们把他们送入<strong>各个类的</strong>类别分类器（论文中为 SVM，切有20个分类器）进行训练。当测试时，遍历这些 SVM 来判断其是否属于该类。由于负样本很多，使用hard negative mining 方法。</p>
+<p>对于这些 Feature Map 以及其对应的类别标签，我们把他们送入<strong>各个类的</strong>类别分类器（论文中为 SVM，且有20个分类器）进行训练。当测试时，遍历这些 SVM 来判断其是否属于该类。由于负样本很多，使用hard negative mining 方法。</p>
 </li>
 <li>
 <p>对于这些 Feature Map 以及其对应的 Ground Truth，再利用 Regression 进行训练。测试时，获取候选框的修正量，以便获取更为准确的候选框。</p>
@@ -67,14 +67,14 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 <p>研究 “图片 --&gt; 卷积层 --&gt; 全连接层” 这个结构，你会发现 “图片 --&gt; 卷积” 这个结构尺寸匹配没有问题，有问题在于之后的 “卷积层 --&gt; 全连接层” 这个结构。</p>
 <p>那么，解决这个问题有两个方法：</p>
 <ol>
-<li>不懂全连接层，采取其他手段保证输入全连接层尺寸固定。</li>
+<li>不动全连接层，采取其他手段保证全连接层的输入的尺寸固定。</li>
 <li>搞定卷积层的输出，使其统一大小。</li>
 </ol>
 <p>SPPNet 选择第二种办法，通过 SPP (Spatial Pyramid Pooling) 这个结构解决了输入固定的问题。</p>
 <p>具体结构如下图</p>
-<figure data-type="image" tabindex="1"><img src="https://afutured.github.io/post-images/image-20190925204611195.png" alt="image-20190925204611195"></figure>
+<figure data-type="image" tabindex="1"><img src="http://blog.afuture.me/post-images/image-20190925204611195.png" alt="image-20190925204611195"></figure>
 <p>框内的结构就是 SPP 。可以明显看出，对于 SPP 的输入（卷积层的结果），使用3种尺度的 pooling 层来获得固定的输出，具体来说（以中间为例），对于卷积层的结果先经过第一个pooling层，获得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的固定输出（例子如下图），同理可以获得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4 \times 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 \times 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 的结果，于是将其展开可以获得估计为 21 的输出（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>16</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">16 + 4 + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>）。</p>
-<figure data-type="image" tabindex="2"><img src="https://afutured.github.io/post-images/image-20190925210822411.png" alt="image-20190925210822411"></figure>
+<figure data-type="image" tabindex="2"><img src="http://blog.afuture.me/post-images/image-20190925210822411.png" alt="image-20190925210822411"></figure>
 <h4 id="fast-r-cnn-的具体过程">Fast R-CNN 的具体过程</h4>
 <p>有了 SPPNet 的结构的基础，才有了 Fast R-CNN 的提出。</p>
 <p>与 R-CNN 相比，Fast R-CNN 有两点改进：</p>
@@ -96,7 +96,7 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 </ol>
 <p>对于这个 ROI Pooling，其实就是 SPP 的变体，其不再是多个 Pooling 层，而是只有一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn><mo>×</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">6 \times 6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span>  Pooling 层。</p>
 <p>结构可见下图：</p>
-<p><img src="https://afutured.github.io/post-images/20180502185247910.png" alt="20180502185247910">至此，Fast R-CNN 的训练过程结束。</p>
+<p><img src="http://blog.afuture.me/post-images/20180502185247910.png" alt="20180502185247910">至此，Fast R-CNN 的训练过程结束。</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
@@ -116,8 +116,8 @@ Detection 有两个方向解决上面提到的两个问题：</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[数列极限 题一]]></title>
-        <id>https://afutured.github.io/post/数列极限-题一</id>
-        <link href="https://afutured.github.io/post/数列极限-题一">
+        <id>http://blog.afuture.me/post/数列极限-题一</id>
+        <link href="http://blog.afuture.me/post/数列极限-题一">
         </link>
         <updated>2018-07-07T06:35:25.000Z</updated>
         <summary type="html"><![CDATA[<p>[题]：<br>
@@ -156,8 +156,8 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
     </entry>
     <entry>
         <title type="html"><![CDATA[求极限 题二]]></title>
-        <id>https://afutured.github.io/post/求极限-题二</id>
-        <link href="https://afutured.github.io/post/求极限-题二">
+        <id>http://blog.afuture.me/post/求极限-题二</id>
+        <link href="http://blog.afuture.me/post/求极限-题二">
         </link>
         <updated>2018-07-05T06:21:41.000Z</updated>
         <summary type="html"><![CDATA[<p>求：</p>
@@ -222,8 +222,8 @@ s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class=
     </entry>
     <entry>
         <title type="html"><![CDATA[Normalization and Regularization]]></title>
-        <id>https://afutured.github.io/post/Normalization-and-Regularization</id>
-        <link href="https://afutured.github.io/post/Normalization-and-Regularization">
+        <id>http://blog.afuture.me/post/Normalization-and-Regularization</id>
+        <link href="http://blog.afuture.me/post/Normalization-and-Regularization">
         </link>
         <updated>2018-07-03T06:51:09.000Z</updated>
         <summary type="html"><![CDATA[<p>Normalization: usually rescales features to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>.<br>
@@ -262,8 +262,8 @@ Regularization: Different from the feature scaling techniques mentioned above, r
     </entry>
     <entry>
         <title type="html"><![CDATA[决策树（decision tree）]]></title>
-        <id>https://afutured.github.io/post/Decision-Tree</id>
-        <link href="https://afutured.github.io/post/Decision-Tree">
+        <id>http://blog.afuture.me/post/Decision-Tree</id>
+        <link href="http://blog.afuture.me/post/Decision-Tree">
         </link>
         <updated>2018-07-03T06:50:09.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="简述">简述</h2>
@@ -413,8 +413,8 @@ Gain(D,a)&amp;=\rho \times Gain(\tilde{D},a)\\\\
     </entry>
     <entry>
         <title type="html"><![CDATA[Logistic Regression]]></title>
-        <id>https://afutured.github.io/post/Logistic-Regression</id>
-        <link href="https://afutured.github.io/post/Logistic-Regression">
+        <id>http://blog.afuture.me/post/Logistic-Regression</id>
+        <link href="http://blog.afuture.me/post/Logistic-Regression">
         </link>
         <updated>2018-07-03T06:49:09.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="简述">简述</h2>
@@ -705,8 +705,8 @@ h_\theta(x)&amp;=E[T(y)|x;\theta]\\
     </entry>
     <entry>
         <title type="html"><![CDATA[Liner Regression]]></title>
-        <id>https://afutured.github.io/post/Liner-Regressionmd</id>
-        <link href="https://afutured.github.io/post/Liner-Regressionmd">
+        <id>http://blog.afuture.me/post/Liner-Regressionmd</id>
+        <link href="http://blog.afuture.me/post/Liner-Regressionmd">
         </link>
         <updated>2018-07-03T06:48:09.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="简述">简述</h2>
@@ -903,8 +903,8 @@ s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class=
     </entry>
     <entry>
         <title type="html"><![CDATA[Symbolic Representation]]></title>
-        <id>https://afutured.github.io/post/Symbolic-Representation</id>
-        <link href="https://afutured.github.io/post/Symbolic-Representation">
+        <id>http://blog.afuture.me/post/Symbolic-Representation</id>
+        <link href="http://blog.afuture.me/post/Symbolic-Representation">
         </link>
         <updated>2018-07-03T06:47:09.000Z</updated>
         <content type="html"><![CDATA[<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>  ：一个标量</p>
@@ -926,8 +926,8 @@ c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg><
     </entry>
     <entry>
         <title type="html"><![CDATA[求极限 题一]]></title>
-        <id>https://afutured.github.io/post/求极限-题一</id>
-        <link href="https://afutured.github.io/post/求极限-题一">
+        <id>http://blog.afuture.me/post/求极限-题一</id>
+        <link href="http://blog.afuture.me/post/求极限-题一">
         </link>
         <updated>2018-07-03T06:42:09.000Z</updated>
         <summary type="html"><![CDATA[<p>求</p>
@@ -960,15 +960,15 @@ c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg><
     </entry>
     <entry>
         <title type="html"><![CDATA[隐函数存在定理]]></title>
-        <id>https://afutured.github.io/post/隐函数存在定理</id>
-        <link href="https://afutured.github.io/post/隐函数存在定理">
+        <id>http://blog.afuture.me/post/隐函数存在定理</id>
+        <link href="http://blog.afuture.me/post/隐函数存在定理">
         </link>
         <updated>2018-07-03T06:26:09.000Z</updated>
         <summary type="html"><![CDATA[<p>证明过程。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>证明过程。</p>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://afutured.github.io/post-images/1562140125805.jpg" alt="pic"></figure>
+<figure data-type="image" tabindex="1"><img src="http://blog.afuture.me/post-images/1562140125805.jpg" alt="pic"></figure>
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>0</mn></msub><mo>)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">F(x_0,y_0)=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>,<br>
 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">d_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>就是在沿x轴的斜率，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">d_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>就是沿y轴的斜率。<br>
 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>F</mi><mi>x</mi><mo mathvariant="normal">′</mo></msubsup></mrow><annotation encoding="application/x-tex">F&#x27;_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.998892em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4530000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span>为沿x轴的增量，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>F</mi><mi>y</mi><mo mathvariant="normal">′</mo></msubsup></mrow><annotation encoding="application/x-tex">F&#x27;_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.135em;vertical-align:-0.383108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4530000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.383108em;"><span></span></span></span></span></span></span></span></span></span>为沿y轴的增量，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mi>z</mi></msub></mrow><annotation encoding="application/x-tex">d_z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>为沿z轴的增量。<br>
@@ -979,8 +979,8 @@ c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg><
     </entry>
     <entry>
         <title type="html"><![CDATA[ACM数学知识整理]]></title>
-        <id>https://afutured.github.io/post/ACM数学知识整理</id>
-        <link href="https://afutured.github.io/post/ACM数学知识整理">
+        <id>http://blog.afuture.me/post/ACM数学知识整理</id>
+        <link href="http://blog.afuture.me/post/ACM数学知识整理">
         </link>
         <updated>2018-07-03T06:22:46.000Z</updated>
         <content type="html"><![CDATA[<h2 id="1数论">1.数论</h2>
@@ -1183,8 +1183,8 @@ poj3429
     </entry>
     <entry>
         <title type="html"><![CDATA[Codeforces]]></title>
-        <id>https://afutured.github.io/post/Codeforces-400-C-Molly-s-Chemicals</id>
-        <link href="https://afutured.github.io/post/Codeforces-400-C-Molly-s-Chemicals">
+        <id>http://blog.afuture.me/post/Codeforces-400-C-Molly-s-Chemicals</id>
+        <link href="http://blog.afuture.me/post/Codeforces-400-C-Molly-s-Chemicals">
         </link>
         <updated>2018-07-03T06:18:14.000Z</updated>
         <summary type="html"><![CDATA[<p><em>思维技巧</em></p>
@@ -1300,8 +1300,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[第k短路的故事]]></title>
-        <id>https://afutured.github.io/post/POJ-2449</id>
-        <link href="https://afutured.github.io/post/POJ-2449">
+        <id>http://blog.afuture.me/post/POJ-2449</id>
+        <link href="http://blog.afuture.me/post/POJ-2449">
         </link>
         <updated>2017-08-18T11:43:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>A*、第 k 短路</em></p>
@@ -1498,8 +1498,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[伸展树——Splay Tree]]></title>
-        <id>https://afutured.github.io/post/伸展树——Splay Tree </id>
-        <link href="https://afutured.github.io/post/伸展树——Splay Tree ">
+        <id>http://blog.afuture.me/post/伸展树——Splay Tree </id>
+        <link href="http://blog.afuture.me/post/伸展树——Splay Tree ">
         </link>
         <updated>2017-08-18T11:43:57.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="简单介绍">简单介绍</h2>
@@ -1699,8 +1699,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[51nod bash v2]]></title>
-        <id>https://afutured.github.io/post/51nod bash v2</id>
-        <link href="https://afutured.github.io/post/51nod bash v2">
+        <id>http://blog.afuture.me/post/51nod bash v2</id>
+        <link href="http://blog.afuture.me/post/51nod bash v2">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="描述">描述：</h3>
@@ -1743,8 +1743,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-1043 Eight]]></title>
-        <id>https://afutured.github.io/post/HDU-1043 Eight</id>
-        <link href="https://afutured.github.io/post/HDU-1043 Eight">
+        <id>http://blog.afuture.me/post/HDU-1043 Eight</id>
+        <link href="http://blog.afuture.me/post/HDU-1043 Eight">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： A*算法</em></p>
@@ -1971,8 +1971,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-1272 小希的迷宫]]></title>
-        <id>https://afutured.github.io/post/HDU-1272 小希的迷宫</id>
-        <link href="https://afutured.github.io/post/HDU-1272 小希的迷宫">
+        <id>http://blog.afuture.me/post/HDU-1272 小希的迷宫</id>
+        <link href="http://blog.afuture.me/post/HDU-1272 小希的迷宫">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 并查集</em></p>
@@ -2134,8 +2134,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-1851 A Simple Game]]></title>
-        <id>https://afutured.github.io/post/HDU-1851 A Simple Game</id>
-        <link href="https://afutured.github.io/post/HDU-1851 A Simple Game">
+        <id>http://blog.afuture.me/post/HDU-1851 A Simple Game</id>
+        <link href="http://blog.afuture.me/post/HDU-1851 A Simple Game">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 博弈，SG函数</em></p>
@@ -2166,8 +2166,8 @@ No</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-2066 一个人的旅行]]></title>
-        <id>https://afutured.github.io/post/HDU-2066 一个人的旅行</id>
-        <link href="https://afutured.github.io/post/HDU-2066 一个人的旅行">
+        <id>http://blog.afuture.me/post/HDU-2066 一个人的旅行</id>
+        <link href="http://blog.afuture.me/post/HDU-2066 一个人的旅行">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 最短路，多集合到多集合</em></p>
@@ -2288,8 +2288,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-2196 Computer]]></title>
-        <id>https://afutured.github.io/post/HDU-2196 Computer</id>
-        <link href="https://afutured.github.io/post/HDU-2196 Computer">
+        <id>http://blog.afuture.me/post/HDU-2196 Computer</id>
+        <link href="http://blog.afuture.me/post/HDU-2196 Computer">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 树形DP 、树的最长路</em></p>
@@ -2391,8 +2391,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-2444 The Accomodation of Students]]></title>
-        <id>https://afutured.github.io/post/HDU-2444 The Accomodation of Students</id>
-        <link href="https://afutured.github.io/post/HDU-2444 The Accomodation of Students">
+        <id>http://blog.afuture.me/post/HDU-2444 The Accomodation of Students</id>
+        <link href="http://blog.afuture.me/post/HDU-2444 The Accomodation of Students">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 二分图的判断和最大匹配</em></p>
@@ -2509,8 +2509,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-2544  最短路]]></title>
-        <id>https://afutured.github.io/post/HDU-2544 最短路</id>
-        <link href="https://afutured.github.io/post/HDU-2544 最短路">
+        <id>http://blog.afuture.me/post/HDU-2544 最短路</id>
+        <link href="http://blog.afuture.me/post/HDU-2544 最短路">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： dijkstra</em></p>
@@ -2616,8 +2616,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[Hdu-2686 Matrix]]></title>
-        <id>https://afutured.github.io/post/Hdu-2686 Matrix</id>
-        <link href="https://afutured.github.io/post/Hdu-2686 Matrix">
+        <id>http://blog.afuture.me/post/Hdu-2686 Matrix</id>
+        <link href="http://blog.afuture.me/post/Hdu-2686 Matrix">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型：多线程DP</em></p>
@@ -2704,8 +2704,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[51nod Nim游戏]]></title>
-        <id>https://afutured.github.io/post/Nim游戏</id>
-        <link href="https://afutured.github.io/post/Nim游戏">
+        <id>http://blog.afuture.me/post/Nim游戏</id>
+        <link href="http://blog.afuture.me/post/Nim游戏">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型：Nim游戏</em></p>
@@ -2758,8 +2758,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[51nod 威佐夫博奕（Wythoff Game）]]></title>
-        <id>https://afutured.github.io/post/威佐夫博奕（Wythoff Game）</id>
-        <link href="https://afutured.github.io/post/威佐夫博奕（Wythoff Game）">
+        <id>http://blog.afuture.me/post/威佐夫博奕（Wythoff Game）</id>
+        <link href="http://blog.afuture.me/post/威佐夫博奕（Wythoff Game）">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型：Wythoff Game</em></p>
@@ -2812,8 +2812,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[容斥原理]]></title>
-        <id>https://afutured.github.io/post/容斥原理</id>
-        <link href="https://afutured.github.io/post/容斥原理">
+        <id>http://blog.afuture.me/post/容斥原理</id>
+        <link href="http://blog.afuture.me/post/容斥原理">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="描述">描述</h3>
@@ -2875,8 +2875,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[51nod 巴什博奕（Bash Game）]]></title>
-        <id>https://afutured.github.io/post/巴什博奕（Bash Game）</id>
-        <link href="https://afutured.github.io/post/巴什博奕（Bash Game）">
+        <id>http://blog.afuture.me/post/巴什博奕（Bash Game）</id>
+        <link href="http://blog.afuture.me/post/巴什博奕（Bash Game）">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="描述">描述：</h3>
@@ -2911,8 +2911,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[康托展开]]></title>
-        <id>https://afutured.github.io/post/康托展开</id>
-        <link href="https://afutured.github.io/post/康托展开">
+        <id>http://blog.afuture.me/post/康托展开</id>
+        <link href="http://blog.afuture.me/post/康托展开">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="定义">定义：</h2>
@@ -3040,8 +3040,8 @@ void invKT(int n, int k, int s[]){
     </entry>
     <entry>
         <title type="html"><![CDATA[抽屉原理]]></title>
-        <id>https://afutured.github.io/post/抽屉原理</id>
-        <link href="https://afutured.github.io/post/抽屉原理">
+        <id>http://blog.afuture.me/post/抽屉原理</id>
+        <link href="http://blog.afuture.me/post/抽屉原理">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="抽屉原理简述">抽屉原理简述：</h2>
@@ -3181,8 +3181,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[51NOD DP-最大子矩阵和]]></title>
-        <id>https://afutured.github.io/post/最大子矩阵和</id>
-        <link href="https://afutured.github.io/post/最大子矩阵和">
+        <id>http://blog.afuture.me/post/最大子矩阵和</id>
+        <link href="http://blog.afuture.me/post/最大子矩阵和">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="描述">描述</h3>
@@ -3223,8 +3223,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[裴蜀等式]]></title>
-        <id>https://afutured.github.io/post/裴蜀等式</id>
-        <link href="https://afutured.github.io/post/裴蜀等式">
+        <id>http://blog.afuture.me/post/裴蜀等式</id>
+        <link href="http://blog.afuture.me/post/裴蜀等式">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p>在数论中，<strong>裴蜀等式（Bézout's identity）</strong> 或 <strong>裴蜀定理</strong> 是一个关于最大公因数的定理：</p>
@@ -3251,8 +3251,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[博客的开始——如何搭建Hexo]]></title>
-        <id>https://afutured.github.io/post/博客的开始——如何搭建Hexo</id>
-        <link href="https://afutured.github.io/post/博客的开始——如何搭建Hexo">
+        <id>http://blog.afuture.me/post/博客的开始——如何搭建Hexo</id>
+        <link href="http://blog.afuture.me/post/博客的开始——如何搭建Hexo">
         </link>
         <updated>2016-12-27T01:43:57.000Z</updated>
         <content type="html"><![CDATA[<h2 id="概述">概述</h2>
