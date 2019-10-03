@@ -27733,8 +27733,10 @@ body {
   text-overflow: ellipsis;
 }
 .flink-motto {
-  padding: 16px 0px;
+  float: left;
+  padding: 10px 0px;
   font-size: 13px;
   height: 50px;
+  width: 100%;
   line-height: 20px;
 }
