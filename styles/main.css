@@ -27696,3 +27696,46 @@ body {
     z-index: auto;
   }
 }
+.flink {
+  box-shadow: 0 4px 8px 6px rgba(7, 17, 27, 0.08);
+  padding: 40px 44px 44px;
+  height: auto;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.flink-box {
+  float: left;
+  width: calc(50% - 14px);
+  height: 90px;
+  line-height: 17px;
+  margin: 20px 7px;
+  padding: 0px 0px;
+  overflow: hidden;
+}
+.flink-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50% !important;
+  float: left;
+  margin: 11px 10px !important;
+}
+.flink-info {
+  float: left;
+}
+.flink-name {
+  float: left;
+  padding-top: 16px;
+  /* padding-right: 10px; */
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.flink-motto {
+  padding: 16px 0px;
+  font-size: 13px;
+  height: 50px;
+  line-height: 20px;
+}
