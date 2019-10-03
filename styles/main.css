@@ -27707,7 +27707,6 @@ body {
   float: left;
   width: calc(50% - 14px);
   height: 90px;
-  line-height: 17px;
   margin: 20px 7px;
   padding: 0px 0px;
   overflow: hidden;
@@ -27725,7 +27724,7 @@ body {
 .flink-name {
   float: left;
   padding-top: 16px;
-  /* padding-right: 10px; */
+  line-height: 17px;
   font-size: 20px;
   font-weight: bold;
   height: 40px;
