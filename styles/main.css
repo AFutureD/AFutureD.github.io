@@ -398,7 +398,6 @@ html {
 *::after {
   border-width: 0;
   border-style: solid;
-  border-color: #e2e8f0;
 }
 /**
  * Undo the `border-style: none` reset that Normalize applies to images so that

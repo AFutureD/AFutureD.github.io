@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AFuture&#39;s Blog</title>
 <meta name="description" content="Life & Knowledge" />
-<link rel="shortcut icon" href="http://blog.afuture.me/favicon.ico?v=1573981030704">
+<link rel="shortcut icon" href="http://blog.afuture.me/favicon.ico?v=1577956251933">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -33,7 +33,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="http://blog.afuture.me">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="http://blog.afuture.me/images/avatar.png?v=1573981030704" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="http://blog.afuture.me/images/avatar.png?v=1577956251933" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">AFuture&#39;s Blog</h1>
       </div>
@@ -103,7 +103,7 @@
       
     
       
-        <a href="/post/friends" class="menu" style="animation-delay: 0.8s">
+        <a href="friends" class="menu" style="animation-delay: 0.8s">
           友链
         </a>
       
@@ -127,17 +127,17 @@
 <!-- more -->
 <h2 id="detection">Detection</h2>
 <p>什么是 Detecion ？与 Detection 相关的 Classification 和 Segmentation 呢？<br>
-<img src="http://blog.afuture.me/post-images/1567064326919.png" alt="Fig 1"><br>
+<img src="http://blog.afuture.me/post-images/1567064326919.png" alt="Fig 1" loading="lazy"><br>
 看上图<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，子图 (a) 的情况就是Classification，对于输入的图片只给出了图里存在的物品类别；子图(b)则相对于 (a) 来说，不仅给出了类别还给出了这个物品的位置，这就是 Object Detection；子图 (c)、(d) 则是 Segmentaion 的两个方向，这里不做细说。</p>
 <p>知道了 Detection 是什么后，我们来说说 CV 领域关于 Detection 的发展方向。首先，Detection 的主要问题是：图里有什么（Classification），物体具体在图的哪里且大小如何（Localization）。<br>
 Detection 有两个方向解决上面提到的两个问题：</p>
 <h3 id="第一种-one-stage">第一种 One-Stage</h3>
 <p>这个方法使用 Regression 的思路。普通 Classification 能获取物体的类别但是不知道位置，那么既然能知道类那能不能也知道位置呢？于是基于普通的 Classification 在某个 Feature Map 的基础上兵分两路，一路是 Classification（原来的路径），另一路则利用 Regression 通过 Feature Map 获得 Localization 需要的东西——坐标。<br>
 其简单结构可以看下图。<br>
-<img src="http://blog.afuture.me/post-images/1567066135173.png" alt=""></p>
+<img src="http://blog.afuture.me/post-images/1567066135173.png" alt="" loading="lazy"></p>
 <h3 id="第二种-two-stage">第二种 Two-Stage</h3>
 <p>这种办法与 One-Stage 不同在，它先需要先产生多个  Localization 需要的坐标，然后再逐一判断每个坐标对应的候选框哪个“最好”。<br>
-<img src="http://blog.afuture.me/post-images/1567067209283.png" alt=""><br>
+<img src="http://blog.afuture.me/post-images/1567067209283.png" alt="" loading="lazy"><br>
 当然，产生的坐标方式有很多，最笨的办法是暴力枚举。好的办法当然有，比如本文讲的 Faster R-CNN 的鼻祖——RCNN。</p>
 <h2 id="r-cnn-和-fast-r-cnn">R-CNN 和 Fast R-CNN</h2>
 <h3 id="r-cnn">R-CNN<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h3>
@@ -177,9 +177,9 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 </ol>
 <p>SPPNet 选择第二种办法，通过 SPP (Spatial Pyramid Pooling) 这个结构解决了输入固定的问题。</p>
 <p>具体结构如下图</p>
-<figure data-type="image" tabindex="1"><img src="http://blog.afuture.me/post-images/image-20190925204611195.png" alt="image-20190925204611195"></figure>
+<figure data-type="image" tabindex="1"><img src="http://blog.afuture.me/post-images/image-20190925204611195.png" alt="image-20190925204611195" loading="lazy"></figure>
 <p>框内的结构就是 SPP 。可以明显看出，对于 SPP 的输入（卷积层的结果），使用3种尺度的 pooling 层来获得固定的输出，具体来说（以中间为例），对于卷积层的结果先经过第一个pooling层，获得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的固定输出（例子如下图），同理可以获得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4 \times 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 \times 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 的结果，于是将其展开可以获得估计为 21 的输出（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>16</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">16 + 4 + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>）。</p>
-<figure data-type="image" tabindex="2"><img src="http://blog.afuture.me/post-images/image-20190925210822411.png" alt="image-20190925210822411"></figure>
+<figure data-type="image" tabindex="2"><img src="http://blog.afuture.me/post-images/image-20190925210822411.png" alt="image-20190925210822411" loading="lazy"></figure>
 <h4 id="fast-r-cnn-的具体过程">Fast R-CNN 的具体过程</h4>
 <p>有了 SPPNet 的结构的基础，才有了 Fast R-CNN 的提出。</p>
 <p>与 R-CNN 相比，Fast R-CNN 有两点改进：</p>
@@ -201,7 +201,7 @@ Detection 有两个方向解决上面提到的两个问题：</p>
 </ol>
 <p>对于这个 ROI Pooling，其实就是 SPP 的变体，其不再是多个 Pooling 层，而是只有一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn><mo>×</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">6 \times 6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span>  Pooling 层。</p>
 <p>结构可见下图：</p>
-<p><img src="http://blog.afuture.me/post-images/20180502185247910.png" alt="20180502185247910">至此，Fast R-CNN 的训练过程结束。</p>
+<p><img src="http://blog.afuture.me/post-images/20180502185247910.png" alt="20180502185247910" loading="lazy">至此，Fast R-CNN 的训练过程结束。</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
