@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://blog.afuture.me</id>
     <title>AFuture&apos;s Blog</title>
-    <updated>2020-01-02T09:11:15.094Z</updated>
+    <updated>2020-05-04T08:28:06.462Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://blog.afuture.me"/>
     <link rel="self" href="http://blog.afuture.me/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, AFuture&apos;s Blog</rights>
     <entry>
         <title type="html"><![CDATA[求积分]]></title>
-        <id>http://blog.afuture.me/post/WmYc9YkLS</id>
-        <link href="http://blog.afuture.me/post/WmYc9YkLS">
+        <id>http://blog.afuture.me/post/WmYc9YkLS/</id>
+        <link href="http://blog.afuture.me/post/WmYc9YkLS/">
         </link>
         <updated>2019-11-17T08:55:35.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="question">Question</h2>
@@ -82,8 +82,8 @@ M0 50 h400000 v40H0z m0 194h40000v40H0z'/></svg></span></span></span></span></sp
     </entry>
     <entry>
         <title type="html"><![CDATA[文件整理指导办法]]></title>
-        <id>http://blog.afuture.me/post/-RtH55oOm</id>
-        <link href="http://blog.afuture.me/post/-RtH55oOm">
+        <id>http://blog.afuture.me/post/-RtH55oOm/</id>
+        <link href="http://blog.afuture.me/post/-RtH55oOm/">
         </link>
         <updated>2019-10-23T03:19:48.000Z</updated>
         <summary type="html"><![CDATA[<p>本文章的主要目的是给出一个简单的文件整理思路，期望是达到快速找到目标文件的目的。这里需要指出的是，文章中并没有涉及任何系统自带的，或者第三方的应用，使用「剪切」、「删除」、「复制」、「重命名」等常规操作，能够广泛的应用于各个操作系统。当然，本文是基于 macOS 所写。</p>
@@ -148,8 +148,8 @@ M0 50 h400000 v40H0z m0 194h40000v40H0z'/></svg></span></span></span></span></sp
     </entry>
     <entry>
         <title type="html"><![CDATA[R-CNN 系列详解]]></title>
-        <id>http://blog.afuture.me/post/0LqrMpmdy</id>
-        <link href="http://blog.afuture.me/post/0LqrMpmdy">
+        <id>http://blog.afuture.me/post/0LqrMpmdy/</id>
+        <link href="http://blog.afuture.me/post/0LqrMpmdy/">
         </link>
         <updated>2019-08-29T06:05:14.000Z</updated>
         <summary type="html"><![CDATA[<p>上个月，组里进行论文学习的时候我给大家讲的是 Faster R-CNN，为了不白看论文，我决定重新组织一下自己对这个模型的了解，顺便写一篇 Blog。</p>
@@ -252,8 +252,8 @@ Detection 有两个方向解决上面提到的两个问题：</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[数列极限 题一]]></title>
-        <id>http://blog.afuture.me/post/数列极限-题一</id>
-        <link href="http://blog.afuture.me/post/数列极限-题一">
+        <id>http://blog.afuture.me/post/数列极限-题一/</id>
+        <link href="http://blog.afuture.me/post/数列极限-题一/">
         </link>
         <updated>2018-07-07T06:35:25.000Z</updated>
         <summary type="html"><![CDATA[<p>[题]：<br>
@@ -292,8 +292,8 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
     </entry>
     <entry>
         <title type="html"><![CDATA[求极限 题二]]></title>
-        <id>http://blog.afuture.me/post/求极限-题二</id>
-        <link href="http://blog.afuture.me/post/求极限-题二">
+        <id>http://blog.afuture.me/post/求极限-题二/</id>
+        <link href="http://blog.afuture.me/post/求极限-题二/">
         </link>
         <updated>2018-07-05T06:21:41.000Z</updated>
         <summary type="html"><![CDATA[<p>求：</p>
@@ -358,8 +358,8 @@ s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class=
     </entry>
     <entry>
         <title type="html"><![CDATA[Normalization and Regularization]]></title>
-        <id>http://blog.afuture.me/post/Normalization-and-Regularization</id>
-        <link href="http://blog.afuture.me/post/Normalization-and-Regularization">
+        <id>http://blog.afuture.me/post/Normalization-and-Regularization/</id>
+        <link href="http://blog.afuture.me/post/Normalization-and-Regularization/">
         </link>
         <updated>2018-07-03T06:51:09.000Z</updated>
         <summary type="html"><![CDATA[<p>Normalization: usually rescales features to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>.<br>
@@ -398,8 +398,8 @@ Regularization: Different from the feature scaling techniques mentioned above, r
     </entry>
     <entry>
         <title type="html"><![CDATA[决策树（decision tree）]]></title>
-        <id>http://blog.afuture.me/post/Decision-Tree</id>
-        <link href="http://blog.afuture.me/post/Decision-Tree">
+        <id>http://blog.afuture.me/post/Decision-Tree/</id>
+        <link href="http://blog.afuture.me/post/Decision-Tree/">
         </link>
         <updated>2018-07-03T06:50:09.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="简述">简述</h2>
@@ -549,8 +549,8 @@ Gain(D,a)&amp;=\rho \times Gain(\tilde{D},a)\\\\
     </entry>
     <entry>
         <title type="html"><![CDATA[Logistic Regression]]></title>
-        <id>http://blog.afuture.me/post/Logistic-Regression</id>
-        <link href="http://blog.afuture.me/post/Logistic-Regression">
+        <id>http://blog.afuture.me/post/Logistic-Regression/</id>
+        <link href="http://blog.afuture.me/post/Logistic-Regression/">
         </link>
         <updated>2018-07-03T06:49:09.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="简述">简述</h2>
@@ -841,8 +841,8 @@ h_\theta(x)&amp;=E[T(y)|x;\theta]\\
     </entry>
     <entry>
         <title type="html"><![CDATA[Liner Regression]]></title>
-        <id>http://blog.afuture.me/post/Liner-Regressionmd</id>
-        <link href="http://blog.afuture.me/post/Liner-Regressionmd">
+        <id>http://blog.afuture.me/post/Liner-Regressionmd/</id>
+        <link href="http://blog.afuture.me/post/Liner-Regressionmd/">
         </link>
         <updated>2018-07-03T06:48:09.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="简述">简述</h2>
@@ -1039,8 +1039,8 @@ s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class=
     </entry>
     <entry>
         <title type="html"><![CDATA[Symbolic Representation]]></title>
-        <id>http://blog.afuture.me/post/Symbolic-Representation</id>
-        <link href="http://blog.afuture.me/post/Symbolic-Representation">
+        <id>http://blog.afuture.me/post/Symbolic-Representation/</id>
+        <link href="http://blog.afuture.me/post/Symbolic-Representation/">
         </link>
         <updated>2018-07-03T06:47:09.000Z</updated>
         <content type="html"><![CDATA[<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>  ：一个标量</p>
@@ -1062,8 +1062,8 @@ c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg><
     </entry>
     <entry>
         <title type="html"><![CDATA[求极限 题一]]></title>
-        <id>http://blog.afuture.me/post/求极限-题一</id>
-        <link href="http://blog.afuture.me/post/求极限-题一">
+        <id>http://blog.afuture.me/post/求极限-题一/</id>
+        <link href="http://blog.afuture.me/post/求极限-题一/">
         </link>
         <updated>2018-07-03T06:42:09.000Z</updated>
         <summary type="html"><![CDATA[<p>求</p>
@@ -1096,8 +1096,8 @@ c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg><
     </entry>
     <entry>
         <title type="html"><![CDATA[隐函数存在定理]]></title>
-        <id>http://blog.afuture.me/post/隐函数存在定理</id>
-        <link href="http://blog.afuture.me/post/隐函数存在定理">
+        <id>http://blog.afuture.me/post/隐函数存在定理/</id>
+        <link href="http://blog.afuture.me/post/隐函数存在定理/">
         </link>
         <updated>2018-07-03T06:26:09.000Z</updated>
         <summary type="html"><![CDATA[<p>证明过程。</p>
@@ -1115,8 +1115,8 @@ c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg><
     </entry>
     <entry>
         <title type="html"><![CDATA[ACM数学知识整理]]></title>
-        <id>http://blog.afuture.me/post/ACM数学知识整理</id>
-        <link href="http://blog.afuture.me/post/ACM数学知识整理">
+        <id>http://blog.afuture.me/post/ACM数学知识整理/</id>
+        <link href="http://blog.afuture.me/post/ACM数学知识整理/">
         </link>
         <updated>2018-07-03T06:22:46.000Z</updated>
         <content type="html"><![CDATA[<h2 id="1数论">1.数论</h2>
@@ -1319,8 +1319,8 @@ poj3429
     </entry>
     <entry>
         <title type="html"><![CDATA[Codeforces]]></title>
-        <id>http://blog.afuture.me/post/Codeforces-400-C-Molly-s-Chemicals</id>
-        <link href="http://blog.afuture.me/post/Codeforces-400-C-Molly-s-Chemicals">
+        <id>http://blog.afuture.me/post/Codeforces-400-C-Molly-s-Chemicals/</id>
+        <link href="http://blog.afuture.me/post/Codeforces-400-C-Molly-s-Chemicals/">
         </link>
         <updated>2018-07-03T06:18:14.000Z</updated>
         <summary type="html"><![CDATA[<p><em>思维技巧</em></p>
@@ -1436,8 +1436,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[第k短路的故事]]></title>
-        <id>http://blog.afuture.me/post/POJ-2449</id>
-        <link href="http://blog.afuture.me/post/POJ-2449">
+        <id>http://blog.afuture.me/post/POJ-2449/</id>
+        <link href="http://blog.afuture.me/post/POJ-2449/">
         </link>
         <updated>2017-08-18T11:43:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>A*、第 k 短路</em></p>
@@ -1634,8 +1634,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[伸展树——Splay Tree]]></title>
-        <id>http://blog.afuture.me/post/伸展树——Splay Tree </id>
-        <link href="http://blog.afuture.me/post/伸展树——Splay Tree ">
+        <id>http://blog.afuture.me/post/伸展树——Splay Tree /</id>
+        <link href="http://blog.afuture.me/post/伸展树——Splay Tree /">
         </link>
         <updated>2017-08-18T11:43:57.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="简单介绍">简单介绍</h2>
@@ -1835,8 +1835,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[51nod bash v2]]></title>
-        <id>http://blog.afuture.me/post/51nod bash v2</id>
-        <link href="http://blog.afuture.me/post/51nod bash v2">
+        <id>http://blog.afuture.me/post/51nod bash v2/</id>
+        <link href="http://blog.afuture.me/post/51nod bash v2/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="描述">描述：</h3>
@@ -1879,8 +1879,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-1043 Eight]]></title>
-        <id>http://blog.afuture.me/post/HDU-1043 Eight</id>
-        <link href="http://blog.afuture.me/post/HDU-1043 Eight">
+        <id>http://blog.afuture.me/post/HDU-1043 Eight/</id>
+        <link href="http://blog.afuture.me/post/HDU-1043 Eight/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： A*算法</em></p>
@@ -2107,8 +2107,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-1272 小希的迷宫]]></title>
-        <id>http://blog.afuture.me/post/HDU-1272 小希的迷宫</id>
-        <link href="http://blog.afuture.me/post/HDU-1272 小希的迷宫">
+        <id>http://blog.afuture.me/post/HDU-1272 小希的迷宫/</id>
+        <link href="http://blog.afuture.me/post/HDU-1272 小希的迷宫/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 并查集</em></p>
@@ -2270,8 +2270,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-1851 A Simple Game]]></title>
-        <id>http://blog.afuture.me/post/HDU-1851 A Simple Game</id>
-        <link href="http://blog.afuture.me/post/HDU-1851 A Simple Game">
+        <id>http://blog.afuture.me/post/HDU-1851 A Simple Game/</id>
+        <link href="http://blog.afuture.me/post/HDU-1851 A Simple Game/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 博弈，SG函数</em></p>
@@ -2302,8 +2302,8 @@ No</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-2066 一个人的旅行]]></title>
-        <id>http://blog.afuture.me/post/HDU-2066 一个人的旅行</id>
-        <link href="http://blog.afuture.me/post/HDU-2066 一个人的旅行">
+        <id>http://blog.afuture.me/post/HDU-2066 一个人的旅行/</id>
+        <link href="http://blog.afuture.me/post/HDU-2066 一个人的旅行/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 最短路，多集合到多集合</em></p>
@@ -2424,8 +2424,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-2196 Computer]]></title>
-        <id>http://blog.afuture.me/post/HDU-2196 Computer</id>
-        <link href="http://blog.afuture.me/post/HDU-2196 Computer">
+        <id>http://blog.afuture.me/post/HDU-2196 Computer/</id>
+        <link href="http://blog.afuture.me/post/HDU-2196 Computer/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 树形DP 、树的最长路</em></p>
@@ -2527,8 +2527,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-2444 The Accomodation of Students]]></title>
-        <id>http://blog.afuture.me/post/HDU-2444 The Accomodation of Students</id>
-        <link href="http://blog.afuture.me/post/HDU-2444 The Accomodation of Students">
+        <id>http://blog.afuture.me/post/HDU-2444 The Accomodation of Students/</id>
+        <link href="http://blog.afuture.me/post/HDU-2444 The Accomodation of Students/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： 二分图的判断和最大匹配</em></p>
@@ -2645,8 +2645,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[HDU-2544  最短路]]></title>
-        <id>http://blog.afuture.me/post/HDU-2544 最短路</id>
-        <link href="http://blog.afuture.me/post/HDU-2544 最短路">
+        <id>http://blog.afuture.me/post/HDU-2544 最短路/</id>
+        <link href="http://blog.afuture.me/post/HDU-2544 最短路/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型： dijkstra</em></p>
@@ -2752,8 +2752,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[Hdu-2686 Matrix]]></title>
-        <id>http://blog.afuture.me/post/Hdu-2686 Matrix</id>
-        <link href="http://blog.afuture.me/post/Hdu-2686 Matrix">
+        <id>http://blog.afuture.me/post/Hdu-2686 Matrix/</id>
+        <link href="http://blog.afuture.me/post/Hdu-2686 Matrix/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型：多线程DP</em></p>
@@ -2840,8 +2840,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[51nod Nim游戏]]></title>
-        <id>http://blog.afuture.me/post/Nim游戏</id>
-        <link href="http://blog.afuture.me/post/Nim游戏">
+        <id>http://blog.afuture.me/post/Nim游戏/</id>
+        <link href="http://blog.afuture.me/post/Nim游戏/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型：Nim游戏</em></p>
@@ -2894,8 +2894,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[51nod 威佐夫博奕（Wythoff Game）]]></title>
-        <id>http://blog.afuture.me/post/威佐夫博奕（Wythoff Game）</id>
-        <link href="http://blog.afuture.me/post/威佐夫博奕（Wythoff Game）">
+        <id>http://blog.afuture.me/post/威佐夫博奕（Wythoff Game）/</id>
+        <link href="http://blog.afuture.me/post/威佐夫博奕（Wythoff Game）/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p><em>类型：Wythoff Game</em></p>
@@ -2948,8 +2948,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[容斥原理]]></title>
-        <id>http://blog.afuture.me/post/容斥原理</id>
-        <link href="http://blog.afuture.me/post/容斥原理">
+        <id>http://blog.afuture.me/post/容斥原理/</id>
+        <link href="http://blog.afuture.me/post/容斥原理/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="描述">描述</h3>
@@ -3011,8 +3011,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[51nod 巴什博奕（Bash Game）]]></title>
-        <id>http://blog.afuture.me/post/巴什博奕（Bash Game）</id>
-        <link href="http://blog.afuture.me/post/巴什博奕（Bash Game）">
+        <id>http://blog.afuture.me/post/巴什博奕（Bash Game）/</id>
+        <link href="http://blog.afuture.me/post/巴什博奕（Bash Game）/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="描述">描述：</h3>
@@ -3047,8 +3047,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[康托展开]]></title>
-        <id>http://blog.afuture.me/post/康托展开</id>
-        <link href="http://blog.afuture.me/post/康托展开">
+        <id>http://blog.afuture.me/post/康托展开/</id>
+        <link href="http://blog.afuture.me/post/康托展开/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="定义">定义：</h2>
@@ -3176,8 +3176,8 @@ void invKT(int n, int k, int s[]){
     </entry>
     <entry>
         <title type="html"><![CDATA[抽屉原理]]></title>
-        <id>http://blog.afuture.me/post/抽屉原理</id>
-        <link href="http://blog.afuture.me/post/抽屉原理">
+        <id>http://blog.afuture.me/post/抽屉原理/</id>
+        <link href="http://blog.afuture.me/post/抽屉原理/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="抽屉原理简述">抽屉原理简述：</h2>
@@ -3317,8 +3317,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[51NOD DP-最大子矩阵和]]></title>
-        <id>http://blog.afuture.me/post/最大子矩阵和</id>
-        <link href="http://blog.afuture.me/post/最大子矩阵和">
+        <id>http://blog.afuture.me/post/最大子矩阵和/</id>
+        <link href="http://blog.afuture.me/post/最大子矩阵和/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="描述">描述</h3>
@@ -3359,8 +3359,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[裴蜀等式]]></title>
-        <id>http://blog.afuture.me/post/裴蜀等式</id>
-        <link href="http://blog.afuture.me/post/裴蜀等式">
+        <id>http://blog.afuture.me/post/裴蜀等式/</id>
+        <link href="http://blog.afuture.me/post/裴蜀等式/">
         </link>
         <updated>2016-12-28T08:31:57.000Z</updated>
         <summary type="html"><![CDATA[<p>在数论中，<strong>裴蜀等式（Bézout's identity）</strong> 或 <strong>裴蜀定理</strong> 是一个关于最大公因数的定理：</p>
@@ -3387,8 +3387,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[博客的开始——如何搭建Hexo]]></title>
-        <id>http://blog.afuture.me/post/博客的开始——如何搭建Hexo</id>
-        <link href="http://blog.afuture.me/post/博客的开始——如何搭建Hexo">
+        <id>http://blog.afuture.me/post/博客的开始——如何搭建Hexo/</id>
+        <link href="http://blog.afuture.me/post/博客的开始——如何搭建Hexo/">
         </link>
         <updated>2016-12-27T01:43:57.000Z</updated>
         <content type="html"><![CDATA[<h2 id="概述">概述</h2>

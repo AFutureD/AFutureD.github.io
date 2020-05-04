@@ -395,9 +395,10 @@ html {
  */
 *,
 *::before,
-*::after {
+*::after :not(.mfrac) {
   border-width: 0;
   border-style: solid;
+  border-color: #e2e8f0;
 }
 /**
  * Undo the `border-style: none` reset that Normalize applies to images so that
@@ -27694,48 +27695,4 @@ body {
   .xl\:z-auto {
     z-index: auto;
   }
-}
-.flink {
-  box-shadow: 0 4px 8px 6px rgba(7, 17, 27, 0.08);
-  padding: 40px 44px 44px;
-  height: auto;
-  overflow: hidden;
-  border-radius: 8px;
-}
-.flink-box {
-  float: left;
-  width: calc(50% - 14px);
-  height: 90px;
-  margin: 20px 7px;
-  padding: 0px 0px;
-  overflow: hidden;
-}
-.flink-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50% !important;
-  float: left;
-  margin: 11px 10px !important;
-}
-.flink-info {
-  float: left;
-}
-.flink-name {
-  float: left;
-  padding-top: 16px;
-  line-height: 17px;
-  font-size: 20px;
-  font-weight: bold;
-  height: 40px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.flink-motto {
-  float: left;
-  padding: 10px 0px;
-  font-size: 13px;
-  height: 50px;
-  width: 100%;
-  line-height: 20px;
 }
